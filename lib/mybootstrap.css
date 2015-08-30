@@ -1,0 +1,12 @@
+.publication{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #fff;
+}
+
+.user-name, .user-name:hover{
+	margin-top: 5px;
+	color: #FFF;
+	text-decoration: none;
+	
+}

@@ -1,4 +1,23 @@
-*{
-	margin:0;
-	padding: 0;
+
+#muro{
+	width: 1900px;
+	height: 80px;
+	opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
 }
+
+.marginAuto {
+    margin: auto;
+}
+
+.conteinerCentrado{
+	display: -webkit-flex; /* Safari */
+    -webkit-align-items: center; /* Safari 7.0+ */
+    display: flex;
+    align-items: center;
+}
+
+#titulo {
+		position: absolute;
+		z-index: 2;
+	}
