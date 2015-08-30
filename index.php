@@ -15,27 +15,9 @@
 <body>
 <div class="container-fluid">
 
-    <div class="row">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="#menu">
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </button>
-            <a href="index.php" class="navbar-brand">The Wall</a>
-        </div>
-
-        <div class="collapse navbar-collapse col-md-12 pull-right" id="menu">
-
-            <ul class="nav navbar-nav">
-
-                <li><a href="user.php">Laura Gutierrez</a></li>
-                <li><a href="#">Configuración</a></li>
-                <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalLogin">Entrar</button>
-                <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalSignUp">Registrarse</button>
-            </ul>
-        </div>
-    </div>
+    <?php
+    include_once (__DIR__."/templates/header.php");
+    ?>
 
 
     <h4>Muro general</h4>
@@ -68,82 +50,18 @@
         </div>
     </div>
 
-    <div class="row">
+    <?php
+    include_once (__DIR__."/templates/footer.php");
+    ?>
 
-        <footer>
-            <div class="col-xs-12 bg-info">
-                <h5 class="text-info col-xs-offset-5   ">Universidad Nacional de la Matanza</h5>
+    <?php
+    include_once (__DIR__."/templates/modalLogin.php");
+    ?>
 
-            </div>
-    </div>
+    <?php
+    include_once (__DIR__."/templates/modalSignUp.php");
+    ?>
 
-    <div class="row">
-        <div class="col-xs-12 bg-info">
-            <p class="text-info text-right">Integrantes:</p>
-            <p class="text-info text-right">García Matías</p>
-            <p class="text-info text-right">León Manuel</p>
-            <p class="text-info text-right">Magnoni Nicolás</p>
-            <p class="text-info text-right">Ramírez Federico</p>
-            <p class="text-info text-right">Villarroel Jonatan</p>
-        </div>
-    </div>
-    </footer>
-
-</div>
-
-<!-- Modal Login-->
-<div id="myModalLogin" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <!--    <img id="muro" src="img/muroBlanco.jpg">
--->
-            <div class="container-fluid alert alert-info">
-                <div class="marginAuto form-group form-inline">
-                    <label for="focusedInput">Usuario</label>
-                    <input class="form-control" id="focusedInput" type="text">
-                    <label for="focusedInput">Contraseña</label>
-                    <input class="form-control" id="focusedInput" type="password">
-                    <button type="button" class="btn btn-primary active">Iniciar Sesión</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal SignUp-->
-<div id="myModalSignUp" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="conteinerCentrado panel-body">
-                <div class="container-fluid col-sm-4">
-                    <h3>Regístrese</h3>
-                    <div class="form-group">
-                        <label for="focusedInput">Nombre</label>
-                        <input class="form-control" id="focusedInput" type="text">
-                        <label for="focusedInput">Apellido</label>
-                        <input class="form-control" id="focusedInput" type="text">
-                        <label for="focusedInput">Nombre de Usuario</label>
-                        <input class="form-control" id="focusedInput" type="text">
-                        <label for="focusedInput">Correo electrónico</label>
-                        <input class="form-control" id="focusedInput" type="text">
-                        <label for="focusedInput">Contraseña</label>
-                        <input class="form-control" id="focusedInput" type="password">
-                        <label for="focusedInput">Confirme la contraseña</label>
-                        <input class="form-control" id="focusedInput" type="password">
-                    </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-primary active">Registrarse</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 <script src="js/jquery-1.11.1.min.js"></script>
 <script src="js/main.js"></script>
