@@ -15,6 +15,8 @@ class Usuario extends Connection{
         parent::__construct();
     }
 
+    //Recibe un json
+    //Devuelve un echo con un mensaje.
     public function SignUp($data){
 
         //Guardo en variable cada dato.
@@ -84,7 +86,7 @@ class Usuario extends Connection{
             }
         }
 
-        //Inicio session.
+        //Si existe el usuario puedo loguearme.
         if($canLogin)
         {
             $data['valido'] = true;
@@ -105,13 +107,15 @@ class Usuario extends Connection{
         echo json_encode($data);
     }
 
-    public function update($userName, $mail, $values){
+    //Recibe el nombre de usuario ACTUAL, y un json con los datos que el usuario modificó en el formulario
+    public function update($userName, $dataToModificate){
         $errorMessageView = "";
         $where = "'$userName' = nombre_usuario";
+        $mail = $dataToModificate['mail'];
         $queryBuilder = new QueryBuilder();
 
         //Valido que los datos sean válidos.
-        $errorMessage = self::validate($values);
+        $errorMessage = self::validate($dataToModificate);
 
         $isError = false;
         $errorMessageView = "";
@@ -141,7 +145,7 @@ class Usuario extends Connection{
             }else
             {
                 //Procedo a updatear los datos a la bdd.
-                $queryBuilder->update('USUARIO', $values, $where);
+                $queryBuilder->update('USUARIO', $dataToModificate, $where);
                 echo "Datos modificados";
             }
         }
@@ -229,6 +233,25 @@ class Usuario extends Connection{
 
         return $errorMessageView;
     }
+
+    /**
+    Recibe un json con:
+    * @param id_usuario
+    * @param id_muro
+    * @param content
+    */
+    public function postMessage($data){
+
+        $content = $data['content'];
+        $fromUser = $data['fromUser'];
+        $toWall = $data['toWall'];
+
+        $message = new Message($content, $toWall, $fromUser);
+
+    }
+
+
+
 }
 
 ?>
