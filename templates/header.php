@@ -5,10 +5,10 @@
             <?PHP
                 if(!($_SESSION["usuario"])){
             ?>
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" method="post" action="#">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="E-mail" id="mail">
-                    <input type="text" class="form-control" placeholder="Contraseña" id="pass">
+                    <input type="password" class="form-control" placeholder="Contraseña" id="pass">
                 </div>
                 <button type="submit" class="btn btn-default">Ingresar</button>
             </form>
