@@ -23,6 +23,9 @@ if(!defined('DB_CHARSET'))
 if(!defined('DB_RETURN')){
 	define('DB_RETURN','array');
 }
+if(!defined('DB_DEBUG')){
+	define('DB_DEBUG',false);
+}
 /*if(!defined('PATH'))
 {
     $path = $_SERVER['DOCUMENT_ROOT'];

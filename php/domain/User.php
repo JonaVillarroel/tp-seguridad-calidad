@@ -1,67 +1,69 @@
 <?php
-include_once (dirname(__DIR__)."/connection/Connection.php");
-include_once (dirname(__DIR__)."/connection/Querybuilder.php");
+require(dirname(__DIR__)."/connection/Querybuilder.php");
 
-class Usuario extends Connection{
-    private $surname;
-    private $name;
+define("PENDIENTE","Pendiente");
+define("COMUN","Comun");
+class User{    
     private $rol;
+	private $name;
+	private $surname;
     private $mail;
+	private $userName;
     private $pass;
-    private $userName;
+	private $status;
+	private $dateLeaving;
+	
+	/*id_usuario int not null auto_increment primary key,
+	rol set('Administrador','Comun'),
+	nombre varchar(30),
+	apellido varchar(30),
+	mail varchar(50),
+	nombre_usuario varchar(30),
+	contraseña varchar(50),
+	estado SET ('Registrado', 'Pendiente') not null,
+	fecha_baja date*/
 
-    public function __construct(){
+    public function __construct(){}
 
-        parent::__construct();
-    }
-
-    //Recibe un json
-    //Devuelve un echo con un mensaje.
-    public function SignUp($data){
-
-        //Guardo en variable cada dato.
-        $name = $data["name"];
-        $surname = $data["surname"];
-        $userName = $data["userName"];
-        $pass = $data["pass"];
-        $repass = $data["repass"];
-        $mail = $data["mail"];
-        $rol = "simpleUser";
-
+    public function SignUp($name,$surname,$mail,$userName,$pass,$repass){
+		$queryBuilder = new Querybuilder();
+		
         //Valido los datos
-        $errorMessage = self::validate($data);
+        $errorMessage = self::validate($name,$surname,$mail,$userName,$pass,$repass);
 
         $isError = false;
         $errorMessageView = "";
         foreach($errorMessage as $error){
-            if( $error !== 0 )
-            {
+            if( $error !== 0 ){
                 $isError = true;
                 $errorMessageView = $errorMessageView . $error."<br>";
             }
         }
-
-
-        if($isError)
-        {
+		
+        if($isError){
             //Informo que hay errores y el mensaje de error
             echo $errorMessageView;
-        }else
-        {
+        }else{
             //Verifico que el mail y nombre de usuario no estén en uso
-
             $errorMessageView = self::verify($mail, $userName);
 
-            if( sizeof($errorMessageView) > 1)
-            {
+            if( sizeof($errorMessageView) >= 1){
                 //Informo.
                 echo $errorMessageView;
-            }else
-            {
+            }else{
                 //Procedo a insertar los datos a la bdd.
-                $query = "INSERT INTO USUARIO(nombre, apellido, nombre_usuario, pass, rol, mail)
-                VALUES ('$name', '$surname', '$userName', '$pass', '$rol', '$mail')";
-                $this->db->query($query) or die('Error en el INSERT: ' . mysqli_error($this->db));
+                $surnameOK = ucfirst(strtolower($surname));#Primer letra mayucula y el resto de lo que escribo en minuscula
+				$nameOK = ucfirst(strtolower($name));#Primer letra mayucula y el resto de lo que escribo en minuscula
+			
+				$values['rol'] = $COMUN;
+				$values['nombre'] = $nameOK;
+				$values['apellido'] = $surnameOK;
+				$values['mail'] = $mail;
+				$values['nombre_usuario'] = $userName;
+				$values['contraseña'] = $pass;
+				$values['estado'] = $PENDIENTE;
+			
+				$queryBuilder -> insert('USUARIO', $values);
                 echo "Usuario registrado";
             }
         }
@@ -73,10 +75,9 @@ class Usuario extends Connection{
 
         $query = "SELECT nombre_usuario, rol FROM USUARIO where nombre_usuario = '$userName' and pass = '$pass'";
         $result = $this->db->query($query) or die( "Error en el SELECT: ".mysqli_error($this->db) );
-        if($result->num_rows === 1)
-        {
+        if($result->num_rows === 1){
             $canLogin = true;
-        };
+        }
         while ($obj = $result->fetch_object()) {
             $userName = $obj->nombre_usuario;
             if ($obj->rol === "adminUser") {
@@ -87,21 +88,17 @@ class Usuario extends Connection{
         }
 
         //Si existe el usuario puedo loguearme.
-        if($canLogin)
-        {
+        if($canLogin){
             $data['valido'] = true;
             $data['message'] = "Todos los datos correctos.<br/>" ;
             session_start();
             $_SESSION['userName'] = $userName;
-            if($isAdmin)
-            {
+            if($isAdmin){
                 $_SESSION['rol'] = "adminUser";
-            }else
-            {
+            }else{
                 $_SESSION['rol'] = "simpleUser";
             }
-        }else
-        {
+        }else{
             $data['valido'] = false;
         }
         echo json_encode($data);
@@ -120,30 +117,24 @@ class Usuario extends Connection{
         $isError = false;
         $errorMessageView = "";
         foreach($errorMessage as $error){
-            if( $error !== 0 )
-            {
+            if( $error !== 0 ){
                 $isError = true;
                 $errorMessageView = $errorMessageView . $error."<br>";
             }
         }
 
-
-        if($isError)
-        {
+        if($isError){
             //Informo que hay errores y el mensaje de error
             echo $errorMessageView;
-        }else
-        {
+        }else{
             //Verifico que el mail y nombre de usuario no estén en uso
 
             $errorMessageView = self::verify($mail, $userName);
 
-            if( sizeof($errorMessageView) > 1)
-            {
+            if( sizeof($errorMessageView) >= 1){
                 //Informo.
                 echo $errorMessageView;
-            }else
-            {
+            }else{
                 //Procedo a updatear los datos a la bdd.
                 $queryBuilder->update('USUARIO', $dataToModificate, $where);
                 echo "Datos modificados";
@@ -152,54 +143,37 @@ class Usuario extends Connection{
 
     }
 
-
-    private function validate($data){
+    private function validate($name,$surname,$mail,$userName,$pass,$repass){
         $errorMessage = array();
-        $name = $data["name"];
-        $surname = $data["surname"];
-        $userName = $data["userName"];
-        $pass = $data["pass"];
-        $repass = $data["repass"];
-        $mail = $data["mail"];
 
 
-        if(preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$name))
-        {
+        if(preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$name)){
             $errorMessage["name"] = 0;
-        }else
-        {
+        }else{
             $errorMessage["name"] = "El nombre no es correcto";
         }
 
-        if(preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$surname))
-        {
+        if(preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$surname)){
             $errorMessage["name"] = 0;
-        }else
-        {
+        }else{
             $errorMessage["name"] = "El nombre no es correcto";
         }
 
-        if(preg_match("/[\w]{6,}/",$pass))
-        {
+        if(preg_match("/[\w]{6,}/",$pass)){
             $errorMessage["pass"] = 0;
-        }else
-        {
+        }else{
             $errorMessage["pass"] = "La contraseña no es correcta";
         }
 
-        if($repass == $pass)
-        {
+        if($repass == $pass){
             $errorMessage["repass"] = 0;
-        }else
-        {
+        }else{
             $errorMessage["repass"] = "Las contraseñas no coinciden";
         }
 
-        if(preg_match("/^[a-zA-Z0-9_ñÑáéíóÁÉÍÓÚ]*[@]+[a-z]+([.]{1}[a-z]+)*$/",$mail))
-        {
+        if(preg_match("/^[a-zA-Z0-9_ñÑáéíóÁÉÍÓÚ]*[@]+[a-z]+([.]{1}[a-z]+)*$/",$mail)){
             $errorMessage["mail"] = 0;
-        }else
-        {
+        }else{
             $errorMessage["mail"] = "El mail ingresado no es válido";
         }
 
@@ -209,24 +183,19 @@ class Usuario extends Connection{
     private function verify($mail, $userName){
         $queryBuilder = new Querybuilder();
         $errorMessageView = "";
-
-        $result = $queryBuilder->simple_select('USUARIO', 'nombre_usuario', 'nombre_usuario', '$userName');
-        if($result->num_rows === 0)
-        {
+		
+        $result1 = $queryBuilder->select('USUARIO','nombre_usuario',"nombre_usuario='$userName'");
+        if($result1->num_rows === 0){
             $userExist = false;
-        }else
-        {
+        }else{
             $userExist = true;
             $errorMessageView += "El usuario ingresado ya existe<br>";
         }
-
-        $result = $queryBuilder->simple_select('USUARIO', 'mail', 'mail', '$mail');
-
-        if($result->num_rows === 0)
-        {
+		
+		$result2 = $queryBuilder->select('USUARIO','mail',"mail='$mail'");
+        if($result2->num_rows === 0){
             $mailExist = false;
-        }else
-        {
+        }else{
             $mailExist = true;
             $errorMessageView += "El mail ingresado ya existe<br>";
         }
@@ -240,11 +209,7 @@ class Usuario extends Connection{
     * @param id_muro
     * @param content
     */
-    public function postMessage($data){
-
-        $content = $data['content'];
-        $fromUser = $data['fromUser'];
-        $toWall = $data['toWall'];
+    public function postMessage($content, $fromUser, $toWall){
 
         $message = new Message($content, $toWall, $fromUser);
 

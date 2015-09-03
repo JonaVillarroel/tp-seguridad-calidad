@@ -1,4 +1,5 @@
 <?php
+require (dirname(__DIR__)."/connection/config.php");
  error_reporting(E_ALL);
 class Querybuilder {
 	

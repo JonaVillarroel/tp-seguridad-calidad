@@ -36,7 +36,7 @@
 
     <div class="row publication">
 		  <div class="col-md-2"><img src="http://packetcode.com/apps/wall-design/image.jpg" class="img-circle" width="40%"/></div>
-		  <div class="col-md-10"><textarea class="form-control" id="feedbox" rows="3" placeholder="Publica un mensaje!"></textarea><br>
+		  <div class="col-md-10"><textarea class="form-control" id="message" rows="3" placeholder="Publica un mensaje!"></textarea><br>
 		  <button type="button" id="button" class="btn btn-default">Publicar</button>
 		  </div>
 	</div>

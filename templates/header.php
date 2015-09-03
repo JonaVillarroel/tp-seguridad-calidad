@@ -1,22 +1,32 @@
-<div class="row">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="#menu">
-                <span class="glyphicon glyphicon-menu-hamburger"></span>
-            </button>
-            <a href="index.php" class="navbar-brand">The Wall</a>
-        </div>
+<div>
+    <div class="navbar navbar-default">
+        <a href="index.php" class="navbar-brand">The Wall</a>
+        <div class="pull-right">
+            <?PHP
+                if(!($_SESSION["usuario"])){
+            ?>
+            <form class="navbar-form navbar-left" method="post" action="#">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="E-mail" id="mail">
+                    <input type="password" class="form-control" placeholder="Contraseña" id="pass">
+                </div>
+                <button type="submit" class="btn btn-default">Ingresar</button>
+            </form>
 
-        <div class="collapse navbar-collapse col-md-12 pull-right" id="menu">
-
-            <ul class="nav navbar-nav">
-
-                <li><a href="user.php">Laura Gutierrez</a></li>
-                <li><a href="#">Configuración</a></li>
-                <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalLogin">Entrar</button>
-                <!-- Trigger the modal with a button -->
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalSignUp">Registrarse</button>
-            </ul>
+            <p class="navbar-text"><a href="#" class="navbar-link">Registrarse</a></p>
+             
+            <?PHP
+            }else{
+            ?>           
+            <p class="navbar-text">
+                <a class="navbar-link" href="#"><span class="glyphicon glyphicon-cog"></span></a> |
+                <a class="navbar-link" href="user.php"><span class="glyphicon glyphicon-user"></span> Usuario</a> |
+                <a class="navbar-link" href="user.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
+            </p>
+            <?PHP
+            }
+            ?>
         </div>
     </div>
+</div>
 
