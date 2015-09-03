@@ -38,6 +38,17 @@ class Message{
     }
 
 
+    public function remove($id_mensaje){
+        $values['fecha_baja'] = new Date();
+
+        $queryBuilder = new Querybuilder();
+        $queryBuilder.simple_update('MENSAJE',$values ,'id_mensaje', $id_mensaje);
+
+    }
+
+    public function getContent(){
+        return content;
+    }
 }
 
 ?>
