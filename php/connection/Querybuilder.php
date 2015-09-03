@@ -75,7 +75,7 @@ class Querybuilder {
 			while($line = mysql_fetch_object($query)) {
 				$new_line = ($this->variable == 'object') ? (object)NULL : (array)NULL;
 				foreach((array)$line as $key => $value) {
-					$value = $this->((strtolower($this->char) == "utf8") ? utf8_encode($value) : $value),true;//funcion replace despues del $this
+					$value = $this->((strtolower($this->char) == "utf8") ? utf8_encode($value) : $value);//funcion replace despues del $this y a lo ultimo un ,true)
 					if($this->variable == 'object')
 						$new_line->$key = $value;
 					else
