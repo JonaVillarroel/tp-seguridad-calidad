@@ -19,6 +19,7 @@ CREATE TABLE MURO (
 	id_muro int not null auto_increment primary key,
 	id_usuario int not null,
 	privacidad set('publico','privado') not null,
+	fecha_baja date,
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
 
