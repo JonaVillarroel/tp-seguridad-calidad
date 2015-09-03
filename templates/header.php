@@ -1,4 +1,4 @@
-<div>
+<div id="header">
     <div class="navbar navbar-default">
         <a href="index.php" class="navbar-brand">The Wall</a>
         <div class="pull-right">

@@ -6,3 +6,13 @@
 .line{
 	display: inline-block;
 }
+
+.jumbotron{
+	margin-top: 3%;
+	margin-bottom: 5%;
+}
+#footer{
+	position:absolute;
+   	bottom:0;
+   	width:100%;
+}
