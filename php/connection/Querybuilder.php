@@ -60,24 +60,10 @@ class Querybuilder {
 		return $value;
 	}*/
 	
-	/**
-	 * check the string against sql injection
-	 *
-	 * @param string $value
-	 * @return string
-	 */
 	public function secure($value) {
 		return mysql_real_escape_string($this->$value);// replace($value) para evitar la inyeccion
 	}
 	
-	/**
-	 * execute the query
-	 * if is select query return the result lines
-	 * if is insert query return the inserted id
-	 *
-	 * @param string $sql
-	 * @return string|object
-	 */
 	public function query($sql) {
 		if(strtolower($this->char) == "utf8")
 			$sql = utf8_decode($sql);
@@ -194,5 +180,4 @@ class Querybuilder {
 		}
 		return $where;
 	}
-
 }
