@@ -41,3 +41,7 @@ CREATE TABLE COMPARTE_CON (
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
 	foreign key(id_muro) references MURO(id_muro) ON DELETE CASCADE
 );
+
+INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES ('','Comun','asd','asd','asd','nom','123','Pendiente');
+
+SELECT * FROM USUARIO;

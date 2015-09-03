@@ -1,8 +1,7 @@
 <?php
-require(dirname(__DIR__)."/connection/Querybuilder.php");
+require(dirname(__DIR__)."/connection/Connection.php");
+require(dirname(__DIR__)."/domain/Session.php");
 
-define("PENDIENTE","Pendiente");
-define("COMUN","Comun");
 class User{    
     private $rol;
 	private $name;
@@ -26,7 +25,7 @@ class User{
     public function __construct(){}
 
     public function SignUp($name,$surname,$mail,$userName,$pass,$repass){
-		$queryBuilder = new Querybuilder();
+		$myConnection = new Connection();
 		
         //Valido los datos
         $errorMessage = self::validate($name,$surname,$mail,$userName,$pass,$repass);
@@ -47,26 +46,21 @@ class User{
             //Verifico que el mail y nombre de usuario no estén en uso
             $errorMessageView = self::verify($mail, $userName);
 
-            if( sizeof($errorMessageView) >= 1){
+            if(strlen($errorMessageView) > 1){
                 //Informo.
                 echo $errorMessageView;
             }else{
                 //Procedo a insertar los datos a la bdd.
                 $surnameOK = ucfirst(strtolower($surname));#Primer letra mayucula y el resto de lo que escribo en minuscula
 				$nameOK = ucfirst(strtolower($name));#Primer letra mayucula y el resto de lo que escribo en minuscula
-			
-				$values['rol'] = $COMUN;
-				$values['nombre'] = $nameOK;
-				$values['apellido'] = $surnameOK;
-				$values['mail'] = $mail;
-				$values['nombre_usuario'] = $userName;
-				$values['contraseña'] = $pass;
-				$values['estado'] = $PENDIENTE;
-			
-				$queryBuilder -> insert('USUARIO', $values);
+
+				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
+				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente');");
+				
                 echo "Usuario registrado";
             }
         }
+		$myConnection -> close();
     }
 
     public function Login($userName, $pass){
@@ -181,25 +175,28 @@ class User{
     }
 
     private function verify($mail, $userName){
-        $queryBuilder = new Querybuilder();
+        $myConnection = new Connection();
         $errorMessageView = "";
 		
-        $result1 = $queryBuilder->select('USUARIO','nombre_usuario',"nombre_usuario='$userName'");
-        if($result1->num_rows === 0){
-            $userExist = false;
-        }else{
+		$result1 = $myConnection -> query("SELECT * FROM USUARIO WHERE nombre_usuario = '$userName';");
+		$numberOfRows1 = mysqli_num_rows($result1);
+        if($numberOfRows1 > 0){
             $userExist = true;
-            $errorMessageView += "El usuario ingresado ya existe<br>";
+            $errorMessageView = "El usuario ingresado ya existe<br>";
+        }else{
+			$userExist = false;
         }
 		
-		$result2 = $queryBuilder->select('USUARIO','mail',"mail='$mail'");
-        if($result2->num_rows === 0){
-            $mailExist = false;
-        }else{
+		$result2 = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail';");
+		$numberOfRows2 = mysqli_num_rows($result2);
+        if($numberOfRows2 > 0){
             $mailExist = true;
-            $errorMessageView += "El mail ingresado ya existe<br>";
+            $errorMessageView = "El mail ingresado ya existe<br>";
+        }else{
+			$mailExist = false;
         }
-
+		
+		$myConnection -> close();
         return $errorMessageView;
     }
 
