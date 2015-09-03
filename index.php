@@ -59,9 +59,8 @@
             ?>
 
 
-        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="lib/jquery-1.11.3.min.js"></script>
+        <script src="lib/jquery-ui/jquery-ui.min.js"></script>
         <script src="js/main.js"></script>
-        <script src="bootstrap/js/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
     </body>
 </html>
