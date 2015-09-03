@@ -1,5 +1,5 @@
 <?php
-
+ error_reporting(E_ALL);
 class Querybuilder {
 	
 	private $conn;
@@ -60,24 +60,10 @@ class Querybuilder {
 		return $value;
 	}*/
 	
-	/**
-	 * check the string against sql injection
-	 *
-	 * @param string $value
-	 * @return string
-	 */
 	public function secure($value) {
 		return mysql_real_escape_string($this->$value);// replace($value) para evitar la inyeccion
 	}
 	
-	/**
-	 * execute the query
-	 * if is select query return the result lines
-	 * if is insert query return the inserted id
-	 *
-	 * @param string $sql
-	 * @return string|object
-	 */
 	public function query($sql) {
 		if(strtolower($this->char) == "utf8")
 			$sql = utf8_decode($sql);
@@ -89,7 +75,7 @@ class Querybuilder {
 			while($line = mysql_fetch_object($query)) {
 				$new_line = ($this->variable == 'object') ? (object)NULL : (array)NULL;
 				foreach((array)$line as $key => $value) {
-					$value = $this->((strtolower($this->char) == "utf8") ? utf8_encode($value) : $value),true;//funcion replace despues del $this
+					$value = $this-> strtolower($this->char) == "utf8" ? utf8_encode($value) : $value;//funcion replace despues del $this y a lo ultimo un ,true)
 					if($this->variable == 'object')
 						$new_line->$key = $value;
 					else
@@ -194,5 +180,4 @@ class Querybuilder {
 		}
 		return $where;
 	}
-
 }
