@@ -209,11 +209,7 @@ class User{
     * @param id_muro
     * @param content
     */
-    public function postMessage($data){
-
-        $content = $data['content'];
-        $fromUser = $data['fromUser'];
-        $toWall = $data['toWall'];
+    public function postMessage($content, $fromUser, $toWall){
 
         $message = new Message($content, $toWall, $fromUser);
 
