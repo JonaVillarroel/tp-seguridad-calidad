@@ -1,3 +1,12 @@
+<?php
+require './php/domain/Session.php';
+$mysession = new Session();
+$mysession->initSession();
+
+$name = isset($_SESSION['nombreUsuario']) ? $_SESSION['nombreUsuario'] : null;
+$surname = isset($_SESSION['apellidoUsuario']) ? $_SESSION['apellidoUsuario'] : null;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -10,34 +19,22 @@
     </head>
 
     <body>
-        <div class="bg" id="wrapper">
-
-            <?php
-            include_once (__DIR__."/templates/header.php");
-            ?>
-
-            <div class="container" id="content">
-                <?php
-                    if(($_SESSION["usuario"])){
-                        include_once (__DIR__."/templates/wall.php");
-                    }else{
-                        include_once (__DIR__."/templates/welcome.php");
-                    }
-                ?>
-            </div>
-
-            <?php
-            include_once (__DIR__."/templates/footer.php");
-            ?>
-
-            <?php
-            include_once (__DIR__."/templates/modalLogin.php");
-            ?>
-
-            <?php
-            include_once (__DIR__."/templates/modalSignUp.php");
-            ?>
-        </div>
+	<?php
+        include_once (__DIR__."/templates/header.php");
+    ?>
+	<div class="container bg">
+        <?php
+            if($name){
+                include_once (__DIR__."/templates/wall.php");
+            }else{
+                include_once (__DIR__."/templates/welcome.php");
+            }
+        ?>
+	</div>
+	
+	<?php
+        include_once (__DIR__."/templates/footer.php");
+    ?>
 
         <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
         <script src="lib/jquery-ui/jquery-ui.min.js"></script>

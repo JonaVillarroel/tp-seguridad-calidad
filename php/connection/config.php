@@ -10,7 +10,7 @@ if(!defined('DB_USER'))
 }
 if(!defined('DB_PASS'))
 {
-    define('DB_PASS','root');
+    define('DB_PASS','');
 }
 if(!defined('DB_NAME'))
 {
