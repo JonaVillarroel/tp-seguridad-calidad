@@ -1,6 +1,5 @@
 <?php
 require(dirname(__DIR__)."/connection/Connection.php");
-require(dirname(__DIR__)."/domain/Session.php");
 
 class User{    
     private $rol;

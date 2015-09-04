@@ -3,8 +3,8 @@ require './php/domain/Session.php';
 $mysession = new Session();
 $mysession->initSession();
 
-$name = isset($_SESSION['nombreUsuario']) ? $_SESSION['nombreUsuario'] : null;
-$surname = isset($_SESSION['apellidoUsuario']) ? $_SESSION['apellidoUsuario'] : null;
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
+$roles = isset($_SESSION['roles']) ? $_SESSION['roles'] : false;
 ?>
 
 <!DOCTYPE html>
@@ -23,7 +23,7 @@ $surname = isset($_SESSION['apellidoUsuario']) ? $_SESSION['apellidoUsuario'] : 
     ?>
 	<div class="container bg">
         <?php
-            if($name){
+            if($username){
                 include_once (__DIR__."/templates/wall.php");
             }else{
                 include_once (__DIR__."/templates/welcome.php");

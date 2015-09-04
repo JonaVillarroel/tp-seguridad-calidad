@@ -1,8 +1,5 @@
 <?php
 
-require (dirname(__DIR__)."/connection/Connection.php");
-require (dirname(__DIR__)."/domain/Session.php");
-
 class Wall{
 	
 	private $id_wall;
@@ -19,11 +16,34 @@ class Wall{
 	
 	public function getMessages(){
 
-		$myConnection = new Connection();
-		$mySession = new Session();
-			
-			$result = $myConnection -> query("SELECT * FROM MENSAJE WHERE id_muro='$this->id_wall';");
-			
+		$con = new Connection();
+		$sql = "SELECT * FROM MENSAJE WHERE id_muro=?";
+		$stmt = $con->prepare($sql);
+		$valor = 1;
+		if($stmt === false) {
+  			trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $con->error, E_USER_ERROR);
+		}
+		$stmt->bind_param('i',$valor);
+
+		$stmt->execute();
+
+		$stmt->bind_result($id_mensaje, $id_usuario, $id_muro, $contenido, $fecha_alta, $fecha_baja);
+
+		while($row = $stmt->fetch())
+		{
+  			printf ("%s \n", $contenido);
+		}
+
+
+/*$arr = $rs->fetch_all(MYSQLI_ASSOC);
+ 
+if($rs === false) {
+  trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
+} else {
+  $rows_returned = $rs->num_rows;
+}
+
+
 		if($fila = $result -> fetch_object()){//Devuelve la fila actual de un conjunto de resultados como un objeto
 			
 			$mySession -> initSession();
@@ -49,16 +69,14 @@ class Wall{
 		}
 		else{
 			//header ('location: ../index.php?error=1');
-		}
+		}*/
 			
-		$myConnection -> close();
+		$con -> close();
 	}
 
 	//Posterior a dar de baja un usuario llamo a este método pasandole por parámetro el id del usuario.
 	public function remove($id_usuario){
 		//Busco el muro que corresponde con el id al usuario que se borró.
-
-		$qb = new Querybuilder();
 		$result =  $qb.simple_select('MURO', 'id_muro', 'id_usuario', $id_usuario);
 
 		if($result->num_rows === 0)

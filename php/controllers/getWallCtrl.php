@@ -4,8 +4,5 @@
 
     $wall = new Wall(1,1,"publico");
     $wall -> getMessages();
-    foreach ($wall as $key => $value) {
-    	echo $value;
-    }
 
 ?>
