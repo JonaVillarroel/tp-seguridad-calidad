@@ -1,6 +1,6 @@
 <?php
 
-class Wall{
+class Wall extends Connection{
 	
 	private $id_wall;
 	private $id_user;
@@ -90,6 +90,18 @@ if($rs === false) {
 			$values['fecha_baja'] = new Date();
 			$qb.simple_update('MURO',$values ,'id_muro', $id_muro);
 		}
+
+	}
+
+	public function getWallByUser($userName){
+
+		$query = "SELECT id_usuario FROM MURO INNER JOIN USUARIO ON
+					MURO.id_usuario = USUARIO.id_usuario
+					WHERE USUARIO.nombre_usuario = '$userName'";
+
+		$results = $this->db->query($query)
+		or die('Error consultando el usuario: ' . mysqli_error($this->db));
+
 
 	}
 }
