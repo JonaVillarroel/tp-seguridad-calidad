@@ -1,9 +1,9 @@
-<div>
+<div id="header">
     <div class="navbar navbar-default">
         <a href="index.php" class="navbar-brand">The Wall</a>
         <div class="pull-right">
-            <?PHP
-                if(!($_SESSION["usuario"])){
+            <?php
+                if(!$username){
             ?>
             <form class="navbar-form navbar-left" method="post" action="#">
                 <div class="form-group">
@@ -13,9 +13,9 @@
                 <button type="submit" class="btn btn-default">Ingresar</button>
             </form>
 
-            <p class="navbar-text"><a href="#" class="navbar-link">Registrarse</a></p>
+            <p class="navbar-text"><a href="./registro.php" class="navbar-link">Registrarse</a></p>
              
-            <?PHP
+            <?php
             }else{
             ?>           
             <p class="navbar-text">
@@ -23,7 +23,7 @@
                 <a class="navbar-link" href="user.php"><span class="glyphicon glyphicon-user"></span> Usuario</a> |
                 <a class="navbar-link" href="user.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
             </p>
-            <?PHP
+            <?php
             }
             ?>
         </div>
