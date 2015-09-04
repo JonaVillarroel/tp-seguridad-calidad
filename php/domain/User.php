@@ -208,6 +208,14 @@ class User{
     }
 
 
+    public function isAdmin($userId){
+        //Implementar funcion para verificar si el usuario que se le pasa por
+        //parámetro tiene como rol Admin.
+    }
+
+
+
+
 
 }
 
