@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>TheWall</title>
+	<title>The Wall</title>
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-
-	<link rel="stylesheet" type="text/css" href="lib/bootstrap.min.css"></link>
-	<link rel="stylesheet" type="text/css" href="lib/mybootstrap.css"></link>
-	<link rel="stylesheet" href="bootstrap/css/bootstrapLimpio.min.css">
-	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="lib/bootstrap/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="css/main.css"></link>
 	<link rel="icon" type="image/png" href="img/muroBlanco.png">
 
 <title>The Wall</title>
@@ -37,7 +34,7 @@
     <div class="row publication">
 		  <div class="col-md-2"><img src="http://packetcode.com/apps/wall-design/image.jpg" class="img-circle" width="40%"/></div>
 		  <div class="col-md-10"><textarea class="form-control" id="message" rows="3" placeholder="Publica un mensaje!"></textarea><br>
-		  <button type="button" id="button" class="btn btn-default">Publicar</button>
+		  <button type="button" id="postMessageBtn" class="btn btn-default">Publicar</button>
 		  </div>
 	</div>
 
@@ -84,9 +81,10 @@
 
 
 
-	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="lib/jquery-ui/external/jquery/jquery.js"></script>
+	<script src="lib/jquery-ui/jquery-ui.min.js"></script>
 	<script src="js/main.js"></script>
-	<script src="bootstrap/js/jquery.min.js"></script>
-	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="js/postMessage.js"></script>
+
 </body>
 </html>
