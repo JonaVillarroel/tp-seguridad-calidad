@@ -73,18 +73,19 @@ class User{
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
             if ($row->estado == 'Registrado') {
                 $mysession->initSession();
-                $mysession->setSession('userName', $row->nombre);
+                $mysession->setSession('username', $row->nombre);
                 $mysession->setSession('userSurname', $row->apellido);
                 $mysession->setSession('userMail', $row->mail);
                 $mysession->setSession('userUserName', $row->nombre_usuario);
-
+                $mysession->setSession('userRol', $row->rol);
                 $rol = $row->rol;
+
                 switch ($rol) {
                     case 'Administrador':
                         echo "Hola Admin";
                         break;
                     case 'Comun':
-                        echo "Hola Comunacho";
+                        header("Location: ../../index.php");
                         break;
                 }
             } else if ($row->estado == 'Pendiente') {

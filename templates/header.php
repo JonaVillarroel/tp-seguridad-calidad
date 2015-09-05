@@ -21,7 +21,7 @@
             <p class="navbar-text">
                 <a class="navbar-link" href="#"><span class="glyphicon glyphicon-cog"></span></a> |
                 <a class="navbar-link" href="user.php"><span class="glyphicon glyphicon-user"></span> Usuario</a> |
-                <a class="navbar-link" href="user.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
+                <a class="navbar-link" href="<?php $mysession -> destroySession() ?>"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
             </p>
             <?php
             }
