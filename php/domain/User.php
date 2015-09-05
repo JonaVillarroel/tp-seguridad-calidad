@@ -1,7 +1,9 @@
 <?php
 require(dirname(__DIR__)."/connection/Connection.php");
+require(dirname(__DIR__)."/domain/Message.php");
 
-class User{    
+
+class User{
     private $rol;
 	private $name;
 	private $surname;
@@ -199,17 +201,19 @@ class User{
         return $errorMessageView;
     }
 
-    /**
-    Recibe un json con:
-    * @param id_usuario
-    * @param id_muro
-    * @param content
-    */
     public function postMessage($content, $fromUser, $toWall){
 
         $message = new Message($content, $toWall, $fromUser);
 
     }
+
+
+    public function isAdmin($userId){
+        //Implementar funcion para verificar si el usuario que se le pasa por
+        //parámetro tiene como rol Admin.
+    }
+
+
 
 
 

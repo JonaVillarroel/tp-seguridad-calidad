@@ -1,13 +1,12 @@
 <?php
-include_once (dirname(__DIR__)."/connection/Querybuilder.php");
 
 class Message{
     private $content;
     private $toWall;
     private $fromUser;
     //private $toUser;
-    private $date_leaving;
-    private $date_start;
+    private $dateLeaving;
+    private $dateStart;
 
     /**
      * Message constructor.
@@ -20,29 +19,36 @@ class Message{
         $this->content = $content;
         $this->toWall = $toWall;
         $this->fromUser = $fromUser;
-        $this->date_start = new Date();
+        $this->dateStart = date("m.d.y");
 
         self::save();
 
     }
 
     private function save(){
+        $db = new Connection();
 
-        $values['contenido'] = $this -> content;
-        $values['id_usuario'] = $this -> fromUser;
-        $values['id_muro'] = $this -> toWall;
-        $values['fecha_alta'] = $this -> date_start;
+        $fromUser = $this -> fromUser;
+        $toWall = $this -> toWall;
+        $content = $this -> content;
+        $dateStart = $this -> dateStart;
 
-        $queryBuilder = new Querybuilder();
-        $queryBuilder.insert('MENSAJE', $values);
+        $query = "INSERT INTO MENSAJE(id_usuario, id_muro, contenido, fecha_alta)
+        VALUES ($fromUser, $toWall, '$content', $dateStart)";
+
+        $results = $db -> query($query)
+        or die('Error guardando el mensaje: ' . mysqli_error($this->db));
     }
 
 
     public function remove($id_mensaje){
-        $values['fecha_baja'] = new Date();
+        $db = new Connection();
+        $dateLeaving = date("m.d.y");
 
-        $queryBuilder = new Querybuilder();
-        $queryBuilder.simple_update('MENSAJE',$values ,'id_mensaje', $id_mensaje);
+        $query = "UPDATE MENSAJE SET fecha_baja = $dateLeaving where id_mensaje = $id_mensaje";
+
+        $results = $db -> query($query)
+        or die('Error dando de baja el mensaje: ' . mysqli_error($this->db));
 
     }
 
