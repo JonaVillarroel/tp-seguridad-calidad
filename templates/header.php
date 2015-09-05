@@ -3,12 +3,12 @@
         <a href="index.php" class="navbar-brand">The Wall</a>
         <div class="pull-right">
             <?php
-                if($username){
+                if(!$username){
             ?>
-            <form class="navbar-form navbar-left" method="post" action="#">
+            <form class="navbar-form navbar-left" method="post" action="./php/controllers/loginController.php">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="E-mail" id="mail">
-                    <input type="password" class="form-control" placeholder="Contraseña" id="pass">
+                    <input type="text" class="form-control" placeholder="E-mail" id="mail" name="mail">
+                    <input type="password" class="form-control" placeholder="Contraseña" id="pass" name="pass">
                 </div>
                 <button type="submit" class="btn btn-default">Ingresar</button>
             </form>

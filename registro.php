@@ -5,6 +5,7 @@ $mysession->initSession();
 
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
 $roles = isset($_SESSION['roles']) ? $_SESSION['roles'] : false;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
