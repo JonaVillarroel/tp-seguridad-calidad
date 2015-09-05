@@ -1,36 +1,44 @@
 <div id="wall" class="col-sm-12">
-    <h4>Mi Wall</h4>
-        <?php 
-        include_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
-        
+    <h2>Mi Wall</h2>
+
+        <?php
+            include_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
         ?>
-            
-            <!--<div id="">
-                <div class="col-md-2"><img src="http://packetcode.com/apps/wall-design/image.jpg" class="img-circle" width="40%"/></div>
-                <div class="col-md-10"><textarea class="form-control" id="feedbox" rows="3" placeholder="Publica un mensaje!"></textarea><br>
-                    <button type="button" id="button" class="btn btn-default">Publicar</button>
+
+        <div class="col-sm-12">
+
+            <div class="col-sm-10 col-sm-push-1">
+
+                <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">
+                    <textarea type="text" class="form-control" maxlength="280" rows="5"></textarea><br/>
+                    <button type="submit" id="btnMessage" name="btnMessage" class="btn btn-success btn-md pull-right">
+                        <span class="glyphicon glyphicon-send"></span> Publicar
+                    </button>    
+                </div>
+
+                <div class="btn-message col-sm-10 wall">
+                    <?php
+                        while($obj = $muro -> fetch_object()){
+                            $contenido = $obj -> contenido;
+                            if($contenido)
+                                
+                    ?>
+                    <hr class="col-sm-10 col-sm-push-1">
+                    <div id="toRepeat" name="toRepeat">
+                        <div class="col-sm-2">
+                            <div class="pull-right">
+                                <img src="img/user.png" alt="usuario" class="img-circle">
+                            </div>
+                        </div>
+                        <div class="col-sm-10 mensaje">
+                            <?php echo $contenido; ?>    
+                        </div>
+                    </div>
+                    <?php 
+                        } 
+                    ?>
                 </div>
             </div>
 
-            <div class="row publication" >
-                <div class="col-md-2"><img src="http://7-themes.com/data_images/out/60/6976065-dark-colors-abstract.jpg" class="img-circle" width="40%"/></div>
-                <div class="col-md-10">
-                    <div><b>Lucas Rodríguez </b>
-
-                        <div>Hola Laura!</div>
-                        <div class="text-muted"> <small>Hace 1 hora</small></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row publication">
-                <div class="col-md-2"><img src="http://packetcode.com/apps/wall-design/image.jpg" class="img-circle" width="40%"/></div>
-                <div class="col-md-10">
-                    <div><b>Laura Gutierrez </b>
-
-                        <div>Primera publicación</div>
-                        <div class="text-muted"> <small>Hace 3 horas</small></div>
-                    </div>
-            </div>
--->
+        </div>
 </div>

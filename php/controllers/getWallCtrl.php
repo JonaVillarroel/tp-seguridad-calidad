@@ -3,6 +3,6 @@
 	require_once (dirname(__DIR__)."/domain/Wall.php");
 
     $wall = new Wall(1,1,"publico");
-    $wall -> getMessages();
+    $muro = $wall -> getMessages();
 
 ?>

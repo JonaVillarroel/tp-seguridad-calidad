@@ -3,7 +3,7 @@
         <a href="index.php" class="navbar-brand">The Wall</a>
         <div class="pull-right">
             <?php
-                if(!$username){
+                if($username){
             ?>
             <form class="navbar-form navbar-left" method="post" action="#">
                 <div class="form-group">

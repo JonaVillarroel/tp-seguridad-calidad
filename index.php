@@ -24,7 +24,7 @@ $roles = isset($_SESSION['roles']) ? $_SESSION['roles'] : false;
     ?>
 	<div class="container bg">
         <?php
-            if($username){
+            if(!$username){
                 include_once (__DIR__."/templates/wall.php");
             }else{
                 include_once (__DIR__."/templates/welcome.php");
