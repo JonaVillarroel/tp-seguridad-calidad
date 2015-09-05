@@ -1,5 +1,6 @@
 <?php
 require(dirname(__DIR__)."/connection/Connection.php");
+require(dirname(__DIR__)."/domain/Session.php");
 
 class User{    
     private $rol;
@@ -62,39 +63,37 @@ class User{
 		$myConnection -> close();
     }
 
-    public function Login($userName, $pass){
-        $this -> userName = $userName;
-        $this -> pass = $pass;
+    public function Login($mail, $pass){
+        $myConnection = new Connection();
+        $mysession = new Session();
 
-        $query = "SELECT nombre_usuario, rol FROM USUARIO where nombre_usuario = '$userName' and pass = '$pass'";
-        $result = $this->db->query($query) or die( "Error en el SELECT: ".mysqli_error($this->db) );
-        if($result->num_rows === 1){
-            $canLogin = true;
-        }
-        while ($obj = $result->fetch_object()) {
-            $userName = $obj->nombre_usuario;
-            if ($obj->rol === "adminUser") {
-                $isAdmin = true;
+        $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass';");
+        if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
+            if ($row->estado == 'Registrado') {
+                $mysession->initSession();
+                $mysession->setSession('userName', $row->nombre);
+                $mysession->setSession('userSurname', $row->apellido);
+                $mysession->setSession('userMail', $row->mail);
+                $mysession->setSession('userUserName', $row->nombre_usuario);
+
+                $rol = $row->rol;
+                switch ($rol) {
+                    case 'Administrador':
+                        echo "Hola Admin";
+                        break;
+                    case 'Comun':
+                        echo "Hola Comunacho";
+                        break;
+                }
+            } else if ($row->estado == 'Pendiente') {
+                echo "DISCULPE LAS MOLESTIAS <br/>";
+                echo "Usuario " . $row->nombre . " " . $row->apellido . " su solicitud de registro todavia no fue confirmada por el Administrador del sitio.";
             } else {
-                $isAdmin = false;
+                echo "Error en el login";
             }
-        }
 
-        //Si existe el usuario puedo loguearme.
-        if($canLogin){
-            $data['valido'] = true;
-            $data['message'] = "Todos los datos correctos.<br/>" ;
-            session_start();
-            $_SESSION['userName'] = $userName;
-            if($isAdmin){
-                $_SESSION['rol'] = "adminUser";
-            }else{
-                $_SESSION['rol'] = "simpleUser";
-            }
-        }else{
-            $data['valido'] = false;
+            $myConnection->close();
         }
-        echo json_encode($data);
     }
 
     //Recibe el nombre de usuario ACTUAL, y un json con los datos que el usuario modificó en el formulario
