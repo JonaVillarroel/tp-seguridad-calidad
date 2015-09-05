@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="927c2df8-c8d3-4f4b-827c-8f4e035bb2dc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php/controllers/loginController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/domain/Session.php" afterPath="$PROJECT_DIR$/php/domain/Session.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/php/services/UserRepositoryService.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/indexAdmin.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/userControlAdmin.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/php/controllers/postMessage.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/domain/Message.php" afterPath="$PROJECT_DIR$/php/domain/Message.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/domain/User.php" afterPath="$PROJECT_DIR$/php/domain/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/header.php" afterPath="$PROJECT_DIR$/templates/header.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/registro.php" afterPath="$PROJECT_DIR$/registro.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/user.php" afterPath="$PROJECT_DIR$/user.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/domain/Wall.php" afterPath="$PROJECT_DIR$/php/domain/Wall.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/php/controllers/postMessageCtrl.php" afterPath="$PROJECT_DIR$/php/controllers/postMessageCtrl.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tp-seguridad-calidad.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +35,7 @@
       <file leaf-file-name="header.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/header.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
+            <state vertical-scroll-proportion="0.0">
               <caret line="10" column="109" selection-start-line="10" selection-start-column="109" selection-end-line="10" selection-end-column="109" />
               <folding />
             </state>
@@ -43,7 +45,7 @@
       <file leaf-file-name="loginController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/php/controllers/loginController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.125">
+            <state vertical-scroll-proportion="0.0">
               <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
@@ -63,13 +65,13 @@
       <file leaf-file-name="User.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/php/domain/User.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.479798">
-              <caret line="87" column="19" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
+            <state vertical-scroll-proportion="-3.469697">
+              <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
               <folding>
-                <marker date="1441460904480" expanded="true" signature="1804:1981" placeholder="INSERT INTO ..." />
-                <marker date="1441460904480" expanded="true" signature="2255:2322" placeholder="SELECT * FRO..USUARIO..." />
-                <marker date="1441460904480" expanded="true" signature="6089:6145" placeholder="SELECT * FRO..USUARIO..." />
-                <marker date="1441460904480" expanded="true" signature="6417:6459" placeholder="SELECT * FRO..USUARIO..." />
+                <marker date="1441464054100" expanded="true" signature="1850:2027" placeholder="INSERT INTO ..." />
+                <marker date="1441464054100" expanded="true" signature="2301:2368" placeholder="SELECT * FRO..USUARIO..." />
+                <marker date="1441464054100" expanded="true" signature="6135:6191" placeholder="SELECT * FRO..USUARIO..." />
+                <marker date="1441464054100" expanded="true" signature="6463:6505" placeholder="SELECT * FRO..USUARIO..." />
               </folding>
             </state>
           </provider>
@@ -132,9 +134,9 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="65" />
-    <option name="y" value="-4" />
+    <option name="y" value="24" />
     <option name="width" value="1301" />
-    <option name="height" value="772" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -159,7 +161,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -205,6 +207,20 @@
               <option name="myItemId" value="php" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tp-seguridad-calidad" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tp-seguridad-calidad" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="php" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="domain" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -228,24 +244,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tp-seguridad-calidad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tp-seguridad-calidad" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="php" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -530,15 +532,17 @@
       <workItem from="1441376326962" duration="789000" />
       <workItem from="1441377135316" duration="5187000" />
       <workItem from="1441460380980" duration="583000" />
+      <workItem from="1441463814090" duration="240000" />
+      <workItem from="1441464172667" duration="157000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6559000" />
+    <option name="totallyTimeSpent" value="6956000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
-    <editor active="false" />
+    <frame x="65" y="24" width="1301" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -596,6 +600,96 @@
     <entry file="file://$PROJECT_DIR$/php/controllers/loginController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="90" selection-start-line="15" selection-start-column="90" selection-end-line="15" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/domain/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1441464054100" expanded="true" signature="1850:2027" placeholder="INSERT INTO ..." />
+            <marker date="1441464054100" expanded="true" signature="2301:2368" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6135:6191" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6463:6505" placeholder="SELECT * FRO..USUARIO..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/controllers/signUpController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="109" selection-start-line="10" selection-start-column="109" selection-end-line="10" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/controllers/loginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="90" selection-start-line="15" selection-start-column="90" selection-end-line="15" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/domain/User.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <marker date="1441464054100" expanded="true" signature="1850:2027" placeholder="INSERT INTO ..." />
+            <marker date="1441464054100" expanded="true" signature="2301:2368" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6135:6191" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6463:6505" placeholder="SELECT * FRO..USUARIO..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/controllers/signUpController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="3" column="45" selection-start-line="3" selection-start-column="45" selection-end-line="3" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/header.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="109" selection-start-line="10" selection-start-column="109" selection-end-line="10" selection-end-column="109" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/php/controllers/loginController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -614,10 +708,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="51" selection-start-line="95" selection-start-column="51" selection-end-line="95" selection-end-column="51" />
           <folding>
-            <marker date="1441460904480" expanded="true" signature="1804:1981" placeholder="INSERT INTO ..." />
-            <marker date="1441460904480" expanded="true" signature="2255:2322" placeholder="SELECT * FRO..USUARIO..." />
-            <marker date="1441460904480" expanded="true" signature="6089:6145" placeholder="SELECT * FRO..USUARIO..." />
-            <marker date="1441460904480" expanded="true" signature="6417:6459" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="1850:2027" placeholder="INSERT INTO ..." />
+            <marker date="1441464054100" expanded="true" signature="2301:2368" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6135:6191" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6463:6505" placeholder="SELECT * FRO..USUARIO..." />
           </folding>
         </state>
       </provider>
@@ -634,7 +728,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -659,10 +752,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1441460904480" expanded="true" signature="1804:1981" placeholder="INSERT INTO ..." />
-            <marker date="1441460904480" expanded="true" signature="2255:2322" placeholder="SELECT * FRO..USUARIO..." />
-            <marker date="1441460904480" expanded="true" signature="6089:6145" placeholder="SELECT * FRO..USUARIO..." />
-            <marker date="1441460904480" expanded="true" signature="6417:6459" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="1850:2027" placeholder="INSERT INTO ..." />
+            <marker date="1441464054100" expanded="true" signature="2301:2368" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6135:6191" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6463:6505" placeholder="SELECT * FRO..USUARIO..." />
           </folding>
         </state>
       </provider>
@@ -693,7 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.479798">
           <caret line="36" column="106" selection-start-line="36" selection-start-column="68" selection-end-line="36" selection-end-column="106" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -715,7 +807,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/php/controllers/loginController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.125">
+        <state vertical-scroll-proportion="0.0">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
           <folding />
         </state>
@@ -723,7 +815,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/header.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
+        <state vertical-scroll-proportion="0.0">
           <caret line="10" column="109" selection-start-line="10" selection-start-column="109" selection-end-line="10" selection-end-column="109" />
           <folding />
         </state>
@@ -731,13 +823,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/php/domain/User.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.479798">
-          <caret line="87" column="19" selection-start-line="87" selection-start-column="19" selection-end-line="87" selection-end-column="19" />
+        <state vertical-scroll-proportion="-3.469697">
+          <caret line="51" column="26" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
           <folding>
-            <marker date="1441460904480" expanded="true" signature="1804:1981" placeholder="INSERT INTO ..." />
-            <marker date="1441460904480" expanded="true" signature="2255:2322" placeholder="SELECT * FRO..USUARIO..." />
-            <marker date="1441460904480" expanded="true" signature="6089:6145" placeholder="SELECT * FRO..USUARIO..." />
-            <marker date="1441460904480" expanded="true" signature="6417:6459" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="1850:2027" placeholder="INSERT INTO ..." />
+            <marker date="1441464054100" expanded="true" signature="2301:2368" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6135:6191" placeholder="SELECT * FRO..USUARIO..." />
+            <marker date="1441464054100" expanded="true" signature="6463:6505" placeholder="SELECT * FRO..USUARIO..." />
           </folding>
         </state>
       </provider>

@@ -95,12 +95,18 @@ if($rs === false) {
 
 	public function getWallByUser($userName){
 
-		$query = "SELECT id_usuario FROM MURO INNER JOIN USUARIO ON
+		$query = "SELECT id_muro FROM MURO INNER JOIN USUARIO ON
 					MURO.id_usuario = USUARIO.id_usuario
 					WHERE USUARIO.nombre_usuario = '$userName'";
 
 		$results = $this->db->query($query)
 		or die('Error consultando el usuario: ' . mysqli_error($this->db));
+
+		$obj = $results -> fetch_object();
+
+		$wallId = $obj -> id_muro;
+
+		return $wallId;
 
 
 	}
