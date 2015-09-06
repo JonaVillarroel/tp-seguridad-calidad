@@ -61,8 +61,6 @@ class Wall extends Connection{
 		$wallId = $obj -> id_muro;
 
 		return $wallId;
-
-
 	}
 }
 

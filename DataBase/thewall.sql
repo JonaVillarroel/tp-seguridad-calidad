@@ -42,6 +42,8 @@ CREATE TABLE COMPARTE_CON (
 	foreign key(id_muro) references MURO(id_muro) ON DELETE CASCADE
 );
 
-INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES ('','Comun','asd','asd','asd','nom','123','Pendiente');
+INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES ('','Administrador','Juanito','Arcoiris','admin@admin.com','Admin','admin','Registrado');
+
+UPDATE USUARIO SET USUARIO.estado = 'Registrado' WHERE USUARIO.id_usuario = 2;
 
 SELECT * FROM USUARIO;

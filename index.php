@@ -4,6 +4,10 @@ $mysession = new Session();
 $mysession->initSession();
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
 //$roles = isset($_SESSION['rol']) ? $_SESSION['roles'] : false;
+if($username == ''){
+	echo "Variable vacia";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +24,8 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
     <body>
 	<?php
         include_once (__DIR__."/templates/header.php");
+		echo "Holaaaa ";
+		print_r ($username);
     ?>
 	<div class="container bg">
         <?php
