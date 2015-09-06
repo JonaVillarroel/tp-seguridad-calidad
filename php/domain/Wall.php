@@ -8,15 +8,18 @@ class Wall extends Connection{
 	private $date_leaving;
 
 	#Datos Muro [id_muro auto_increment,id_usuario,privacidad set('propietario','todos','registrados')]
-	public function __construct(){
+	public function __construct($idMuro,$idUsuario,$privacidad){	
+		$this -> id_wall = $idMuro;
+		$this -> id_user = $idUsuario;
+		$this -> privacity = $privacidad;
 	}
 	
 	public function getMessages(){
 
 	    $db = new Connection();
-	    $idUsuario = $_GET['usuario'];
+	    $usuario = 1;
 
-	    $query = "SELECT MENSAJE.*, MURO.privacidad, USUARIO.nombre, USUARIO.apellido FROM MENSAJE INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro INNER JOIN USUARIO ON USUARIO.id_usuario = MURO.id_muro WHERE MURO.id_usuario = '$idUsuario' ORDER BY fecha_alta DESC LIMIT 10";
+	    $query = "SELECT MENSAJE.* FROM MENSAJE INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro WHERE MURO.id_usuario = '$usuario' ORDER BY fecha_alta DESC LIMIT 10";
 
 	    $results = $db -> query($query)
 	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));
@@ -58,17 +61,6 @@ class Wall extends Connection{
 		$wallId = $obj -> id_muro;
 
 		return $wallId;
-	}
-
-	public function isInWhiteList($idMuro, $loggedUserId){
-		$db = new Connection();
-
-	    $query = "SELECT * FROM COMPARTE_CON WHERE id_muro = '$idMuro' AND id_usuario = '$loggedUserId'";
-
-	    $results = $db -> query($query)
-	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));
-
-	    return $results;
 	}
 }
 

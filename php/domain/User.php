@@ -58,11 +58,6 @@ class User{
 
 				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
 				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente');");
-
-                $query = "INSERT INTO MURO (privacidad)
-                  VALUES ('publico')";
-
-                $myConnection -> query($query);
 				
                 echo "Usuario registrado";
             }
@@ -88,21 +83,20 @@ class User{
 
                 switch ($rol) {
                     case 'Administrador':
-                        echo "Hola Admin";
+                        header ('location: ../../indexAdmin.php');
                         break;
                     case 'Comun':
-						header ('location: ../../index.php?usuario='.$_SESSION['idUser']);
+						header ('location: ../../index.php');
                         break;
                 }
             } else if ($row->estado == 'Pendiente') {
                 echo "DISCULPE LAS MOLESTIAS <br/>";
                 echo "Usuario " . $row->nombre . " " . $row->apellido . " su solicitud de registro todavia no fue confirmada por el Administrador del sitio.";
-            } else {
-                echo "Error en el login";
             }
-
-            $myConnection->close();
+        }else{
+            header ('location: ../../index.php?error=1');
         }
+		 $myConnection->close();
     }
 
     //Recibe el nombre de usuario ACTUAL, y un json con los datos que el usuario modificó en el formulario
@@ -144,7 +138,101 @@ class User{
 
     }
 
-    private function validate($name,$surname,$mail,$userName,$pass,$repass){
+    public function postMessage($content, $fromUser, $toWall){
+
+        $message = new Message($content, $toWall, $fromUser);
+
+    }
+
+
+    public function isAdmin($userId){
+        //Implementar funcion para verificar si el usuario que se le pasa por
+        //parámetro tiene como rol Admin.
+    }
+
+	public function getUser($userId){
+        $myConnection = new Connection();
+		
+		$result = $myConnection -> query("SELECT * FROM USUARIO WHERE USUARIO.id_usuario = '$userId';");
+		
+		$myConnection -> close();
+		return $result;
+    }
+	
+	public function getUsersStatusPending(){
+        $myConnection = new Connection();
+		
+		$result = $myConnection -> query("SELECT * FROM USUARIO WHERE estado = 'Pendiente' AND fecha_baja IS NULL;");
+		
+		$myConnection -> close();
+		return $result;
+    }
+	
+	public function getUsersStatusCurrent(){
+        $myConnection = new Connection();
+		
+		$result = $myConnection -> query("SELECT * FROM USUARIO WHERE estado = 'Registrado' AND fecha_baja IS NULL;");
+		
+		$myConnection -> close();
+		return $result;
+    }
+	
+	public function getUsersStatusDisapprove(){
+        $myConnection = new Connection();
+		
+		$result = $myConnection -> query("SELECT * FROM USUARIO WHERE fecha_baja IS NOT NULL;");
+		
+		$myConnection -> close();
+		return $result;
+    }
+	
+	public function approveUser($userId){
+		$myConnection = new Connection();
+		
+		$result = $myConnection -> query("UPDATE USUARIO SET USUARIO.estado = 'Registrado' WHERE USUARIO.id_usuario = '$userId';");
+		
+		$myConnection -> close();
+		header ('location: ../../indexAdmin.php?list=request');
+    }
+	
+	public function modifyUser($userId,$name,$surname,$mail,$userName){
+		$myConnection = new Connection();
+
+                //Procedo a insertar los datos a la bdd.
+                $surnameOK = ucfirst(strtolower($surname));#Primer letra mayucula y el resto de lo que escribo en minuscula
+				$nameOK = ucfirst(strtolower($name));#Primer letra mayucula y el resto de lo que escribo en minuscula
+
+				if(($name != null or $name != '') AND (preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$name))){
+					$result = $myConnection -> query("UPDATE USUARIO SET USUARIO.nombre = '$nameOK' WHERE USUARIO.id_usuario = '$userId';");
+				}
+				if(($surname != null or $surname != '') AND (preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$surname))){
+					$result = $myConnection -> query("UPDATE USUARIO SET USUARIO.apellido = '$surnameOK' WHERE USUARIO.id_usuario = '$userId';");
+				}
+				if(($mail != null or $mail != '') AND (preg_match("/^[a-zA-Z0-9_ñÑáéíóÁÉÍÓÚ]*[@]+[a-z]+([.]{1}[a-z]+)*$/",$mail))){
+					$result = $myConnection -> query("UPDATE USUARIO SET USUARIO.mail = '$mail' WHERE USUARIO.id_usuario = '$userId';");
+				}
+				if(($userName != null or $userName != '') AND (preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$name))){
+					$result = $myConnection -> query("UPDATE USUARIO SET USUARIO.nombre_usuario = '$userName' WHERE USUARIO.id_usuario = '$userId';");
+				}
+				
+                header ('location: ../../indexAdmin.php?list=current');
+
+		$myConnection -> close();
+    }
+	
+	public function disapproveUser($userId){
+		$myConnection = new Connection();
+		
+		// Establecer la zona horaria predeterminada a usar. Disponible desde PHP 5.1
+		date_default_timezone_set('GMT-3');
+		$currentDate = date('Y-m-d');
+		$result = $myConnection -> query("UPDATE USUARIO SET USUARIO.fecha_baja = '$currentDate' WHERE USUARIO.id_usuario = '$userId';");
+		
+		$myConnection -> close();
+		header ('location: ../../indexAdmin.php?list=current');
+    }
+	
+	private function validate($name,$surname,$mail,$userName,$pass,$repass){
         $errorMessage = array();
 
 
@@ -177,6 +265,12 @@ class User{
         }else{
             $errorMessage["mail"] = "El mail ingresado no es válido";
         }
+		
+		if(preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$userName)){
+            $errorMessage["userName"] = 0;
+        }else{
+            $errorMessage["userName"] = "El nombre de usuario no es correcto";
+        }
 
         return $errorMessage;
     }
@@ -206,22 +300,6 @@ class User{
 		$myConnection -> close();
         return $errorMessageView;
     }
-
-    public function postMessage($content, $fromUser, $toWall){
-
-        $message = new Message($content, $toWall, $fromUser);
-
-    }
-
-
-    public function isAdmin($userId){
-        //Implementar funcion para verificar si el usuario que se le pasa por
-        //parámetro tiene como rol Admin.
-    }
-
-
-
-
 
 }
 

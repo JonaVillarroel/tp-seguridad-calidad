@@ -2,10 +2,9 @@
 require './php/domain/Session.php';
 $mysession = new Session();
 $mysession->initSession();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
-//$roles = isset($_SESSION['rol']) ? $_SESSION['roles'] : false;
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+$usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null;
 
-$id = isset($_GET['usuario']) ? $_GET['usuario'] : false; 
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +24,7 @@ $id = isset($_GET['usuario']) ? $_GET['usuario'] : false;
     ?>
 	<div class="container bg">
         <?php
-            if($id){
+            if($username){
                 include_once (__DIR__."/templates/wall.php");
             }else{
                 include_once (__DIR__."/templates/welcome.php");
