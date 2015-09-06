@@ -6,7 +6,7 @@
     <div class="navbar navbar-default">
 	<?php
 		$rol = isset($_SESSION['userRol']) ? $_SESSION['userRol'] : null;
-		if($rol == 'Comun'){
+		if($rol == 'Comun' or $rol == null){
 			echo "<a href='index.php' class='navbar-brand'>The Wall</a>";
 		}
 		if($rol == 'Administrador'){
