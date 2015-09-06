@@ -86,7 +86,7 @@ class User{
                         echo "Hola Admin";
                         break;
                     case 'Comun':
-						header ('location: http://localhost:8080/tp-seguridad-calidad/index.php');
+						header ('location: ../../index.php');
                         break;
                 }
             } else if ($row->estado == 'Pendiente') {

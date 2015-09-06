@@ -5,5 +5,5 @@
 	
 	$mysession->destroySession();
 	
-	header('location: http://localhost:8080/tp-seguridad-calidad/index.php');
+	header('location: ../../index.php');
 ?>
