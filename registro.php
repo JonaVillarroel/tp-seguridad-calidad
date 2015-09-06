@@ -35,7 +35,7 @@ $roles = isset($_SESSION['roles']) ? $_SESSION['roles'] : false;
 					<span class="red">*Campos Obligatorios</span>
 				</div>
 			</div><br/>
-				<form class="form-horizontal" method="post" action="./php/controllers/signUpController.php">
+				<form class="form-horizontal" method="post" onsubmit="return ValidarRegistroComun()" action="./php/controllers/signUpController.php">
 					<!--NOMBRE-->	  
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblNombre" for="txtNombre">Nombre: <span class="red">*</span></label>
@@ -61,6 +61,9 @@ $roles = isset($_SESSION['roles']) ? $_SESSION['roles'] : false;
 						<label class="col-sm-4 control-label" id="lblNomUser" for="txtNomUser">Nombre de Usuario: <span class="red">*</span></label>
 						<div class="col-sm-6 col-md-6">
 							<input class="form-control" type="text" id="txtNomUser"  name="userName" onkeypress="return sololetras(event)" onpaste="return false"/>
+							<div id="nonombreUC" class="alert alert-danger">Por favor ingrese Nombre de Usuario</div>
+							<div id="longnombreUC" class="alert alert-danger">El Nombre de Usuario debe tener menos de 50 caracteres</div>
+							<div id="malnombreUC" class="alert alert-danger">Por favor ingrese un Nombre de Usuario v&aacute;lido</div>
 						</div>
 					</div>
 					<!--EMAIL-->

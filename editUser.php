@@ -54,7 +54,7 @@ if($rol != 'Administrador'){
 				</div>
 			</div>
 			
-				<form class="form-horizontal" method="post" action="./php/controllers/modifyUserControllers.php?id=<?php echo $userId?>">
+				<form class="form-horizontal" method="post" onsubmit="return ValidarEditUser()" action="./php/controllers/modifyUserControllers.php?id=<?php echo $userId?>">
 					<div class="col-xs-12 red center">
 						<?php echo $row->nombre?>
 					</div>
@@ -63,7 +63,6 @@ if($rol != 'Administrador'){
 						<label class="col-sm-4 control-label" id="lblNombre" for="txtNombre">Nombre:</label>
 						<div class="col-sm-6 col-md-6">
 							<input class="form-control" type="text" id="txtNombre"  name="name" onkeypress="return sololetras(event)" onpaste="return false"/>
-							<div id="nonombreC" class="alert alert-danger">Por favor ingrese su Nombre</div>
 							<div id="longnombreC" class="alert alert-danger">El Nombre debe tener menos de 50 caracteres</div>
 							<div id="malnombreC" class="alert alert-danger">Por favor ingrese un Nombre v&aacute;lido</div>
 						</div>
@@ -76,7 +75,6 @@ if($rol != 'Administrador'){
 						<label class="col-sm-4 control-label" id="lblApellido" for="txtApellido">Apellido:</label>
 						<div class="col-sm-6 col-md-6">
 							<input class="form-control" type="text" id="txtApellido"  name="surname" onkeypress="return sololetras(event)" onpaste="return false"/>
-							<div id="noapelC" class="alert alert-danger">Por favor ingrese su Apellido</div>
 							<div id="longapelC" class="alert alert-danger">El Apellido debe tener menos de 50 caracteres</div>
 							<div id="malapelC" class="alert alert-danger">Por favor ingrese un Apellido v&aacute;lido</div>
 						</div>
@@ -86,9 +84,11 @@ if($rol != 'Administrador'){
 					</div>
 					<!--NOMBRE DE USUARIO-->	  
 					<div class="form-group">
-						<label class="col-sm-4 control-label" id="lblNomUser" for="txtNomUser">Nombre de Usuario:</label>
+						<label class="col-sm-4 control-label" id="lblNomUser" for="txtNomUser">Nombre de Usuario: <span class="red">*</span></label>
 						<div class="col-sm-6 col-md-6">
 							<input class="form-control" type="text" id="txtNomUser"  name="userName" onkeypress="return sololetras(event)" onpaste="return false"/>
+							<div id="longnombreUC" class="alert alert-danger">El Nombre de Usuario debe tener menos de 50 caracteres</div>
+							<div id="malnombreUC" class="alert alert-danger">Por favor ingrese un Nombre de Usuario v&aacute;lido</div>
 						</div>
 					</div>
 					<div class="col-xs-12 red center">
@@ -100,7 +100,6 @@ if($rol != 'Administrador'){
 						<div id="DivEmail" class="input-group col-md-6">
 							<span class="input-group-addon">@</span>
 							<input class="form-control" type="text" id="txtEmail" name="mail"/>
-							<div id="noemailC" class="alert alert-danger">Por favor ingrese su EMail</div>
 							<div id="longemailC" class="alert alert-danger">El EMail debe tener menos de 50 caracteres</div>
 							<div id="malemailC" class="alert alert-danger">Por favor ingrese un EMail v&aacute;lido</div>
 						</div>
