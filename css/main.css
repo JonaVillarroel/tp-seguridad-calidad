@@ -84,3 +84,21 @@ footer{
 #nonombreC,#longnombreC,#malnombreC,#noapelC,#longapelC,#malapelC,#noemailC,#longemailC,#malemailC,#nopswC,#longpswC,#malpswC,#minpswC,#nopsw2C,#malpsw2C{
 	display: none;
 }
+
+/* --------------------------------------MURO--------------------------------------- */
+.btn-message{
+	margin-bottom: 2%;
+}
+
+textarea {
+   resize: none;
+}
+
+.mensaje{
+	table-layout: fixed;
+  	word-wrap: break-word;
+}
+
+.wall{
+	margin-left:5%;
+}

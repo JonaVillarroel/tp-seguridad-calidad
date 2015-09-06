@@ -16,62 +16,16 @@ class Wall extends Connection{
 	
 	public function getMessages(){
 
-		$con = new Connection();
-		$sql = "SELECT * FROM MENSAJE WHERE id_muro=?";
-		$stmt = $con->prepare($sql);
-		$valor = 1;
-		if($stmt === false) {
-  			trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $con->error, E_USER_ERROR);
-		}
-		$stmt->bind_param('i',$valor);
+	    $db = new Connection();
+	    $usuario = 1;
 
-		$stmt->execute();
+	    $query = "SELECT MENSAJE.* FROM MENSAJE INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro WHERE MURO.id_usuario = '$usuario' ORDER BY fecha_alta DESC LIMIT 10";
 
-		$stmt->bind_result($id_mensaje, $id_usuario, $id_muro, $contenido, $fecha_alta, $fecha_baja);
+	    $results = $db -> query($query)
+	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));
 
-		while($row = $stmt->fetch())
-		{
-  			printf ("%s \n", $contenido);
-		}
+	    return $results;
 
-
-/*$arr = $rs->fetch_all(MYSQLI_ASSOC);
- 
-if($rs === false) {
-  trigger_error('Wrong SQL: ' . $sql . ' Error: ' . $conn->error, E_USER_ERROR);
-} else {
-  $rows_returned = $rs->num_rows;
-}
-
-
-		if($fila = $result -> fetch_object()){//Devuelve la fila actual de un conjunto de resultados como un objeto
-			
-			$mySession -> initSession();
-			$mySession -> setSession('idMessage',$fila->id_mensaje);
-			$mySession -> setSession('idUser',$fila->id_usuario);
-			$mySession -> setSession('idWall',$fila->id_muro);
-			$mySession -> setSession('idContent',$fila->contenido);
-			$mySession -> setSession('idDate',$fila->fecha_baja);
-					
-			$result2 = $myConnection -> query("SELECT * FROM USUARIO WHERE id_usuario='$fila->id_usuario';");
-				if($row2 = $result2 -> fetch_object()){
-					$typeUser = $row2 -> rol;
-					$idUser = $row2 -> id_usuario;
-					switch($typeUser){			
-						case 'adminUser':
-							header('location: Administrador/index.php?idUser='.$idUser);//Redirecciono al index.php dentro de la carpeta Administrador
-						break;
-						case 'simpleUser':
-							header('location: Comun/index.php?idUser='.$idUser);//Redirecciono al index.php dentro de la carpeta Comun
-						break;				
-					}
-				}
-		}
-		else{
-			//header ('location: ../index.php?error=1');
-		}*/
-			
-		$con -> close();
 	}
 
 	//Posterior a dar de baja un usuario llamo a este método pasandole por parámetro el id del usuario.
@@ -107,8 +61,6 @@ if($rs === false) {
 		$wallId = $obj -> id_muro;
 
 		return $wallId;
-
-
 	}
 }
 

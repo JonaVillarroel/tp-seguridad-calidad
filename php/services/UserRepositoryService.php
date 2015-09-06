@@ -7,18 +7,37 @@ require_once (dirname(__DIR__)."/connection/Connection.php");
 class UserRepositoryService{
     var $db;
 
-    function __construct(){
+    public function __construct(){
         $this -> db = new Connection();
     }
 
-
-    function getAllUsers(){
+    public function getUsers(){
         $query = "SELECT * FROM USUARIO where fecha_baja = null";
 
         $results = $this -> db -> query($query)
         or die('Error obteniendo todos los usuarios: ' . mysqli_error($this->db));
 
     }
+
+    public function getUserById($userId){
+        $query = "SELECT * FROM USUARIO where fecha_baja = null and id_usuario = $userId";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo el usuario: ' . mysqli_error($this->db));
+    }
+
+
+    public function getUserIdByName($userName){
+        $query = "SELECT id_usuario FROM USUARIO where fecha_baja = null and nombre_usuario = '$userName'";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo el usuario: ' . mysqli_error($this->db));
+    }
+
+    public function __destruct(){
+        $this -> db -> close();
+    }
+
 }
 
 ?>

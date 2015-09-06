@@ -6,8 +6,8 @@
 			@session_start();
 		}
 		
-		public function setSession($varnombre, $valor){
-			$_SESSION[$varnombre] = $valor;
+		public function setSession($varname, $value){
+			$_SESSION[$varname] = $value;
 		}
 		
 		public function destroySession(){
