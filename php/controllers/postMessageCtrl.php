@@ -1,6 +1,8 @@
 <?php
     require_once (dirname(__DIR__)."/domain/User.php");
-    require_once (dirname(__DIR__)."/connection/Connection.php");
+    require_once (dirname(__DIR__)."/servies/WallRepositoryService.php");
+
+    $wallRepo = new WallRepositoryService();
 
     $toUser = $_POST['toUser'];
     $content = $_POST['content'];
@@ -12,16 +14,8 @@
     $fromUser = $_SESSION['userId'];
 
     //Obtengo el id_muro que pertenece al user con nombre $toUser
-    $query = "SELECT id_muro FROM MURO INNER JOIN USUARIO ON
-                        MURO.id_usuario = USUARIO.id_usuario
-                        WHERE USUARIO.nombre_usuario = '$userName'";
 
-    $results = $db -> query($query)
-    or die('Error consultando el usuario: ' . mysqli_error($this->db));
-
-    $obj = $results -> fetch_object();
-
-    $toWall = $obj -> id_muro;
+    $toWall = $wallRepo -> getWallIdByUserName($toUser);
 
     $user -> postMessage($content, $fromUser, $toWall);
 ?>
