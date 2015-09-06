@@ -1,9 +1,9 @@
 <div id="wall" class="col-sm-12">
     <?php
         include_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
-        if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow)){
+        if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) || $_GET['usuario'] == $_SESSION['idUser']){
     ?>
-        <h2>Mi Wall</h2>
+        <h2><?php echo "$nombre $apellido (Wall)"?></h2>
         <div class="col-sm-12">
 
             <div class="col-sm-10 col-sm-push-1">

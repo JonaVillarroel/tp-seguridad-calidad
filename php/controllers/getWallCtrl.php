@@ -8,6 +8,8 @@
     	$privacidad = $obj -> privacidad;
     	$mensajes[] = $obj -> contenido;
     	$idMuro = $obj -> id_muro;
+    	$nombre = $obj -> nombre;
+    	$apellido = $obj -> apellido;
     }
     if(isset($_SESSION["idUser"])){
     	$allow = $wall -> isInWhiteList($idMuro, $_SESSION["idUser"]);
