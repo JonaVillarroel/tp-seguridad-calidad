@@ -23,6 +23,16 @@ class MuroRepositoryService{
 
     }
 
+    public function createWall($userId){
+        $query = "INSERT INTO MURO (id_usuario, privacidad)
+                  VALUES ($userId, 'publico')";
+
+        $results = $this -> db -> query($query)
+        or die('Error insertando el muro: ' . mysqli_error($this->db));
+
+        $obj = $results -> fetch_object();
+    }
+
     public function __destruct(){
         $this -> db -> close();
     }

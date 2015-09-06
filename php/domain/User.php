@@ -58,6 +58,11 @@ class User{
 
 				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
 				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente');");
+
+                $query = "INSERT INTO MURO (privacidad)
+                  VALUES ('publico')";
+
+                $myConnection -> query($query);
 				
                 echo "Usuario registrado";
             }
