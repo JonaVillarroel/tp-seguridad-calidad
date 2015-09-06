@@ -1,6 +1,7 @@
 <?php
 require './php/domain/Session.php';
-
+$mysession = new Session();
+$mysession->initSession();
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
 //$roles = isset($_SESSION['rol']) ? $_SESSION['roles'] : false;
 ?>

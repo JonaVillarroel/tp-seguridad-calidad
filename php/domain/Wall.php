@@ -17,9 +17,9 @@ class Wall extends Connection{
 	public function getMessages(){
 
 	    $db = new Connection();
-	    $muro = 1;
+	    $usuario = 1;
 
-	    $query = "SELECT * FROM MENSAJE WHERE id_muro = '$muro' ORDER BY fecha_alta DESC LIMIT 10";
+	    $query = "SELECT MENSAJE.* FROM MENSAJE INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro WHERE MURO.id_usuario = '$usuario' ORDER BY fecha_alta DESC LIMIT 10";
 
 	    $results = $db -> query($query)
 	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));

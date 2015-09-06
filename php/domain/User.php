@@ -1,6 +1,6 @@
 <?php
 require(dirname(__DIR__)."/connection/Connection.php");
-require(dirname(__DIR__)."/domain/Session.php");
+require_once(dirname(__DIR__)."/domain/Session.php");
 require(dirname(__DIR__)."/domain/Message.php");
 
 
@@ -73,6 +73,7 @@ class User{
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
             if ($row->estado == 'Registrado') {
                 $mysession->initSession();
+                $mysession->setSession('idUser', $row->id_usuario);
                 $mysession->setSession('username', $row->nombre);
                 $mysession->setSession('userSurname', $row->apellido);
                 $mysession->setSession('userMail', $row->mail);
