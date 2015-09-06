@@ -1,6 +1,6 @@
 <?php
     require_once (dirname(__DIR__)."/domain/User.php");
-    require_once (dirname(__DIR__)."/servies/WallRepositoryService.php");
+    require_once (dirname(__DIR__)."/services/WallRepositoryService.php");
 
     $wallRepo = new WallRepositoryService();
 
