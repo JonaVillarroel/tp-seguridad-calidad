@@ -5,6 +5,7 @@ $mysession->initSession();
 $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
 //$roles = isset($_SESSION['rol']) ? $_SESSION['roles'] : false;
 
+$id = isset($_GET['usuario']) ? $_GET['usuario'] : false; 
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +25,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
     ?>
 	<div class="container bg">
         <?php
-            if($username){
+            if($id){
                 include_once (__DIR__."/templates/wall.php");
             }else{
                 include_once (__DIR__."/templates/welcome.php");
