@@ -28,6 +28,10 @@ if ($privacity == 'privado')
     };
     echo "    </ul>
             </div>";
+
+    echo "<div class='radio wallconfiguration '>
+            <label><input type='radio' name='optradio' value='opt-3' >Todos los usuarios del sistema pueden acceder y publicar contenido</label>
+        </div>";
 }else{
     echo "<div class='radio wallconfiguration'>
             <label><input type='radio' name='optradio' value='opt-1'>Sólo pueden acceder usuarios enumerados</label>
