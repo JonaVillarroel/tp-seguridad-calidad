@@ -31,6 +31,30 @@ class WallRepositoryService{
         $obj = $results -> fetch_object();
     }
 
+    public function getPrivacityById($wallId){
+        $wallId = (int) $wallId;
+        $query = "SELECT privacidad FROM MURO WHERE id_muro = $wallId";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo la privacidad del muro: ' . mysqli_error($this->db));
+
+        $obj = $results -> fetch_object();
+
+        return $obj -> privacidad;
+    }
+
+    public function getUsersById($wallId){
+        $query = "SELECT nombre_usuario FROM COMPARTE_CON INNER JOIN USUARIO
+          ON COMPARTE_CON.id_usuario = USUARIO.id_usuario WHERE id_muro = $wallId";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo los usuarios de comparte_con: ' . mysqli_error($this->db));
+
+        $obj = $results -> fetch_object();
+
+        return $obj;
+    }
+
     public function updatePrivacity($data){
 
         $wallId = $data['wallId'];

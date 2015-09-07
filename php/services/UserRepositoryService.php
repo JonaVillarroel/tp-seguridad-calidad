@@ -19,6 +19,18 @@ class UserRepositoryService{
 
     }
 
+    public function getWallIdById($userId){
+        $query = "SELECT id_muro FROM MURO INNER JOIN USUARIO
+                  ON USUARIO.id_usuario = MURO.id_usuario where USUARIO.fecha_baja is null and MURO.id_usuario = '$userId'";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo el id_muro: ' . mysqli_error($this->db));
+
+        $obj = $results -> fetch_object();
+
+        return $obj -> id_muro;
+    }
+
     public function getUserById($userId){
         $query = "SELECT * FROM USUARIO where fecha_baja = null and id_usuario = $userId";
 

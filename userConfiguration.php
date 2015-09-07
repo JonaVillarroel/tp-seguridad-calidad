@@ -25,33 +25,9 @@ $usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null
         <h2 class="text-info">Configuración de usuario</h2>
         <h4>Quién puede ver y escribir en mi muro</h4>
 
-        <div class="radio wallconfiguration">
-          <label><input type="radio" name="optradio" value="opt-1">Sólo pueden acceder usuarios enumerados</label>
-          <input type="text" placeholder="Escribe un nombre" id="item-opt-1">
-            <a href="#" id="addItemList-1" class="btn btn-success">Agregar</a>
-            <ul class="list-group list-1">
-
-            </ul>
-        </div>
-        <div class="radio wallconfiguration">
-          <label><input type="radio" name="optradio" value="opt-2">Pueden acceder todos los usuarios  pero solo agregar mensajes
-        aquellos enumerados</label>
-          <input type="text" placeholder="Escribe un nombre" id="item-opt-2">
-            <a href="#" id="addItemList-2" class="btn btn-success">Agregar</a>
-            <ul class="list-group list-2">
-            </ul>
-        </div>
-        <div class="radio wallconfiguration ">
-          <label><input type="radio" name="optradio" value="opt-3" >Todos los usuarios del sistema pueden acceder y publicar contenido</label>
-        </div>
-
-        <div class="radio wallconfiguration">
-          <label><input type="radio" name="optradio" value="opt-4">Usuarios anónimos pueden leer contenido.</label>
-        </div>
-
-        <div class="radio wallconfiguration">
-          <label><input type="radio" name="optradio" value="opt-5">Usuarios anónimos pueden crear y leer contenido.</label>
-        </div>
+        <?php
+        include_once (__DIR__."/php/views/userConfigView.php");
+        ?>
 
         <a href="#" id="modifyConfigurationBtn" class="btn btn-success">Aceptar cambios</a>
 	</div>
