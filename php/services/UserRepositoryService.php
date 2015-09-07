@@ -32,6 +32,10 @@ class UserRepositoryService{
 
         $results = $this -> db -> query($query)
         or die('Error obteniendo el usuario: ' . mysqli_error($this->db));
+
+        $obj = $results -> fetch_object();
+
+        return $obj -> id_usuario;
     }
 
     public function __destruct(){
