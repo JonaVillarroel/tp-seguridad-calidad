@@ -22,13 +22,18 @@ class WallRepositoryService{
     }
 
     public function createWall($userId){
-        $query = "INSERT INTO MURO (id_usuario, privacidad)
+        $query1 = "INSERT INTO MURO (id_usuario, privacidad)
                   VALUES ($userId, 'publico')";
-
-        $results = $this -> db -> query($query)
+        $results1 = $this -> db -> query($query1)
         or die('Error insertando el muro: ' . mysqli_error($this->db));
 
-        $obj = $results -> fetch_object();
+        $lastID = $this -> db -> insert_id;
+        $query2 = "INSERT INTO MENSAJE (id_usuario,id_muro,contenido)
+                  VALUES ($userId,$lastID,'Bienvenido a The Wall')";
+
+        $results2 = $this -> db -> query($query2)
+        or die('Error insertando el mensaje: ' . mysqli_error($this->db));
+
     }
 
     public function updatePrivacity($data){
