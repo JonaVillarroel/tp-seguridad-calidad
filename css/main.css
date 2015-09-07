@@ -8,12 +8,27 @@ body {
 	margin: 0 auto 0 auto;
 }
 
+.menuvertical{
+	padding-right: 0;
+	border-radius: 3px 3px 3px 3px;
+	margin-bottom: 0;
+}
+
 .line{
 	display: inline-block;
 }
 
 .red{
 	color: red;
+}
+
+.green{
+	color: green;
+}
+
+.center{
+	margin: 0 auto 0 auto;
+	text-align: center;
 }
 
 .jumbotron{
@@ -81,7 +96,7 @@ footer{
 	}
 }
 
-#nonombreC,#longnombreC,#malnombreC,#noapelC,#longapelC,#malapelC,#noemailC,#longemailC,#malemailC,#nopswC,#longpswC,#malpswC,#minpswC,#nopsw2C,#malpsw2C{
+#nonombreC,#longnombreC,#malnombreC,#nonombreUC,#longnombreUC,#malnombreUC,#noapelC,#longapelC,#malapelC,#noemailC,#longemailC,#malemailC,#nopswC,#longpswC,#malpswC,#minpswC,#nopsw2C,#malpsw2C,#modifyUser{
 	display: none;
 }
 

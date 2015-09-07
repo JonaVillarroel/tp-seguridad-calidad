@@ -1,6 +1,6 @@
 <?php
     require_once (dirname(__DIR__)."/domain/User.php");
-    require_once (dirname(__DIR__)."/services/WallRepositoryService.php");
+    require_once (dirname(__DIR__)."/servies/WallRepositoryService.php");
 
     $wallRepo = new WallRepositoryService();
 
@@ -8,6 +8,7 @@
     $content = $_POST['content'];
     $user = new User();
     $db = new Connection();
+
 
     //Obtengo el id_usuario que está enviando el mensaje
     $fromUser = $_SESSION['userId'];

@@ -1,3 +1,11 @@
+<?php
+require './php/domain/Session.php';
+$mysession = new Session();
+$mysession->initSession();
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+$usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

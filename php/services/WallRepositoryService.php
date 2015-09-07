@@ -73,7 +73,6 @@ class MuroRepositoryService{
 
     }
 
-
     public function __destruct(){
         $this -> db -> close();
     }
