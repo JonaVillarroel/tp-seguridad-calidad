@@ -9,7 +9,6 @@
     $user = new User();
     $db = new Connection();
 
-
     //Obtengo el id_usuario que está enviando el mensaje
     $fromUser = $_SESSION['userId'];
 

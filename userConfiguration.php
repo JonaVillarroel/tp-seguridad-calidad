@@ -39,7 +39,6 @@ $usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null
           <input type="text" placeholder="Escribe un nombre" id="item-opt-2">
             <a href="#" id="addItemList-2" class="btn btn-success">Agregar</a>
             <ul class="list-group list-2">
-                <li class="list-group-item">CosmeFulanito</li>
             </ul>
         </div>
         <div class="radio wallconfiguration ">
