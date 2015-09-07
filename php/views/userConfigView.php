@@ -23,7 +23,7 @@ if ($privacity == 'privado')
     if(sizeof($users) > 0)
     {
         foreach($users as $user){
-            echo "<li class='list-group-item'>".$user -> nombre_usuario."</li>";
+            echo "<li class='list-group-item'>".$user."</li>";
         }
     };
     echo "    </ul>
