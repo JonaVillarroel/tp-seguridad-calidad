@@ -86,7 +86,7 @@ class User{
                         header ('location: ../../indexAdmin.php');
                         break;
                     case 'Comun':
-						header ('location: ../../index.php');
+						header ('location: ../../index.php?usuario='.$_SESSION['idUser']);
                         break;
                 }
             } else if ($row->estado == 'Pendiente') {
