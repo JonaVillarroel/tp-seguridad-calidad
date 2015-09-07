@@ -2,8 +2,8 @@
 require './php/domain/Session.php';
 $mysession = new Session();
 $mysession->initSession();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
-//$roles = isset($_SESSION['rol']) ? $_SESSION['roles'] : false;
+$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
+$usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null;
 
 ?>
 
@@ -26,7 +26,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
         <h4>Quién puede ver y escribir en mi muro</h4>
 
         <div class="radio wallconfiguration">
-          <label><input type="radio" name="optradio" val="opt-1">Sólo pueden acceder usuarios enumerados</label>
+          <label><input type="radio" name="optradio" value="opt-1">Sólo pueden acceder usuarios enumerados</label>
           <input type="text" placeholder="Escribe un nombre" id="item-opt-1">
             <a href="#" id="addItemList-1" class="btn btn-success">Agregar</a>
             <ul class="list-group list-1">
@@ -34,7 +34,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
             </ul>
         </div>
         <div class="radio wallconfiguration">
-          <label><input type="radio" name="optradio" val="opt-2">Pueden acceder todos los usuarios  pero solo agregar mensajes
+          <label><input type="radio" name="optradio" value="opt-2">Pueden acceder todos los usuarios  pero solo agregar mensajes
         aquellos enumerados</label>
           <input type="text" placeholder="Escribe un nombre" id="item-opt-2">
             <a href="#" id="addItemList-2" class="btn btn-success">Agregar</a>
@@ -43,15 +43,15 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
             </ul>
         </div>
         <div class="radio wallconfiguration ">
-          <label><input type="radio" name="optradio" val="opt-3" >Todos los usuarios del sistema pueden acceder y publicar contenido</label>
+          <label><input type="radio" name="optradio" value="opt-3" >Todos los usuarios del sistema pueden acceder y publicar contenido</label>
         </div>
 
         <div class="radio wallconfiguration">
-          <label><input type="radio" name="optradio" val="opt-4">Usuarios anónimos pueden leer contenido.</label>
+          <label><input type="radio" name="optradio" value="opt-4">Usuarios anónimos pueden leer contenido.</label>
         </div>
 
         <div class="radio wallconfiguration">
-          <label><input type="radio" name="optradio" val="opt-5">Usuarios anónimos pueden crear y leer contenido.</label>
+          <label><input type="radio" name="optradio" value="opt-5">Usuarios anónimos pueden crear y leer contenido.</label>
         </div>
 
         <a href="#" id="modifyConfigurationBtn" class="btn btn-success">Aceptar cambios</a>
@@ -63,5 +63,7 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
 <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
 <script src="lib/jquery-ui/jquery-ui.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/UpdateWallConfig.js"></script>
+
 </body>
 </html>

@@ -28,13 +28,14 @@ class UserRepositoryService{
 
 
     public function getUserIdByName($userName){
-        $query = "SELECT id_usuario FROM USUARIO where fecha_baja = null and nombre_usuario = '$userName'";
+        $query = "SELECT id_usuario FROM USUARIO where fecha_baja is null and nombre_usuario = '$userName'";
 
         $results = $this -> db -> query($query)
         or die('Error obteniendo el usuario: ' . mysqli_error($this->db));
 
         $obj = $results -> fetch_object();
 
+        echo $obj -> id_usuario;
         return $obj -> id_usuario;
     }
 

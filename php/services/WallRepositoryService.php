@@ -1,7 +1,7 @@
 <?php
 require_once (dirname(__DIR__)."/connection/Connection.php");
 
-class MuroRepositoryService{
+class WallRepositoryService{
     var $db;
 
     public function __construct(){
@@ -40,34 +40,40 @@ class MuroRepositoryService{
             $users = $data['users'];
 
             foreach($users as $userId){
+                $wallId = (int) $wallId;
+                $userId = (int) $userId;
+
                 $query = "INSERT INTO COMPARTE_CON (id_muro, id_usuario)
-                      VALUES ($wallId, $userId)";
+                          VALUES($wallId,$userId)";
 
                 $results = $this -> db -> query($query)
                 or die('Error insertando los usuarios con COMPARTE_CON: ' . mysqli_error($this->db));
             }
-            $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_wall = $wallId";
+            $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_muro = $wallId";
 
         }else if($privacity == "opt-2"){
             $users = $data['users'];
 
             foreach($users as $userId){
+                $wallId = (int) $wallId;
+                $userId = (int) $userId;
+
                 $query = "INSERT INTO COMPARTE_CON (id_muro, id_usuario)
-                          VALUES ($wallId, $userId)";
+                          VALUES($wallId,$userId)";
 
                 $results = $this -> db -> query($query)
                 or die('Error insertando los usuarios con COMPARTE_CON: ' . mysqli_error($this->db));
             }
-            $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_wall = $wallId";
+            $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_muro = $wallId";
         }else{
-            $queryUpdate = "UPDATE MURO SET privacidad = 'publico' WHERE id_wall = $wallId";
+            $queryUpdate = "UPDATE MURO SET privacidad = 'publico' WHERE id_muro = $wallId";
         };
 
 
-        $results = $this -> db -> query($queryUpdate)
+        $resultsUpdate = $this -> db -> query($queryUpdate)
         or die('Error actualizando la privacidad del muro: ' . mysqli_error($this->db));
 
-        $obj = $results -> fetch_object();
+        $obj = $resultsUpdate -> fetch_object();
 
         return $obj -> id_muro;
 
