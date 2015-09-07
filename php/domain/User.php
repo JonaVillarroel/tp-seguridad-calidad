@@ -2,6 +2,7 @@
 require(dirname(__DIR__)."/connection/Connection.php");
 require_once(dirname(__DIR__)."/domain/Session.php");
 require(dirname(__DIR__)."/domain/Message.php");
+require(dirname(__DIR__)."/services/WallRepositoryService.php");
 
 
 class User{
@@ -59,7 +60,10 @@ class User{
 				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
 				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente');");
 
-                $myConnection -> query ("INSERT INTO MURO (privacidad) VALUES ('publico')");
+                $lastID = $myConnection -> insert_id;
+
+                $wall = new WallRepositoryService();
+                $wall -> createWall($lastID);
 				
                 echo "Usuario registrado";
             }
