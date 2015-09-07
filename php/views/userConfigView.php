@@ -20,11 +20,12 @@ if ($privacity == 'privado')
             <input type='text' placeholder='Escribe un nombre' id='item-opt-1'>
             <a href='#' id='addItemList-1' class='btn btn-success'>Agregar</a>
                 <ul class='list-group list-1'>";
-    if($users.si)
-    foreach($users as $user){
-        echo "<li class='list-group-item'>".$user -> nombre_usuario."</li>";
-    }
-
+    if(sizeof($users) > 0)
+    {
+        foreach($users as $user){
+            echo "<li class='list-group-item'>".$user -> nombre_usuario."</li>";
+        }
+    };
     echo "    </ul>
             </div>";
 }else{
