@@ -9,7 +9,9 @@
             <div class="col-sm-10 col-sm-push-1">
                 <form class="form-horizontal" method="post" action="./php/controllers/publishController.php">
                 <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">
-                    <textarea type="text" class="form-control" maxlength="280" rows="5"></textarea><br/>
+                    <textarea type="text" name="contenido" class="form-control" maxlength="280" rows="5"></textarea><br/>
+                    <input name="idmuro" value="<?php echo $idMuro;?>" type="hidden"/>
+                    <input name="iduser" value="<?php echo $idUser?>" type="hidden"/>
                     <button type="submit" id="btnMessage" name="btnMessage" class="btn btn-success btn-md pull-right">
                         <span class="glyphicon glyphicon-send"></span> Publicar
                     </button>
