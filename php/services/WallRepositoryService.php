@@ -71,9 +71,11 @@ class WallRepositoryService{
             foreach($users as $userId){
                 $wallId = (int) $wallId;
                 $userId = (int) $userId;
-
+                
+                //arreglar query para que no inserte duplicados
                 $query = "INSERT INTO COMPARTE_CON (id_muro, id_usuario)
-                          VALUES($wallId,$userId)";
+                          VALUES($wallId,$userId)
+                          WHERE id_usuario NOT IN (SELECT id_usuario FROM COMPARTE_CON WHERE id_muro = $wallId)";
 
                 $results = $this -> db -> query($query)
                 or die('Error insertando los usuarios con COMPARTE_CON: ' . mysqli_error($this->db));
@@ -101,10 +103,6 @@ class WallRepositoryService{
 
         $resultsUpdate = $this -> db -> query($queryUpdate)
         or die('Error actualizando la privacidad del muro: ' . mysqli_error($this->db));
-
-        $obj = $resultsUpdate -> fetch_object();
-
-        return $obj -> id_muro;
 
     }
 

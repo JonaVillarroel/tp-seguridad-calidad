@@ -18,14 +18,16 @@ $userName = $_SESSION['userUserName'];
 
 $newData['wallId'] = $wallRepo -> getWallIdByUserName($userName);
 
-//Obtengo el userId de cada userName
-foreach($data['users'] as $user){
+if($data['opt'] == 'opt-1' || $data['opt'] == 'opt-2')
+{
+    //Obtengo el userId de cada userName
+    $newUsers = Array();
+    foreach($data['users'] as $user){
+        $newUsers[] = $userRepo -> getUserIdByName($user);
+    }
+    $newData['users'] = $newUsers;
+};
 
-    $newUsers[] = $userRepo -> getUserIdByName($user);
-}
-
-$newData['users'] = $newUsers;
-$result = $wallRepo -> updatePrivacity($newData);
-
+$wallRepo -> updatePrivacity($newData);
 
 ?>
