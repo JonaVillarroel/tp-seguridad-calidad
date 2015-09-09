@@ -23,7 +23,10 @@ if ($privacity == 'privado')
     if(sizeof($users) > 0)
     {
         foreach($users as $user){
-            echo "<li class='list-group-item'>".$user -> nombre_usuario."</li>";
+            echo "<li class='list-group-item'>"
+                .$user -> nombre_usuario.
+                "<button type='button' class='btn btn-danger btn-sm pull-right'>
+                <span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></li>";
         }
     };
     echo "    </ul>

@@ -27,7 +27,10 @@ function addItemList1(event){
             var data = JSON.parse(data);
 
             if(data.valid == true){
-                $(".list-1").append("<li class='list-group-item'>"+ user +"</li>");
+                $(".list-1").append("<li class='list-group-item'>"+ user +
+                    "<button type='button' class='btn btn-default btn-sm'>" +
+                "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>" +
+                    "</li>");
             }
             else{
                 console.log(data.errorMsg);
@@ -76,5 +79,6 @@ function modifyWallConfiguration(event){
         { data : dataJSON },
         function(data){
             console.log(data);
+            location.reload();
         } );
 }

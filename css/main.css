@@ -117,3 +117,7 @@ textarea {
 .wall{
 	margin-left:5%;
 }
+
+.list-group-item{
+	overflow: hidden;
+}
