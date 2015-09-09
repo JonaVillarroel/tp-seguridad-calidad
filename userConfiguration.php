@@ -41,6 +41,8 @@ $usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null
             </div>
             <div class="modal-body">
             </div>
+            <div class="modal-footer">
+            </div>
         </div>
     </div>
 </div>

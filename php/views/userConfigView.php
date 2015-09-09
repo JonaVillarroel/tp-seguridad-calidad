@@ -25,7 +25,7 @@ if ($privacity == 'privado')
         foreach($users as $user){
             echo "<li class='list-group-item'>"
                 .$user -> nombre_usuario.
-                "<button type='button' class='btn btn-danger btn-sm pull-right'>
+                "<button type='button' class='btn btn-danger btn-sm pull-right removeItemList-1' id=''>
                 <span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button></li>";
         }
     };
