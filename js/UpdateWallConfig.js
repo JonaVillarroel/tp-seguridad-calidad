@@ -10,13 +10,31 @@ $(document).ready(function(){
     $('#addItemList-1').click(addItemList1);
     $('#addItemList-2').click(addItemList2);
 
+    $('#modalMessages').modal({
+        show: false
+    });
+
 });
 
 function addItemList1(event){
     event.preventDefault();
     var user = $("#item-opt-1").val();
 
-    $(".list-1").append("<li class='list-group-item'>"+ user +"</li>");
+    $.post( "php/controllers/verifyUserCtrl.php",
+        { userName : user },
+        function(data){
+            console.log(data);
+            var data = JSON.parse(data);
+
+            if(data.valid == true){
+                $(".list-1").append("<li class='list-group-item'>"+ user +"</li>");
+            }
+            else{
+                console.log(data.errorMsg);
+                $('#modalMessages').find('.modal-body').html(data.errorMsg);
+                $('#modalMessages').modal('toggle');
+            };
+        } );
 }
 
 function addItemList2(event){

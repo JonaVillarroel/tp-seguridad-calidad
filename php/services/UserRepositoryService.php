@@ -51,9 +51,26 @@ class UserRepositoryService{
         return $obj -> id_usuario;
     }
 
+    public function verifyUser($userName){
+        $query = "SELECT id_usuario FROM USUARIO where fecha_baja is null and nombre_usuario = '$userName'";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo el usuario: ' . mysqli_error($this->db));
+
+        if($results -> num_rows === 0)
+        {
+            return null;
+        }else{
+            $obj = $results -> fetch_object();
+
+            return $obj -> id_usuario;
+        };
+    }
+
     public function __destruct(){
         $this -> db -> close();
     }
+
 
 }
 
