@@ -14,7 +14,7 @@ $privacity = $wallRepo -> getPrivacityById($wallId);
 if ($privacity == 'privado')
 {
     $users = $wallRepo -> getUsersById($wallId);
-    
+
     echo "<div class='radio wallconfiguration'>
             <label><input type='radio' name='optradio' value='opt-1' checked='true' >Sólo pueden acceder usuarios enumerados</label>
             <input type='text' placeholder='Escribe un nombre' id='item-opt-1'>
@@ -23,7 +23,7 @@ if ($privacity == 'privado')
     if(sizeof($users) > 0)
     {
         foreach($users as $user){
-            echo "<li class='list-group-item'>".$user."</li>";
+            echo "<li class='list-group-item'>".$user -> nombre_usuario."</li>";
         }
     };
     echo "    </ul>

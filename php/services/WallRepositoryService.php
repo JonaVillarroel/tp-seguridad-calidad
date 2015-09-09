@@ -55,7 +55,9 @@ class WallRepositoryService{
         $results = $this -> db -> query($query)
         or die('Error obteniendo los usuarios de comparte_con: ' . mysqli_error($this->db));
 
-        $obj = $results -> fetch_object();
+        while ($row = $results->fetch_object()) {
+            $obj[] = $row;
+        }
 
         return $obj;
     }
@@ -71,14 +73,23 @@ class WallRepositoryService{
             foreach($users as $userId){
                 $wallId = (int) $wallId;
                 $userId = (int) $userId;
-                
-                //arreglar query para que no inserte duplicados
-                $query = "INSERT INTO COMPARTE_CON (id_muro, id_usuario)
-                          VALUES($wallId,$userId)
-                          WHERE id_usuario NOT IN (SELECT id_usuario FROM COMPARTE_CON WHERE id_muro = $wallId)";
 
-                $results = $this -> db -> query($query)
-                or die('Error insertando los usuarios con COMPARTE_CON: ' . mysqli_error($this->db));
+                //arreglar query para que no inserte duplicados
+                $querySelect = "SELECT id_usuario FROM COMPARTE_CON WHERE id_muro = $wallId and id_usuario = $userId";
+
+                $resultsSelect = $this -> db -> query($querySelect)
+                or die('Error consultando los usuarios del muro: ' . mysqli_error($this->db));
+
+                if($resultsSelect->num_rows == 0)
+                {
+                    $queryInsert = "INSERT INTO COMPARTE_CON (id_muro, id_usuario)
+                          VALUES($wallId,$userId)";
+
+                    $results = $this -> db -> query($queryInsert)
+                    or die('Error insertando los usuarios con COMPARTE_CON: ' . mysqli_error($this->db));
+                };
+
+
             }
             $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_muro = $wallId";
 
