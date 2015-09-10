@@ -1,8 +1,6 @@
 <?php
 require_once (dirname(__DIR__)."/connection/Connection.php");
 
-//Todas las querys que se hagan sobre la tabla USUARIO, ACÁÁÁÁÁÁÁÁ.
-
 
 class UserRepositoryService{
     var $db;
@@ -47,7 +45,6 @@ class UserRepositoryService{
 
         $obj = $results -> fetch_object();
 
-        echo $obj -> id_usuario;
         return $obj -> id_usuario;
     }
 

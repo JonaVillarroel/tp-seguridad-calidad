@@ -32,6 +32,8 @@ function addItemList1(event){
                     "<button type='button' class='btn btn-danger btn-sm pull-right removeItemList-1' id=''>" +
                 "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>" +
                     "</li>");
+
+                $('.removeItemList-1').click(removeItemList1);
             }
             else{
                 console.log(data.errorMsg);
@@ -46,11 +48,36 @@ function addItemList1(event){
 function removeItemList1() {
     var li = $(this).parent();
     var user = li.text();
-    $('#modalMessages').find('.modal-title').html("ATENCIÓN!");
-    $('#modalMessages').find('.modal-body').html("¿Está seguro de que desea eliminar a " + user + " de su lista?");
+    $('#modalMessages').find('.modal-title').html("ATENCIÓN!!!");
+    $('#modalMessages').find('.modal-body').html("¿Está seguro de que desea eliminar a <span id='"+user+"'>" + user + "</span> de su lista?");
     $('#modalMessages').find('.modal-footer').html("<button type='button' class='btn btn-default' data-dismiss='modal'>Cancelar</button>" +
-                                                    "<button type='button' class='btn btn-primary'>Aceptar</button>");
+                                                    "<button type='button' class='btn btn-primary' id='confirmRemoveUserBtn'>Aceptar</button>");
     $('#modalMessages').modal('toggle');
+
+    $("#confirmRemoveUserBtn").click(function(){
+        var modal = $(this).parent().parent();
+        var span = modal.find(".modal-body").find("span");
+        var userNameRemove = span.attr("id").trim();
+
+
+        $.post( "php/controllers/wallCtrl.php",
+            { action : "remove", userNameRemove : userNameRemove},
+            function(data){
+                console.log(data);
+
+                var data = JSON.parse(data);
+
+                if(data.valid == true){
+                    location.reload();
+                }
+                else{
+                    $('#modalMessages').find('.modal-title').html("OH NO!");
+                    $('#modalMessages').find('.modal-body').html(data.errorMsg)
+                    $('#modalMessages').find('.modal-footer').html("");
+                    $('#modalMessages').modal('show');
+                };
+            } );
+    });
 }
 
 function addItemList2(event){

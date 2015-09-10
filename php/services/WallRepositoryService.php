@@ -55,6 +55,7 @@ class WallRepositoryService{
         $results = $this -> db -> query($query)
         or die('Error obteniendo los usuarios de comparte_con: ' . mysqli_error($this->db));
 
+        $obj = Array();
         while ($row = $results->fetch_object()) {
             $obj[] = $row;
         }
@@ -115,6 +116,16 @@ class WallRepositoryService{
         $resultsUpdate = $this -> db -> query($queryUpdate)
         or die('Error actualizando la privacidad del muro: ' . mysqli_error($this->db));
 
+    }
+
+    public function removeUser($userId, $wallId){
+
+        $query = "DELETE FROM COMPARTE_CON WHERE id_usuario = $userId and id_muro = $wallId";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo el muro del usuario: ' . mysqli_error($this->db));
+
+        return $results;
     }
 
     public function __destruct(){
