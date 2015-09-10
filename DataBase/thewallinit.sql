@@ -105,13 +105,13 @@ INSERT INTO COMPARTE_CON
 (8,1);
 
 
-/*SELECT * FROM USUARIO;
+SELECT * FROM USUARIO;
 
 SELECT * FROM MURO;
 
 SELECT * FROM MENSAJE;
 
-SELECT * FROM USUARIO
+/*SELECT * FROM USUARIO
 WHERE rol='Administrador';
 
 *//* Cantidad de usuarios que pueden visualizar dicho id de muro*//*
@@ -127,7 +127,3 @@ SELECT * FROM MENSAJE
 INNER JOIN USUARIO
 ON USUARIO.id_usuario=MENSAJE.id_usuario
 WHERE MENSAJE.id_usuario=3;*/
-
-
-
-

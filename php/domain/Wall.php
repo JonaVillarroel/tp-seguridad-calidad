@@ -1,5 +1,4 @@
 <?php
-
 class Wall extends Connection{
 	
 	private $id_wall;

@@ -7,11 +7,11 @@
         <div class="col-sm-12">
 
             <div class="col-sm-10 col-sm-push-1">
-                <form class="form-horizontal" method="post" action="./php/controllers/publishController.php">
+                <form class="form-horizontal" method="post" action="./php/controllers/postMessageCtrl.php">
                 <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">
-                    <textarea type="text" name="contenido" class="form-control" maxlength="280" rows="5"></textarea><br/>
-                    <input name="idmuro" value="<?php echo $idMuro;?>" type="hidden"/>
-                    <input name="iduser" value="<?php echo $idUser?>" type="hidden"/>
+                    <textarea type="text" name="content" class="form-control" maxlength="280" rows="5"></textarea><br/>
+                    <input name="fromUser" value="<?php echo $idUser?>" type="hidden"/>
+					<input name="toUser" value="<?php echo $id?>" type="hidden"/>
                     <button type="submit" id="btnMessage" name="btnMessage" class="btn btn-success btn-md pull-right">
                         <span class="glyphicon glyphicon-send"></span> Publicar
                     </button>
@@ -33,7 +33,7 @@
                                     <?php echo $contenido; ?>    
                                 </div>
                             </div>
-                        <?php } ?>
+                    <?php } ?>
                 </div>
             </div>
 

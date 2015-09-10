@@ -102,7 +102,7 @@ class User{
         }else{
             header ('location: ../../index.php?error=1');
         }
-		 $myConnection->close();
+		$myConnection->close();
     }
 
     //Recibe el nombre de usuario ACTUAL, y un json con los datos que el usuario modificó en el formulario
