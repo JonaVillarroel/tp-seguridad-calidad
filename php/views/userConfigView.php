@@ -6,7 +6,7 @@ $wallRepo = new WallRepositoryService();
 $userRepo = new UserRepositoryService();
 
 
-$userId = $_SESSION['idUser'];
+$userId = $_SESSION['id'];
 
 $wallId = $userRepo -> getWallIdById($userId);
 $privacity = $wallRepo -> getPrivacityById($wallId);

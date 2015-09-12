@@ -21,15 +21,15 @@
                     <?php
                         foreach($rows as $fila){                                
                     ?>
-                    <hr class="col-sm-10 col-sm-push-1">
+                    <hr class="col-sm-12 icon-image">
                             <div id="toRepeat" name="toRepeat">
-                                <div class="col-sm-2">
-                                    <div class="pull-right">
+                                <div class="col-sm-3">
+                                    <div class="text-center">
                                         <img src="img/user.png" alt="usuario" class="img-circle icon-image"><br/>
-                                        <?php echo "<span class='text-center'>$fila->nombre <br/> $fila->apellido</span>" ?>
+                                        <?php echo "<span>$fila->nombre <br/> $fila->apellido</span>" ?>
                                     </div>
                                 </div>
-                                <div class="col-sm-10 mensaje">
+                                <div class="col-sm-9 mensaje">
                                     <?php echo $fila->contenido ?>    
                                 </div>
                             </div>

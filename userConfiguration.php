@@ -1,9 +1,11 @@
 <?php
 require './php/domain/Session.php';
-$mysession = new Session();
-$mysession->initSession();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
-$usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null;
+    
+    $mysession = new Session();
+    $mysession->initSession();
+
+    $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
+    $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
 
 ?>
 

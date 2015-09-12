@@ -7,6 +7,8 @@
     $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
     $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
 
+    $usuarioConsultado = isset($_GET['usuario']) ? isset($_GET['usuario']) : false;
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +28,7 @@
     ?>
 	<div class="container bg">
         <?php
-            if($userLoggedId){
+            if($usuarioConsultado){
                 include_once (__DIR__."/templates/wall.php");
             }else{
                 include_once (__DIR__."/templates/welcome.php");
