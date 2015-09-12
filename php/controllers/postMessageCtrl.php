@@ -1,17 +1,21 @@
 <?php
-    require_once (dirname(__DIR__)."/domain/User.php");
+    require_once (dirname(__DIR__)."/domain/Message.php");
     require_once (dirname(__DIR__)."/services/WallRepositoryService.php");
+  	require_once (dirname(__DIR__)."/domain/Session.php");
+	$mysession = new Session();
+	$mysession->initSession();
 
     $toUser = $_POST["toUser"];
+
     $content = $_POST["content"];
-    $fromUser = $_POST["fromUser"];
+    $fromUser = $_SESSION["id"];
 	
 	//Obtengo el id_muro que pertenece al user con id $toUser
 	$wallRepo = new WallRepositoryService();
+
     $toWall = $wallRepo -> getWallIdById($toUser);
 	
-	$user = new User();
-	$user -> postMessage($content,$fromUser,$toWall);
+	$message = new Message($content, $toWall, $fromUser);
 	
 	header ('location: ../../index.php?usuario='.$toUser);
 	

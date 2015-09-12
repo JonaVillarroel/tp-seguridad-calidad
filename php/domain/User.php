@@ -79,12 +79,13 @@ class User{
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
             if ($row->estado == 'Registrado') {
                 $mysession->initSession();
-                $mysession->setSession('idUser', $row->id_usuario);
-                $mysession->setSession('username', $row->nombre);
-                $mysession->setSession('userSurname', $row->apellido);
-                $mysession->setSession('userMail', $row->mail);
-                $mysession->setSession('userUserName', $row->nombre_usuario);
-                $mysession->setSession('userRol', $row->rol);
+                $mysession->setSession('id', $row->id_usuario);
+                $mysession->setSession('nombre', $row->nombre);
+                $mysession->setSession('apellido', $row->apellido);
+                $mysession->setSession('mail', $row->mail);
+                $mysession->setSession('usuario', $row->nombre_usuario);
+                $mysession->setSession('rol', $row->rol);
+                $mysession->setSession('estado', $row->estado);
                 $rol = $row->rol;
 
                 switch ($rol) {
@@ -92,16 +93,18 @@ class User{
                         header ('location: ../../indexAdmin.php');
                         break;
                     case 'Comun':
-						header ('location: ../../index.php?usuario='.$_SESSION['idUser']);
+						header ('location: ../../index.php?usuario='.$_SESSION['id']);
                         break;
                 }
+
             } else if ($row->estado == 'Pendiente') {
                 echo "DISCULPE LAS MOLESTIAS <br/>";
                 echo "Usuario " . $row->nombre . " " . $row->apellido . " su solicitud de registro todavia no fue confirmada por el Administrador del sitio.";
-            }
+                }
         }else{
             header ('location: ../../index.php?error=1');
         }
+
 		$myConnection->close();
     }
 
@@ -141,12 +144,6 @@ class User{
                 echo "Datos modificados";
             }
         }
-
-    }
-
-    public function postMessage($content, $fromUser, $toWall){
-
-        $message = new Message($content, $toWall, $fromUser);
 
     }
 

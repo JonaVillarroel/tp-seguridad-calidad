@@ -5,7 +5,7 @@
 <div id="header">
     <div class="navbar navbar-default">
 	<?php
-		$rol = isset($_SESSION['userRol']) ? $_SESSION['userRol'] : null;
+		$rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : null;
 		if($rol == 'Comun' or $rol == null){
 			echo "<a href='index.php' class='navbar-brand'>The Wall</a>";
 		}
@@ -16,7 +16,7 @@
         
         <div class="pull-right">
             <?php
-                if(!$username){
+                if(!$userLoggedId){
             ?>
             <form class="navbar-form navbar-left" method="post" action="php/controllers/loginController.php">
                 <div class="form-group">
@@ -33,7 +33,7 @@
             ?>           
             <p class="navbar-text">
                 <a class="navbar-link" href="userConfiguration.php"><span class="glyphicon glyphicon-cog"></span></a> |
-                <a class="navbar-link" href="index.php?usuario=<?php echo $_SESSION['idUser']; ?>"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['username'] . " " . $_SESSION['userSurname']; ?></a> |
+                <a class="navbar-link" href="index.php?usuario=<?php echo $_SESSION['id']; ?>"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['nombre'] . " " . $_SESSION['apellido']; ?></a> |
                 <a class="navbar-link" href="php/controllers/exitController.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
             </p>
             <?php

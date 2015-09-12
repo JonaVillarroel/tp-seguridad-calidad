@@ -1,21 +1,23 @@
 <?php
 	//EVITO LOS WARNINGS DE VARIABLES NO DEFINIDAS
 	$list = isset($_GET['list']) ? $_GET['list'] : null;
-?>
-<?php
-require './php/domain/Session.php';
-$mysession = new Session();
-$mysession->initSession();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
-$usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null;
-if($username == null or $usersurname == null){
-	header ('location: index.php?error=2');
-}
+	
+	require './php/domain/Session.php';
+	$mysession = new Session();
+	$mysession->initSession();
+	
+	$username = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : null;
+	$usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
+	$userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
+	
+	if($username == null or $usersurname == null){
+		header ('location: index.php?error=2');
+	}
 
-$rol = isset($_SESSION['userRol']) ? $_SESSION['userRol'] : null;
-if($rol != 'Administrador'){
-	header ('location: index.php?error=3');
-}
+	$rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : null;
+	if($rol != 'Administrador'){
+		header ('location: index.php?error=3');
+	}
 
 ?>
 

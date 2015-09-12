@@ -1,4 +1,7 @@
 <?php
+
+require_once (dirname(__DIR__)."/connection/Connection.php");
+
 class Message extends Connection{
     private $content;
     private $toWall;

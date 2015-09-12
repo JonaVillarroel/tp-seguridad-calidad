@@ -11,9 +11,10 @@
     	$idMuro = $obj -> id_muro;
         $nombre = $obj -> nombre;
         $apellido = $obj -> apellido;
+        $rows[] = $obj;
     }
-    if(isset($_SESSION["idUser"])){
-    	$allow = $wall -> isInWhiteList($idMuro, $_SESSION["idUser"]);
+    if(isset($_SESSION["id"])){
+    	$allow = $wall -> isInWhiteList($idMuro, $_SESSION["id"]);
     	$userAllow = $allow -> fetch_array(MYSQLI_NUM);
     }else
     	$userAllow = false;

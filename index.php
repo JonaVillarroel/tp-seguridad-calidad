@@ -1,12 +1,12 @@
 <?php
-require './php/domain/Session.php';
-$mysession = new Session();
-$mysession->initSession();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
-$idUser = isset($_SESSION['idUser']) ? $_SESSION['idUser'] : false;
-$UserLoggedId = isset($_SESSION['idUser']) ? $_SESSION['idUser'] : false;
+    require './php/domain/Session.php';
+    
+    $mysession = new Session();
+    $mysession->initSession();
 
-$id = isset($_GET['usuario']) ? $_GET['usuario'] : false; 
+    $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
+    $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
+
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ $id = isset($_GET['usuario']) ? $_GET['usuario'] : false;
     ?>
 	<div class="container bg">
         <?php
-            if($id){
+            if($userLoggedId){
                 include_once (__DIR__."/templates/wall.php");
             }else{
                 include_once (__DIR__."/templates/welcome.php");
