@@ -1,3 +1,5 @@
+DROP IF EXISTS thewall;
+
 CREATE DATABASE thewall;
 
 USE thewall;
@@ -42,11 +44,30 @@ CREATE TABLE COMPARTE_CON (
 	foreign key(id_muro) references MURO(id_muro) ON DELETE CASCADE
 );
 
+CREATE TABLE MENSAJE_PRIVADO (
+	id_mensaje int not null auto_increment primary key,
+	id_usuario int not null,
+	id_bandeja int not null,
+	fecha_alta datetime not null,
+	contenido varchar (280) not null,
+	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
+	foreign key(id_bandeja) references BANDEJA(id_bandeja) ON DELETE CASCADE
+);
+
+CREATE TABLE BANDEJA_DE_ENTRADA (
+	id_bandeja int not null auto_increment primary key,
+	id_usuario int not null,
+/*
+	privacidad set('publico','privado') not null,
+*/
+	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
+);
+
 
 
 INSERT INTO USUARIO 
 (rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
- ('Comun','asd','asd','asd','nom','123','Registrado'),
+ ('Comun','Cosme','Fulanito','cosme@fulanito.com','cosmeFulanito','123','Registrado'),
  ('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome','nrthewall','Registrado'),
  ('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova','fvthewall','Registrado'),
  ('Comun','Laura','Gutierrez','laura.g@gmail.com','LauraGutierrez','lgthewall','Registrado'),
@@ -55,9 +76,32 @@ INSERT INTO USUARIO
 ('Comun','Anabel','Gimt','anabel.g@gmail.com','AnaGimt','agthewall','Pendiente'),
 ('Administrador','Franco','Malen','franco.m@gmail.com','FranMalen','fmthewall','Registrado');
 
+INSERT INTO BANDEJA_DE_ENTRADA
+(id_usuario) VALUES
+(1),
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8);
 
+INSERT INTO MENSAJE_PRIVADO
+(id_usuario,id_bandeja,contenido,fecha_alta) VALUES
+(1,2,'Hola NicoRome, mi nombre es Cosme Fulanito.', NOW() ),
+(2,1,'Lárgate de aquí Homero !', NOW() ),
+(3,4,'Hola !', NOW() ),
+(4,3,'¿Qué haces? ', NOW() ),
+(5,4,'Hello !', NOW() ),
+(4,5,'Ciao !', NOW() ),
+(8,1,'Hola Cosme.', NOW() ),
+(8,2,'Hola Nico.', NOW() ),
+(8,3,'Hola Flor.', NOW() ),
+(8,4,'Hola Laura.', NOW() ),
+(8,5,'Hola Lucas. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW() );
 
-INSERT INTO MURO 
+INSERT INTO MURO
 (id_usuario,privacidad) VALUES
 (1,'publico'),
 (2,'publico'),
@@ -70,7 +114,7 @@ INSERT INTO MURO
 
 INSERT INTO MENSAJE 
 (id_usuario,id_muro,contenido,fecha_alta) VALUES
-(1,1,'Hola theWall !', NOW() ),
+(1,1,'Buenas noches señores. Molesto con una copilla por favorrrr?', NOW() ),
 (2,2,'Primer mensaje en theWall !', NOW() ),
 (3,3,'Hola !', NOW() ),
 (3,3,'¿Qué hacen? ', NOW() ),
@@ -79,6 +123,10 @@ INSERT INTO MENSAJE
 (6,6,'¿Cómo están?', NOW() ),
 (7,7,'Hola a todos !', NOW() ),
 (8,8,'Buen día !', NOW() ),
+(8,2,'Hola Nico', NOW() ),
+(8,3,'Hola Florencia', NOW() ),
+(8,4,'Hola Laura. Laura no está? Laura se fue?', NOW() ),
+(8,8,'Por favor no hackeen la aplicación.', NOW() ),
 (1,1,'Segundo mensaje', NOW() );
 
 INSERT INTO COMPARTE_CON
@@ -104,26 +152,3 @@ INSERT INTO COMPARTE_CON
 /*El muro con id 8 de rol 'privado' puede ser visualizado sólo por el usuario 1*/
 (8,1);
 
-
-SELECT * FROM USUARIO;
-
-SELECT * FROM MURO;
-
-SELECT * FROM MENSAJE;
-
-/*SELECT * FROM USUARIO
-WHERE rol='Administrador';
-
-*//* Cantidad de usuarios que pueden visualizar dicho id de muro*//*
-SELECT id_muro , COUNT(id_usuario) as 'Cantidad de usuarios' FROM COMPARTE_CON
-GROUP BY id_muro;
-
-
-SELECT * FROM COMPARTE_CON
-ORDER BY id_usuario asc;
-
-*//*Buscar mensajes por usuario*//*
-SELECT * FROM MENSAJE
-INNER JOIN USUARIO
-ON USUARIO.id_usuario=MENSAJE.id_usuario
-WHERE MENSAJE.id_usuario=3;*/
