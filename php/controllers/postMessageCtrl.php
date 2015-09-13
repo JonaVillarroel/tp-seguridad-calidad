@@ -8,7 +8,7 @@
     $toUser = $_POST["toUser"];
 
     $content = $_POST["content"];
-    $fromUser = $_SESSION["id"];
+    $fromUser = isset($_SESSION['id']) ? $_SESSION['id'] : 1;
 	
 	//Obtengo el id_muro que pertenece al user con id $toUser
 	$wallRepo = new WallRepositoryService();

@@ -1,4 +1,4 @@
-DROP IF EXISTS thewall;
+DROP DATABASE IF EXISTS thewall;
 
 CREATE DATABASE thewall;
 
@@ -44,16 +44,6 @@ CREATE TABLE COMPARTE_CON (
 	foreign key(id_muro) references MURO(id_muro) ON DELETE CASCADE
 );
 
-CREATE TABLE MENSAJE_PRIVADO (
-	id_mensaje int not null auto_increment primary key,
-	id_usuario int not null,
-	id_bandeja int not null,
-	fecha_alta datetime not null,
-	contenido varchar (280) not null,
-	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
-	foreign key(id_bandeja) references BANDEJA(id_bandeja) ON DELETE CASCADE
-);
-
 CREATE TABLE BANDEJA_DE_ENTRADA (
 	id_bandeja int not null auto_increment primary key,
 	id_usuario int not null,
@@ -63,10 +53,19 @@ CREATE TABLE BANDEJA_DE_ENTRADA (
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
 
-
+CREATE TABLE MENSAJE_PRIVADO (
+	id_mensaje int not null auto_increment primary key,
+	id_usuario int not null,
+	id_bandeja int not null,
+	fecha_alta datetime not null,
+	contenido varchar (280) not null,
+	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
+	foreign key(id_bandeja) references BANDEJA_DE_ENTRADA(id_bandeja) ON DELETE CASCADE
+);
 
 INSERT INTO USUARIO 
 (rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
+('Comun','Usuario','Anonimo',null,null,null,'Registrado'),
 ('Comun','Juan','Diaz','juan@gmail.com','Juan','juan1990','Registrado'),
 ('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome','nrthewall','Registrado'),
 ('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova','fvthewall','Registrado'),
@@ -114,34 +113,17 @@ INSERT INTO MURO
 
 INSERT INTO MENSAJE 
 (id_usuario,id_muro,contenido,fecha_alta) VALUES
-<<<<<<< Updated upstream
-(1,1,'Buenas noches señores. Molesto con una copilla por favorrrr?', NOW() ),
-(2,2,'Primer mensaje en theWall !', NOW() ),
-(3,3,'Hola !', NOW() ),
-(3,3,'¿Qué hacen? ', NOW() ),
-(4,4,'Hello !', NOW() ),
-(5,5,'Ciao !', NOW() ),
-(6,6,'¿Cómo están?', NOW() ),
-(7,7,'Hola a todos !', NOW() ),
-(8,8,'Buen día !', NOW() ),
-(8,2,'Hola Nico', NOW() ),
-(8,3,'Hola Florencia', NOW() ),
-(8,4,'Hola Laura. Laura no está? Laura se fue?', NOW() ),
-(8,8,'Por favor no hackeen la aplicación.', NOW() ),
-=======
-(3,1,'Hola Juan, que lindo fue cruzarte hoy! Saludos a la familia.', NOW() ),
-(1,2,'Nico, Hoy nos juntamos a la noche en mi casa. Estas invitado!! Te espero. :)', NOW() ),
-(5,3,'Feliz cumpleañoooos!! Que tengas un lindo dia Flor!', NOW() ),
-(4,3,'Amigaaa! Feliz cumpleee! Te extraño mucho! Mas tarde te veo! Besitos ', NOW() ),
+(3,4,'Hola, que lindo fue cruzarte hoy! Saludos a la familia.', NOW() ),
+(6,2,'Hoy nos juntamos a la noche en mi casa. Estas invitado!! Te espero. :)', NOW() ),
+(5,3,'Feliz cumpleañoooos!! Que tengas un lindo dia', NOW() ),
+(4,3,'Feliz cumpleee! Te extraño mucho! Mas tarde te veo! Besitos ', NOW() ),
 (4,4,'Como extraño salir a pasear! Que vuelva el verano..', NOW() ),
 (4,4,'Hoy a la noche salimos a festejar el cumple de Flopy!', NOW() ),
-(8,5,'Lucas, Bienvenido a The Wall. Cualquier consulta mandame un msj privado! Que lo disfrutes!', NOW() ),
+(8,5,'Bienvenido a The Wall. Cualquier consulta mandame un msj privado! Que lo disfrutes!', NOW() ),
 (6,6,'Que hermoso dia para ir a la plaza', NOW() ),
 (7,6,'Hace frio para ir a la plaza! Andate a la cama', NOW() ),
 (8,8,'Buen día!', NOW() ),
 (4,8,'Nos despertamos de buen humor? jajaja Yo estoy despierto desde temprano :(', NOW() ),
->>>>>>> Stashed changes
-(1,1,'Segundo mensaje', NOW() );
 
 INSERT INTO COMPARTE_CON
 (id_muro,id_usuario)VALUES
