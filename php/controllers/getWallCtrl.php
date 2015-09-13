@@ -18,4 +18,12 @@
     	$userAllow = $allow -> fetch_array(MYSQLI_NUM);
     }else
     	$userAllow = false;
+
+    $userMuro = new User();
+    $result = $userMuro -> getUser($_GET['usuario']);
+
+    if($obj = $result -> fetch_object()){
+        $nombreMuro  = $obj -> nombre;
+        $apellidoMuro = $obj -> apellido;
+    }
 ?>

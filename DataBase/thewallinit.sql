@@ -123,28 +123,18 @@ INSERT INTO MENSAJE
 (6,6,'Que hermoso dia para ir a la plaza', NOW() ),
 (7,6,'Hace frio para ir a la plaza! Andate a la cama', NOW() ),
 (8,8,'Buen día!', NOW() ),
-(4,8,'Nos despertamos de buen humor? jajaja Yo estoy despierto desde temprano :(', NOW() ),
+(4,8,'Nos despertamos de buen humor? jajaja Yo estoy despierto desde temprano :(', NOW() );
 
 INSERT INTO COMPARTE_CON
-(id_muro,id_usuario)VALUES
+(id_muro,id_usuario) VALUES
 
-/*El muro con id 5 de rol 'privado' puede ser visualizado sólo por los usuarios 1, 2 y 3*/
 (5,1),
 (5,2),
 (5,3),
-
-/*El muro con id 6 de rol 'privado' puede ser visualizado sólo por los usuarios 4, 5 y 7*/
 (6,4),
 (6,5),
 (6,7),
-
-
-/*El muro con id 7 de rol 'privado' puede ser visualizado sólo por los usuarios 1, 3 y 8*/
 (7,1),
 (7,3),
 (7,8),
-
-
-/*El muro con id 8 de rol 'privado' puede ser visualizado sólo por el usuario 1*/
 (8,1);
-
