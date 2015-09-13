@@ -1,4 +1,4 @@
-DROP IF EXISTS thewall;
+DROP DATABASE IF EXISTS thewall;
 
 CREATE DATABASE thewall;
 
@@ -44,16 +44,6 @@ CREATE TABLE COMPARTE_CON (
 	foreign key(id_muro) references MURO(id_muro) ON DELETE CASCADE
 );
 
-CREATE TABLE MENSAJE_PRIVADO (
-	id_mensaje int not null auto_increment primary key,
-	id_usuario int not null,
-	id_bandeja int not null,
-	fecha_alta datetime not null,
-	contenido varchar (280) not null,
-	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
-	foreign key(id_bandeja) references BANDEJA(id_bandeja) ON DELETE CASCADE
-);
-
 CREATE TABLE BANDEJA_DE_ENTRADA (
 	id_bandeja int not null auto_increment primary key,
 	id_usuario int not null,
@@ -63,10 +53,19 @@ CREATE TABLE BANDEJA_DE_ENTRADA (
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
 
-
+CREATE TABLE MENSAJE_PRIVADO (
+	id_mensaje int not null auto_increment primary key,
+	id_usuario int not null,
+	id_bandeja int not null,
+	fecha_alta datetime not null,
+	contenido varchar (280) not null,
+	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
+	foreign key(id_bandeja) references BANDEJA_DE_ENTRADA(id_bandeja) ON DELETE CASCADE
+);
 
 INSERT INTO USUARIO 
 (rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
+ ('Comun','Usuario','Anonimo',null,null,null,'Registrado'),
  ('Comun','Cosme','Fulanito','cosme@fulanito.com','cosmeFulanito','123','Registrado'),
  ('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome','nrthewall','Registrado'),
  ('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova','fvthewall','Registrado'),
