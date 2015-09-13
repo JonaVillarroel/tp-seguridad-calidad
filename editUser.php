@@ -7,13 +7,13 @@
 require './php/domain/Session.php';
 $mysession = new Session();
 $mysession->initSession();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
-$usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null;
+$username = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
+$usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
 if($username == null or $usersurname == null){
 	header ('location: index.php?error=2');
 }
 
-$rol = isset($_SESSION['userRol']) ? $_SESSION['userRol'] : null;
+$rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : null;
 if($rol != 'Administrador'){
 	header ('location: index.php?error=3');
 }

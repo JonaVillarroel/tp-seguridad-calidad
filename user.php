@@ -2,8 +2,8 @@
 require './php/domain/Session.php';
 $mysession = new Session();
 $mysession->initSession();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : null;
-$usersurname = isset($_SESSION['userSurname']) ? $_SESSION['userSurname'] : null;
+$username = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : null;
+$usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
 
 ?>
 <!DOCTYPE html>

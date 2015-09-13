@@ -14,7 +14,7 @@ $data = json_decode($json, true);
 
 $newData['privacity'] = $data['opt'];
 
-$userName = $_SESSION['userUserName'];
+$userName = $_SESSION['usuario'];
 
 $newData['wallId'] = $wallRepo -> getWallIdByUserName($userName);
 
