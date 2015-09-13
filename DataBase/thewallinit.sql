@@ -67,12 +67,12 @@ CREATE TABLE BANDEJA_DE_ENTRADA (
 
 INSERT INTO USUARIO 
 (rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
- ('Comun','Cosme','Fulanito','cosme@fulanito.com','cosmeFulanito','123','Registrado'),
- ('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome','nrthewall','Registrado'),
- ('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova','fvthewall','Registrado'),
- ('Comun','Laura','Gutierrez','laura.g@gmail.com','LauraGutierrez','lgthewall','Registrado'),
- ('Comun','Lucas','Rodriguez','lucas.r@gmail.com','LucRodriguez','lrthewall','Registrado'),
- ('Comun','Jorge','Pérez','jorge.p@gmail.com','JorgeP','jpthewall','Registrado'),
+('Comun','Juan','Diaz','juan@gmail.com','Juan','juan1990','Registrado'),
+('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome','nrthewall','Registrado'),
+('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova','fvthewall','Registrado'),
+('Comun','Laura','Gutierrez','laura.g@gmail.com','LauraGutierrez','lgthewall','Registrado'),
+('Comun','Lucas','Rodriguez','lucas.r@gmail.com','LucRodriguez','lrthewall','Registrado'),
+('Comun','Jorge','Pérez','jorge.p@gmail.com','JorgeP','jpthewall','Registrado'),
 ('Comun','Anabel','Gimt','anabel.g@gmail.com','AnaGimt','agthewall','Pendiente'),
 ('Administrador','Franco','Malen','franco.m@gmail.com','FranMalen','fmthewall','Registrado');
 
@@ -114,6 +114,7 @@ INSERT INTO MURO
 
 INSERT INTO MENSAJE 
 (id_usuario,id_muro,contenido,fecha_alta) VALUES
+<<<<<<< Updated upstream
 (1,1,'Buenas noches señores. Molesto con una copilla por favorrrr?', NOW() ),
 (2,2,'Primer mensaje en theWall !', NOW() ),
 (3,3,'Hola !', NOW() ),
@@ -127,6 +128,19 @@ INSERT INTO MENSAJE
 (8,3,'Hola Florencia', NOW() ),
 (8,4,'Hola Laura. Laura no está? Laura se fue?', NOW() ),
 (8,8,'Por favor no hackeen la aplicación.', NOW() ),
+=======
+(3,1,'Hola Juan, que lindo fue cruzarte hoy! Saludos a la familia.', NOW() ),
+(1,2,'Nico, Hoy nos juntamos a la noche en mi casa. Estas invitado!! Te espero. :)', NOW() ),
+(5,3,'Feliz cumpleañoooos!! Que tengas un lindo dia Flor!', NOW() ),
+(4,3,'Amigaaa! Feliz cumpleee! Te extraño mucho! Mas tarde te veo! Besitos ', NOW() ),
+(4,4,'Como extraño salir a pasear! Que vuelva el verano..', NOW() ),
+(4,4,'Hoy a la noche salimos a festejar el cumple de Flopy!', NOW() ),
+(8,5,'Lucas, Bienvenido a The Wall. Cualquier consulta mandame un msj privado! Que lo disfrutes!', NOW() ),
+(6,6,'Que hermoso dia para ir a la plaza', NOW() ),
+(7,6,'Hace frio para ir a la plaza! Andate a la cama', NOW() ),
+(8,8,'Buen día!', NOW() ),
+(4,8,'Nos despertamos de buen humor? jajaja Yo estoy despierto desde temprano :(', NOW() ),
+>>>>>>> Stashed changes
 (1,1,'Segundo mensaje', NOW() );
 
 INSERT INTO COMPARTE_CON

@@ -1,10 +1,13 @@
 <?php
-require './php/domain/Session.php';
-$mysession = new Session();
-$mysession->initSession();
+    require './php/domain/Session.php';
+    
+    $mysession = new Session();
+    $mysession->initSession();
 
-$username = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
-$roles = isset($_SESSION['roles']) ? $_SESSION['roles'] : false;
+
+    $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
+    $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
+
 
 ?>
 <!DOCTYPE html>

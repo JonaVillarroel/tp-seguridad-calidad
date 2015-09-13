@@ -25,6 +25,8 @@ class Wall extends Connection{
 	    $results = $db -> query($query)
 	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));
 
+    	$db -> close();
+
 	    return $results;
 
 	}
