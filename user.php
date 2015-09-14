@@ -92,7 +92,6 @@ $usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
 	<script src="lib/jquery-ui/external/jquery/jquery.js"></script>
 	<script src="lib/jquery-ui/jquery-ui.min.js"></script>
 	<script src="js/main.js"></script>
-	<script src="js/postMessage.js"></script>
 
 </body>
 </html>
