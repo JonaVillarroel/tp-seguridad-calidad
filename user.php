@@ -87,6 +87,9 @@ $usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
 	include_once (__DIR__."/templates/modalSignUp.php");
 	?>
 
+	<?php
+	include_once (__DIR__."/templates/modalPrivateMessages.php");
+	?>
 
 
 	<script src="lib/jquery-ui/external/jquery/jquery.js"></script>

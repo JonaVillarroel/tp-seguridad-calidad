@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 	$('#sendMessageBtn').click(sendPrivateMessage);
 	$('#postMessageBtn').click(postMessage);
+	$('#privateMessageModalBtn').click(openPrivateMessageModal);
 
 });
 
@@ -441,6 +442,12 @@ function postMessage(){
 	//Envio los datos al back para que el controller los procese
 	//El id_usuario que envia el mensaje y el rol lo obtengo en el back desde las sessions.
 	$.post( "php/controllers/postMessageCtrl.php", { content : content, toUser : toUser }, showInConsole );
+}
+
+function openPrivateMessageModal(event){
+	event.preventDefault();
+
+	$('#modalPrivateMessages').modal('toggle');
 }
 
 function showInConsole(data){
