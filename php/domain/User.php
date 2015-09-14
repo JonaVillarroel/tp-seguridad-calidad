@@ -3,6 +3,8 @@ require(dirname(__DIR__)."/connection/Connection.php");
 require_once(dirname(__DIR__)."/domain/Session.php");
 require(dirname(__DIR__)."/domain/Message.php");
 require(dirname(__DIR__)."/services/WallRepositoryService.php");
+require(dirname(__DIR__)."/services/InboxRepositoryService.php");
+
 
 
 class User{
@@ -64,6 +66,8 @@ class User{
 
                 $wall = new WallRepositoryService();
                 $wall -> createWall($lastID);
+                $inbox = new InboxRepositoryService();
+                $inbox -> createInbox($lastID);
 				
                 echo "Usuario registrado";
             }
