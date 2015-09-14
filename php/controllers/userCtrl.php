@@ -7,13 +7,13 @@ execute($_POST['action']);
 function execute($action){
     switch($action)
     {
-        case "sendPrivateMessage": sendPrivateMessage($_POST['data']);
+        case "sendPrivateMessage": sendPrivateMessage($_POST['content'], $_POST['toUser']);
             break;
     }
 
 }
 
-function sendPrivateMessage($data){
+function sendPrivateMessage($content, $toUser){
     $mysession = new Session();
     $mysession->initSession();
 
@@ -22,10 +22,7 @@ function sendPrivateMessage($data){
 
     $userIdSender = $_SESSION['id'];
 
-    $data = json_decode($data, true);
-
-    $inboxId = $data['inboxId'];
-    $content = $data['content'];
+    $inboxId = $inboxRepo -> getInboxIdByUserName($toUser);
 
     $results = $inboxRepo -> postMessage($inboxId, $userIdSender, $content);
 

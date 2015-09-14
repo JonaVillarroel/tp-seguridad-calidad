@@ -13,6 +13,19 @@ class InboxRepositoryService
 
     }
 
+    function getInboxIdByUserName($userName){
+        $query = "SELECT id_usuario FROM BANDEJA_DE_ENTRADA INNER JOIN USUARIO
+                  ON BANDEJA_DE_ENTRADA.id_usuario = USUARIO.id_usuario
+                  WHERE USUARIO.nombre_usuario = '$userName'";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo la bandeja de entrada del usuario: ' . mysqli_error($this->db));
+
+        $obj = $results -> fetch_object();
+
+        return $obj -> id_usuario;
+    }
+
     public function createInbox($userId){
         $query = "INSERT INTO BANDEJA_DE_ENTRADA (id_usuario)
                   VALUES ($userId)";
