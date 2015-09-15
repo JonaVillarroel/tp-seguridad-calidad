@@ -32,7 +32,7 @@
             }else{
             ?>           
             <p class="navbar-text">
-				<a class="navbar-link" href="#" id="privateMessageModalBtn"><span class="glyphicon glyphicon-envelope"></span></a> |
+				<a class="navbar-link" href="#" id="inboxModalBtn"><span class="glyphicon glyphicon-envelope"></span></a> |
 				<a class="navbar-link" href="userConfiguration.php"><span class="glyphicon glyphicon-cog"></span></a> |
                 <a class="navbar-link" href="index.php?usuario=<?php echo $_SESSION['id']; ?>"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['nombre'] . " " . $_SESSION['apellido']; ?></a> |
                 <a class="navbar-link" href="php/controllers/exitController.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
@@ -62,4 +62,10 @@
         </div>
     </div>
 </div>
+
+<?php
+	include_once (__DIR__."/modalInbox.php");
+?>
+
+
 

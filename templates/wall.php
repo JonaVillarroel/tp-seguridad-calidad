@@ -6,6 +6,13 @@
         <h2><?php echo "$nombreMuro $apellidoMuro (Wall)"?></h2>
         <div class="col-sm-12">
 
+            <div class="col-sm-1">
+                <div class="avatar-wall">
+                    <img class="img-circle" src="http://lorempixel.com/200/200" alt=""/>
+                </div>
+                <a class="btn btn-default btn-lg" href="#" id="privateMessageModalBtn"><span class="glyphicon glyphicon-envelope"></span> Mensaje Privado</a>
+            </div>
+
             <div class="col-sm-10 col-sm-push-1">
                 <form class="form-horizontal" method="post" action="./php/controllers/postMessageCtrl.php">
                     <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">

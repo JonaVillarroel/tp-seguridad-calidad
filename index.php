@@ -40,8 +40,13 @@
         include_once (__DIR__."/templates/footer.php");
     ?>
 
-        <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
-        <script src="lib/jquery-ui/jquery-ui.min.js"></script>
-        <script src="js/main.js"></script>
+    <?php
+    include_once (__DIR__."/templates/modalPrivateMessages.php");
+    ?>
+
+    <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
+    <script src="lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="lib/bootstrap/js/bootstrap.js"></script>
+    <script src="js/main.js"></script>
     </body>
 </html>

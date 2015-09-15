@@ -91,7 +91,7 @@ $usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
 	include_once (__DIR__."/templates/modalPrivateMessages.php");
 	?>
 
-
+	<script src="lib/bootstrap/js/bootstrap.js"></script>
 	<script src="lib/jquery-ui/external/jquery/jquery.js"></script>
 	<script src="lib/jquery-ui/jquery-ui.min.js"></script>
 	<script src="js/main.js"></script>

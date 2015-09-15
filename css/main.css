@@ -125,3 +125,40 @@ textarea {
 .icon-image{
 	margin-left: 2%;
 }
+
+.avatar-wall{
+	margin-bottom: 20px;
+}
+
+.avatar-wall img{
+
+}
+
+.conversations-area li:hover{
+	background-color:#f5f8fa!important;
+	cursor:pointer;
+}
+
+.conversations-area .userName{
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.conversations-area .avatar {
+	float:left;
+	margin-right: 10px;
+}
+
+.conversations-area .avatar img{
+	height: 100px;
+}
+
+.conversations-area .message-review{
+	color:#8899a6;
+	font-size: 12px;
+}
+
+.conversations-area .message-date{
+	color:#8899a6;
+	font-size: 13px;
+}

@@ -3,6 +3,7 @@ $(document).ready(function(){
 	$('#sendMessageBtn').click(sendPrivateMessage);
 	$('#postMessageBtn').click(postMessage);
 	$('#privateMessageModalBtn').click(openPrivateMessageModal);
+	$('#inboxModalBtn').click(openInboxModal);
 
 });
 
@@ -448,6 +449,12 @@ function openPrivateMessageModal(event){
 	event.preventDefault();
 
 	$('#modalPrivateMessages').modal('toggle');
+}
+
+function openInboxModal(event){
+	event.preventDefault();
+
+	$('#modalInbox').modal('toggle');
 }
 
 function showInConsole(data){
