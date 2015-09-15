@@ -84,7 +84,8 @@ INSERT INTO BANDEJA_DE_ENTRADA
 (5),
 (6),
 (7),
-(8);
+(8),
+(9);
 
 INSERT INTO MENSAJE_PRIVADO
 (id_usuario,id_bandeja,contenido,fecha_alta) VALUES
@@ -98,7 +99,7 @@ INSERT INTO MENSAJE_PRIVADO
 (8,2,'Hola Nico.', NOW() ),
 (8,3,'Hola Flor.', NOW() ),
 (8,4,'Hola Laura.', NOW() ),
-(8,5,'Hola Lucas. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW() );
+(9,5,'Hola Lucas. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW() );
 
 INSERT INTO MURO
 (id_usuario,privacidad) VALUES
@@ -109,7 +110,8 @@ INSERT INTO MURO
 (5,'privado'),
 (6,'privado'),
 (7,'privado'),
-(8,'privado');
+(8,'privado'),
+(9,'publico');
 
 INSERT INTO MENSAJE 
 (id_usuario,id_muro,contenido,fecha_alta) VALUES

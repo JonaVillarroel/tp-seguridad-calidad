@@ -30,6 +30,16 @@ class WallRepositoryService{
         return $obj -> id_muro;
     }
 
+    public function getWallByUserId($userId){
+        $query = "SELECT privacidad, id_muro FROM MURO
+                  WHERE id_usuario = $userId";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo el muro del usuario: ' . mysqli_error($this->db));
+
+        return $results;
+    }
+
     public function createWall($userId){
         $query1 = "INSERT INTO MURO (id_usuario, privacidad)
                   VALUES ($userId, 'publico')";
@@ -126,6 +136,7 @@ class WallRepositoryService{
         or die('Error actualizando la privacidad del muro: ' . mysqli_error($this->db));
 
     }
+
 
     public function removeUser($userId, $wallId){
 

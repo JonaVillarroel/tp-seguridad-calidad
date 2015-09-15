@@ -27,21 +27,25 @@
 
                 <div class="btn-message col-sm-10 wall">
                     <?php
-                        foreach($rows as $fila){                                
-                    ?>
-                    <hr class="col-sm-12 icon-image">
-                            <div id="toRepeat" name="toRepeat">
-                                <div class="col-sm-3">
-                                    <div class="text-center">
-                                        <img src="img/user.png" alt="usuario" class="img-circle icon-image"><br/>
-                                        <?php echo "<span>$fila->nombre <br/> $fila->apellido</span>" ?>
+                        if(isset($rows)) {
+                            foreach ($rows as $fila) {
+                                ?>
+                                <hr class="col-sm-12 icon-image">
+                                <div id="toRepeat" name="toRepeat">
+                                    <div class="col-sm-3">
+                                        <div class="text-center">
+                                            <img src="img/user.png" alt="usuario" class="img-circle icon-image"><br/>
+                                            <?php echo "<span>$fila->nombre <br/> $fila->apellido</span>" ?>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-9 mensaje">
+                                        <?php echo $fila->contenido ?>
                                     </div>
                                 </div>
-                                <div class="col-sm-9 mensaje">
-                                    <?php echo $fila->contenido ?>    
-                                </div>
-                            </div>
-                    <?php } ?>
+                            <?php }
+
+                        };
+                    ?>
                 </div>
             </div>
 
