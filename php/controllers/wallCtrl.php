@@ -22,7 +22,7 @@ function removeUser($userNameRemove){
     $wallRepo = new WallRepositoryService();
     $userRepo = new UserRepositoryService();
 
-    $userName = $_SESSION['nombre'];
+    $userName = $_SESSION['usuario'];
 
     $wallId = $wallRepo -> getWallIdByUserName($userName);
 
