@@ -27,7 +27,6 @@ class WallRepositoryService{
         or die('Error obteniendo el muro del usuario: ' . mysqli_error($this->db));
 	
 		$obj = $results -> fetch_object();
-		
         return $obj -> id_muro;
     }
 
