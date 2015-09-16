@@ -1,13 +1,17 @@
 <?php
-require_once (dirname(__DIR__)."/services/InboxRepositoryService.php");
+/*require_once (dirname(__DIR__)."/services/InboxRepositoryService.php");
 
 $inboxRepo = new InboxRepositoryService();
 
-$userRemitentId = $_SESSION['id'];
+$userRemitentIdFirst = $_SESSION['id'];
 
-$userRecipientId = $_GET['usuario'];
+$userRemitentIdSecond = $_GET['usuario'];
 
-$inboxRepo -> getMessagesOfChat($userRemitentId, $userRecipientId);
+$inboxIdFirst = $inboxRepo -> getInboxId
+
+$inboxIdSecond =
+
+$inboxRepo -> getMessagesOfChat($userRemitentIdFirst, $inboxIdFirst, $userRemitentIdSecond, $inboxIdSecond);
 
 
-?>
+*/?>
