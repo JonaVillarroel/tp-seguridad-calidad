@@ -12,7 +12,8 @@ class InboxRepositoryService
     function getMessagesOfChat($userRemitentIdFirst, $inboxIdFirst, $userRemitentIdSecond, $inboxIdSecond){
         $query = "SELECT MENSAJE_PRIVADO.*, USUARIO.nombre, USUARIO.apellido FROM MENSAJE_PRIVADO INNER JOIN USUARIO ON
                   MENSAJE_PRIVADO.id_usuario = USUARIO.id_usuario
-                  WHERE (id_usuario = $userRemitentIdFirst and id_bandeja = $inboxIdSecond) or (id_usuario = $userRemitentIdSecond and id_bandeja = $inboxIdFirst)";
+                  WHERE (MENSAJE_PRIVADO.id_usuario = $userRemitentIdFirst and id_bandeja = $inboxIdSecond) or (MENSAJE_PRIVADO.id_usuario = $userRemitentIdSecond and id_bandeja = $inboxIdFirst)
+                  ORDER BY MENSAJE_PRIVADO.fecha_alta";
         $results = $this -> db -> query($query)
         or die('Error obteniendo los mensajes del chat: ' . mysqli_error($this->db));
 

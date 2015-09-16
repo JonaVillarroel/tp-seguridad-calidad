@@ -5,6 +5,12 @@ $(document).ready(function(){
 	$('#privateMessageModalBtn').click(openPrivateMessageModal);
 	$('#inboxModalBtn').click(openInboxModal);
 
+	$('#modalPrivateMessages').on('shown.bs.modal', function () {
+		$(".message-area").scrollTop($(".message-area")[0].scrollHeight);
+
+	});
+
+
 });
 
 function mostrar_ocultar(cual) {
@@ -410,13 +416,13 @@ function ValidarEditUser(){
 }
 
 
-function sendPrivateMessage(){
+function sendPrivateMessage(event){
+	event.preventDefault();
 	//Traigo todo el contenido del mensaje
 	var content = $("#message-content").val();
 
 	var toUser = $("#recipientUser").val().trim();
 
-	console.log(toUser);
 
 	$.post(
 		"php/controllers/userCtrl.php",
@@ -428,8 +434,13 @@ function sendPrivateMessage(){
 				//Actualizo el modal
 
 				$("#message-content").val("");
+				$('#message-reload').load(document.URL +  ' #message-reload',
+					function(){
+						$(".message-area").scrollTop($(".message-area")[0].scrollHeight);
+				});
 
-				//Buscar alguna forma de actualizar el area de mensajes
+
+
 			}
 			else{
 				console.log(data.errorMsg);
@@ -461,6 +472,7 @@ function openPrivateMessageModal(event){
 	event.preventDefault();
 
 	$('#modalPrivateMessages').modal('toggle');
+
 }
 
 function openInboxModal(event){
