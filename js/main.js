@@ -412,21 +412,33 @@ function ValidarEditUser(){
 
 function sendPrivateMessage(){
 	//Traigo todo el contenido del mensaje
-	var content = $("#privateMessage").val();
+	var content = $("#message-content").val();
 
-	//Obtengo el nombre de usuario al que se le destina el mensaje (el back lo consulta y obtiene de qué muro se trata)
-	var pathname = window.location.pathname;
-	var pathname_array = pathname.split("/");
-	var toUser = pathname_array[pathname_array.length - 1];
-	//Habria que hacer algo más acá para que le saque el ".php" al user.
+	var toUser = $("#recipientUser").val().trim();
 
+	console.log(toUser);
 
-	//Envio los datos al back para que el controller los procese
-	//El id_usuario que envia el mensaje y el rol lo obtengo en el back desde las sessions.
 	$.post(
 		"php/controllers/userCtrl.php",
 		{ content : content, toUser : toUser, action:"sendPrivateMessage" },
-		showInConsole );
+		function(data){
+			var data = JSON.parse(data);
+
+			if(data.valid == true){
+				//Actualizo el modal
+
+				$("#message-content").val("");
+
+				//Buscar alguna forma de actualizar el area de mensajes
+			}
+			else{
+				console.log(data.errorMsg);
+				$('#modalMessages').find('.modal-title').html("OH NO!");
+				$('#modalMessages').find('.modal-body').html(data.errorMsg)
+				$('#modalMessages').find('.modal-footer').html("");
+				$('#modalMessages').modal('toggle');
+			};
+		} );
 }
 
 function postMessage(){
