@@ -1,5 +1,4 @@
 <?php
-
 class Wall extends Connection{
 	
 	private $id_wall;
@@ -8,7 +7,7 @@ class Wall extends Connection{
 	private $date_leaving;
 
 	#Datos Muro [id_muro auto_increment,id_usuario,privacidad set('propietario','todos','registrados')]
-	public function __construct(){
+	public function __construct(){	
 	}
 	
 	public function getMessages(){
@@ -16,10 +15,17 @@ class Wall extends Connection{
 	    $db = new Connection();
 	    $idUsuario = $_GET['usuario'];
 
-	    $query = "SELECT MENSAJE.*, MURO.privacidad, USUARIO.nombre, USUARIO.apellido FROM MENSAJE INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro INNER JOIN USUARIO ON USUARIO.id_usuario = MURO.id_muro WHERE MURO.id_usuario = '$idUsuario' ORDER BY fecha_alta DESC LIMIT 10";
+	    $query = "SELECT MENSAJE.*, USUARIO.nombre, USUARIO.apellido, MURO.privacidad
+					FROM MENSAJE 
+					INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro 
+					INNER JOIN USUARIO ON USUARIO.id_usuario = MENSAJE.id_usuario 
+					WHERE MURO.id_usuario = '$idUsuario' 
+					ORDER BY fecha_alta DESC LIMIT 10";
 
 	    $results = $db -> query($query)
 	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));
+
+    	$db -> close();
 
 	    return $results;
 
@@ -59,6 +65,7 @@ class Wall extends Connection{
 
 		return $wallId;
 	}
+
 
 	public function isInWhiteList($idMuro, $loggedUserId){
 		$db = new Connection();

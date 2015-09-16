@@ -8,12 +8,27 @@ body {
 	margin: 0 auto 0 auto;
 }
 
+.menuvertical{
+	padding-right: 0;
+	border-radius: 3px 3px 3px 3px;
+	margin-bottom: 0;
+}
+
 .line{
 	display: inline-block;
 }
 
 .red{
 	color: red;
+}
+
+.green{
+	color: green;
+}
+
+.center{
+	margin: 0 auto 0 auto;
+	text-align: center;
 }
 
 .jumbotron{
@@ -81,7 +96,7 @@ footer{
 	}
 }
 
-#nonombreC,#longnombreC,#malnombreC,#noapelC,#longapelC,#malapelC,#noemailC,#longemailC,#malemailC,#nopswC,#longpswC,#malpswC,#minpswC,#nopsw2C,#malpsw2C{
+#nonombreC,#longnombreC,#malnombreC,#nonombreUC,#longnombreUC,#malnombreUC,#noapelC,#longapelC,#malapelC,#noemailC,#longemailC,#malemailC,#nopswC,#longpswC,#malpswC,#minpswC,#nopsw2C,#malpsw2C,#modifyUser{
 	display: none;
 }
 
@@ -101,4 +116,49 @@ textarea {
 
 .wall{
 	margin-left:5%;
+}
+
+.list-group-item{
+	overflow: hidden;
+}
+
+.icon-image{
+	margin-left: 2%;
+}
+
+.avatar-wall{
+	margin-bottom: 20px;
+}
+
+.avatar-wall img{
+
+}
+
+.conversations-area li:hover{
+	background-color:#f5f8fa!important;
+	cursor:pointer;
+}
+
+.conversations-area .userName{
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.conversations-area .avatar {
+	float:left;
+	margin-right: 10px;
+}
+
+.conversations-area .avatar img{
+	height: 100px;
+}
+
+.conversations-area .message-review{
+	color:#8899a6;
+	font-size: 12px;
+}
+
+.conversations-area .message-date{
+	color:#8899a6;
+	font-size: 13px;
 }

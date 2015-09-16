@@ -3,7 +3,7 @@ require './php/domain/Session.php';
 $mysession = new Session();
 $mysession->initSession();
 
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
+$username = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : false;
 $roles = isset($_SESSION['roles']) ? $_SESSION['roles'] : false;
 ?>
 

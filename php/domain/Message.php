@@ -1,6 +1,8 @@
 <?php
 
-class Message{
+require_once (dirname(__DIR__)."/connection/Connection.php");
+
+class Message extends Connection{
     private $content;
     private $toWall;
     private $fromUser;
@@ -34,10 +36,12 @@ class Message{
         $dateStart = $this -> dateStart;
 
         $query = "INSERT INTO MENSAJE(id_usuario, id_muro, contenido, fecha_alta)
-        VALUES ($fromUser, $toWall, '$content', $dateStart)";
+        VALUES ('$fromUser','$toWall','$content','$dateStart')";
 
         $results = $db -> query($query)
-        or die('Error guardando el mensaje: ' . mysqli_error($this->db));
+        or die('Error guardando el mensaje: ' . 'del Usuario: ' . $fromUser . 'Para muro: ' . $toWall . 'Contenido: '. $content . 'Fecha: ' . $dateStart . ' /// ' . mysqli_error($db));
+	
+		$db -> close();
     }
 
 
@@ -49,7 +53,8 @@ class Message{
 
         $results = $db -> query($query)
         or die('Error dando de baja el mensaje: ' . mysqli_error($this->db));
-
+		
+		$db -> close();
     }
 
     public function getContent(){

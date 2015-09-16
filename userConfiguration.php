@@ -1,9 +1,11 @@
 <?php
 require './php/domain/Session.php';
-$mysession = new Session();
-$mysession->initSession();
-$username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
-//$roles = isset($_SESSION['rol']) ? $_SESSION['roles'] : false;
+    
+    $mysession = new Session();
+    $mysession->initSession();
+
+    $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
+    $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
 
 ?>
 
@@ -22,37 +24,39 @@ $username = isset($_SESSION['username']) ? $_SESSION['username'] : false;
             include_once (__DIR__."/templates/header.php");
 ?>
 	<div class="container">
-		
-<h2 class="text-info">Configuración de usuario</h2>
-<h4>Quién puede ver y escribir en mi muro</h4>
+        <h2 class="text-info">Configuración de usuario</h2>
+        <h4>Quién puede ver y escribir en mi muro</h4>
 
-<div class="radio wallconfiguration">
-  <label><input type="radio" name="optradio">Sólo pueden acceder usuarios enumerados</label>
-  <input type="text" placeholder="Escribe un nombre">
-</div>
-<div class="radio wallconfiguration">
-  <label><input type="radio" name="optradio">Pueden acceder todos los usuarios  pero solo agregar mensajes
-aquellos enumerados</label>
-  <input type="text" placeholder="Escribe un nombre">
-</div>
-<div class="radio wallconfiguration ">
-  <label><input type="radio" name="optradio" >Todos los usuarios del sistema pueden acceder y publicar contenido</label>
-</div>
+        <?php
+        include_once (__DIR__."/php/views/userConfigView.php");
+        ?>
 
-<div class="radio wallconfiguration">
-  <label><input type="radio" name="optradio" >Usuarios anónimos pueden leer contenido.</label>
-</div>
-
-<div class="radio wallconfiguration">
-  <label><input type="radio" name="optradio" >Usuarios anónimos pueden crear y leer contenido.</label>
-</div>
+        <a href="#" id="modifyConfigurationBtn" class="btn btn-success">Aceptar cambios</a>
 	</div>
-	
+
+<div class="modal fade bs-example-modal-sm" id="modalMessages" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">OH NO!</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php
             include_once (__DIR__."/templates/footer.php");
 ?>
 <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
 <script src="lib/jquery-ui/jquery-ui.min.js"></script>
+<script src="lib/bootstrap/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/UpdateWallConfig.js"></script>
+
 </body>
 </html>

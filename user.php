@@ -1,3 +1,11 @@
+<?php
+require './php/domain/Session.php';
+$mysession = new Session();
+$mysession->initSession();
+$username = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : null;
+$usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,12 +87,14 @@
 	include_once (__DIR__."/templates/modalSignUp.php");
 	?>
 
+	<?php
+	include_once (__DIR__."/templates/modalPrivateMessages.php");
+	?>
 
-
+	<script src="lib/bootstrap/js/bootstrap.js"></script>
 	<script src="lib/jquery-ui/external/jquery/jquery.js"></script>
 	<script src="lib/jquery-ui/jquery-ui.min.js"></script>
 	<script src="js/main.js"></script>
-	<script src="js/postMessage.js"></script>
 
 </body>
 </html>
