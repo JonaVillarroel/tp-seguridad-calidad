@@ -1,13 +1,14 @@
 <?php
     require './php/domain/Session.php';
-    
+
     $mysession = new Session();
     $mysession->initSession();
+    $patron = "/^[[:digit:]]+$/";
 
     $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
     $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
 
-    $usuarioConsultado = isset($_GET['usuario']) ? isset($_GET['usuario']) : false;
+    $usuarioConsultado = isset($_GET['usuario']) and preg_match($patron,$_GET['usuario'])? isset($_GET['usuario']) : false;
 
 ?>
 
