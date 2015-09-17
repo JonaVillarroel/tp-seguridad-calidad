@@ -3,7 +3,13 @@
 	require_once (dirname(__DIR__)."/domain/Wall.php");
     require_once (dirname(__DIR__)."/services/WallRepositoryService.php");
 
-    $idUsuario = $_GET['usuario'];
+    $patron = "/^[[:digit:]]+$/";
+    if(preg_match($patron,$_GET['usuario'])) {
+        $idUsuario = $_GET['usuario'];
+    }else{
+        header ('location: ../../index.php?error=4');
+        exit;
+    }
 
     $wallRepo = new WallRepositoryService();
 

@@ -95,16 +95,14 @@ function modifyWallConfiguration(event){
 
     data.opt = $('input:radio[name="optradio"]:checked').val();
 
-    if(data.opt == "opt-1")
-    {
+    if(data.opt == "opt-1") {
         $( ".list-1 li" ).each(function(){
             user = $(this).text();
             users.push(user);
         });
 
         data.users = users;
-    }else if(data.opt == "opt-2")
-    {
+    }else if(data.opt == "opt-2") {
         $( ".list-2 li" ).each(function(){
             user = $(this).text();
             users.push(user);
