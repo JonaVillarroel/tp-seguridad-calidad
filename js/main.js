@@ -4,6 +4,7 @@ $(document).ready(function(){
 	$('#postMessageBtn').click(postMessage);
 	$('#privateMessageModalBtn').click(openPrivateMessageModal);
 	$('#inboxModalBtn').click(openInboxModal);
+	$('.conversation-item').click(openPrivateMessageModalFromInbox)
 
 	$('#modalPrivateMessages').on('shown.bs.modal', function () {
 		$(".message-area").scrollTop($(".message-area")[0].scrollHeight);
@@ -472,6 +473,11 @@ function openPrivateMessageModal(event){
 	event.preventDefault();
 
 	$('#modalPrivateMessages').modal('toggle');
+
+}
+
+function openPrivateMessageModalFromInbox(){
+	var toUser = $("#propIdBandeja").val();
 
 }
 

@@ -9,10 +9,7 @@ $inboxRepo = new InboxRepositoryService();
 
 $userId = $_SESSION['id'];
 
-
 $conversations = $inboxRepo -> getConversationsByUserId($userId);
-
-
 
 $cont = 0;
 while($conversation = $conversations -> fetch_object())
@@ -21,7 +18,8 @@ while($conversation = $conversations -> fetch_object())
 
     if($conversation -> id_usuario == $userId )
     {
-        echo "<li class='list-group-item'>
+        echo "<li class='list-group-item conversation-item'>
+                    <input type='hidden' id='propIdBandeja' value='".$conversation->prop_id_bandeja."'/>
                     <div class='conversation-item'>
                         <div class='avatar'>
                             <img class='img-circle' src='http://lorempixel.com/200/200/people/".$cont."' alt=''/>
@@ -38,7 +36,7 @@ while($conversation = $conversations -> fetch_object())
                     </div>
                 </li>";
     }else{
-        echo "<li class='list-group-item'>
+        echo "<li class='list-group-item conversation-item'>
                     <div class='conversation-item'>
                         <div class='avatar'>
                             <img class='img-circle' src='http://lorempixel.com/200/200/people' alt=''/>
