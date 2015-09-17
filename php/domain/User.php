@@ -1,9 +1,9 @@
 <?php
-require(dirname(__DIR__)."/connection/Connection.php");
+require_once(dirname(__DIR__)."/connection/Connection.php");
 require_once(dirname(__DIR__)."/domain/Session.php");
-require(dirname(__DIR__)."/domain/Message.php");
-require(dirname(__DIR__)."/services/WallRepositoryService.php");
-require(dirname(__DIR__)."/services/InboxRepositoryService.php");
+require_once(dirname(__DIR__)."/domain/Message.php");
+require_once(dirname(__DIR__)."/services/WallRepositoryService.php");
+require_once(dirname(__DIR__)."/services/InboxRepositoryService.php");
 
 
 

@@ -11,12 +11,8 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="message-area">
-                        <ul class="list-group">
-<!--                            <li class="list-group-item text-right">Hola</li>
-                            <li class="list-group-item">Chau</li>
-                            <li class="list-group-item text-right">HOLA</li>
-                            <li class="list-group-item">No</li>-->
+                    <div class="message-area" >
+                        <ul class="list-group" id="message-reload">
 
                             <?php
                                 require_once (dirname(__DIR__)."/php/views/inboxChat.php");
