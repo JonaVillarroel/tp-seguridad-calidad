@@ -57,6 +57,11 @@
 						echo "Necesita iniciar Sesion como Administrador para acceder al sitio <br/>";
 					echo "</div>";
 				}
+				if($error == 4){
+					echo "<div class='alert alert-danger'>";
+					echo "Te pasas de listo pillin <br/>";
+					echo "</div>";
+				}
 			?>
 			
         </div>

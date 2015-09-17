@@ -215,7 +215,7 @@ class User{
 				if(($surname != null or $surname != '') AND (preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$surname))){
 					$result = $myConnection -> query("UPDATE USUARIO SET USUARIO.apellido = '$surnameOK' WHERE USUARIO.id_usuario = '$userId';");
 				}
-				if(($mail != null or $mail != '') AND (preg_match("/^[a-zA-Z0-9_ñÑáéíóÁÉÍÓÚ]*[@]+[a-z]+([.]{1}[a-z]+)*$/",$mail))){
+				if(($mail != null or $mail != '') AND (preg_match("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/",$mail))){
 					$result = $myConnection -> query("UPDATE USUARIO SET USUARIO.mail = '$mail' WHERE USUARIO.id_usuario = '$userId';");
 				}
 				if(($userName != null or $userName != '') AND (preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$name))){
@@ -267,7 +267,7 @@ class User{
             $errorMessage["repass"] = "Las contraseñas no coinciden";
         }
 
-        if(preg_match("/^[a-zA-Z0-9_ñÑáéíóÁÉÍÓÚ]*[@]+[a-z]+([.]{1}[a-z]+)*$/",$mail)){
+        if(preg_match("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/",$mail)){
             $errorMessage["mail"] = 0;
         }else{
             $errorMessage["mail"] = "El mail ingresado no es válido";

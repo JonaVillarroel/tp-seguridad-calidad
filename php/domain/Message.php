@@ -21,7 +21,8 @@ class Message extends Connection{
         $this->content = $content;
         $this->toWall = $toWall;
         $this->fromUser = $fromUser;
-        $this->dateStart = date("m.d.y");
+        date_default_timezone_set('America/Argentina/Buenos_Aires');
+        $this->dateStart = date('Y-m-d H:i:s');
 
         self::save();
 
