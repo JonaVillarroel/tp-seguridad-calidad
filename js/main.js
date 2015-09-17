@@ -512,3 +512,4 @@ function openInboxModal(event){
 function showInConsole(data){
 	console.log(data);
 }
+
