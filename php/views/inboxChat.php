@@ -10,7 +10,7 @@ $inboxRepo = new InboxRepositoryService();
 
 $userRemitentIdFirst = $_SESSION['id'];
 
-$userRemitentIdSecond = $_GET['usuario'];
+$userRemitentIdSecond = $_GET['usuarioRemitent'];
 
 $inboxIdFirst = $inboxRepo -> getInboxIdByUserId($userRemitentIdFirst);
 

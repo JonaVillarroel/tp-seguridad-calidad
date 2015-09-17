@@ -64,7 +64,8 @@
 </div>
 
 <?php
-	include_once (__DIR__."/modalInbox.php");
+	require_once (__DIR__."/modalInbox.php");
+	require_once (__DIR__."/modalPrivateMessagesInbox.php");
 ?>
 
 

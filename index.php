@@ -39,10 +39,19 @@
 	<?php
         include_once (__DIR__."/templates/footer.php");
     ?>
-
     <?php
-    include_once (__DIR__."/templates/modalPrivateMessages.php");
+
+
+    if(isset($_SESSION['id']))
+    {
+        if($_SESSION['id'] != $_GET['usuario'])
+        {
+            require_once (__DIR__."/templates/modalPrivateMessages.php");
+        }
+    };
+
     ?>
+
 
     <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
     <script src="lib/jquery-ui/jquery-ui.min.js"></script>
