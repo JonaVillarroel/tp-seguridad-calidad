@@ -1,7 +1,14 @@
 <?php
 	//EVITO LOS WARNINGS DE VARIABLES NO DEFINIDAS
 	$list = isset($_GET['list']) ? $_GET['list'] : null;
-	$userId = $_GET['id'];
+
+	$patron = "/^[[:digit:]]+$/";
+	if(preg_match($patron,$_GET['id'])) {
+		$userId = $_GET['id'];
+	}else{
+		header ('location: index.php?error=4');
+		exit;
+	}
 ?>
 <?php
 require './php/domain/Session.php';

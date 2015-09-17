@@ -18,8 +18,7 @@ $userName = $_SESSION['usuario'];
 
 $newData['wallId'] = $wallRepo -> getWallIdByUserName($userName);
 
-if($data['opt'] == 'opt-1' || $data['opt'] == 'opt-2')
-{
+if($data['opt'] == 'opt-1' || $data['opt'] == 'opt-2') {
     //Obtengo el userId de cada userName
     $newUsers = Array();
     foreach($data['users'] as $user){
