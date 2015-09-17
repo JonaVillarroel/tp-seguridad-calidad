@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <form>
-                    <div class="message-area" >
+                    <div class="message-area" id="message-area-inbox" >
                         <ul class="list-group" id="messageFromInbox-reload">
 
 <!--                            --><?php

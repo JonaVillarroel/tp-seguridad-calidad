@@ -4,12 +4,20 @@ $(document).ready(function(){
 	$('#postMessageBtn').click(postMessage);
 	$('#privateMessageModalBtn').click(openPrivateMessageModal);
 	$('#inboxModalBtn').click(openInboxModal);
-	$('.conversation-item').click(openPrivateMessageModalFromInbox)
+	$('.conversation-item').click(openPrivateMessageModalFromInbox);
+	$("#sendMessageFromInboxBtn").click(sendPrivateMessageFromInbox);
 
 	$('#modalPrivateMessages').on('shown.bs.modal', function () {
 		$("#message-area-private").scrollTop($("#message-area-private")[0].scrollHeight);
 
 	});
+	$('#modalPrivateMessagesInbox').on('shown.bs.modal', function () {
+		$("#message-area-inbox").scrollTop($("#message-area-inbox")[0].scrollHeight);
+
+	});
+
+
+
 
 
 });
@@ -416,6 +424,38 @@ function ValidarEditUser(){
 	return true;
 }
 
+function sendPrivateMessageFromInbox(event){
+	event.preventDefault();
+	//Traigo todo el contenido del mensaje
+	var content = $("#message-content-fromInbox").val();
+
+	var toUser = $("#toUserInbox").val().trim();
+
+
+	$.post(
+		"php/controllers/userCtrl.php",
+		{ content : content, toUser : toUser, action:"sendPrivateMessage" },
+		function(data){
+			var data = JSON.parse(data);
+
+			if(data.valid == true){
+				//Actualizo el modal
+
+				$("#message-content-fromInbox").val("");
+				$('#messageFromInbox-reload').load('./php/views/inboxChat.php?usuarioRemitent='+toUser,
+					function(){
+						$("#message-area-inbox").scrollTop($("#message-area-inbox")[0].scrollHeight);
+					});
+			}
+			else{
+				console.log(data.errorMsg);
+				$('#modalMessages').find('.modal-title').html("OH NO!");
+				$('#modalMessages').find('.modal-body').html(data.errorMsg)
+				$('#modalMessages').find('.modal-footer').html("");
+				$('#modalMessages').modal('toggle');
+			};
+		} );
+}
 
 function sendPrivateMessage(event){
 	event.preventDefault();
@@ -490,13 +530,9 @@ function openPrivateMessageModalFromInbox(){
 	$('#modalPrivateMessagesInbox').find('.modal-title').text(toUserName + " " + toUserSurname);
 	$('#modalPrivateMessagesInbox').find('#toUserInbox').val(toUserId);
 
-	var url = "/php/views/inboxChat.php?usuarioRemitent="+toUserId;
-
-	console.log(url);
-
-	$('#messageFromInbox-reload').load(url +  ' #messageFromInbox-reload',
+	$('#messageFromInbox-reload').load('./php/views/inboxChat.php?usuarioRemitent='+toUserId ,
 		function(){
-			$(".message-area").scrollTop($(".message-area")[0].scrollHeight);
+			$("#message-area-inbox").scrollTop($("#message-area-inbox")[0].scrollHeight);
 		});
 
 	$('#modalPrivateMessagesInbox').modal('show');
