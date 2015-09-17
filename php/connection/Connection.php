@@ -1,6 +1,6 @@
 <?php
 
-require (dirname(__DIR__)."/connection/config.php");
+require_once (dirname(__DIR__)."/connection/config.php");
 
 class Connection extends mysqli{
 	
