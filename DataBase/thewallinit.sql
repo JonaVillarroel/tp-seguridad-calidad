@@ -7,10 +7,10 @@ USE thewall;
 CREATE TABLE USUARIO (
 	id_usuario int not null auto_increment primary key,
 	rol set('Administrador','Comun'),
-	nombre varchar(30),
-	apellido varchar(30),
+	nombre varchar(50),
+	apellido varchar(50),
 	mail varchar(50),
-	nombre_usuario varchar(30),
+	nombre_usuario varchar(50),
 	contraseña varchar(50),
 	estado SET ('Registrado', 'Pendiente') not null,
 	fecha_baja date

@@ -4,23 +4,23 @@ require_once (dirname(__DIR__)."/domain/Session.php");
 
 $mysession = new Session();
 $mysession->initSession();
+$patron = "/^[[:digit:]]+$/";
 
 $inboxRepo = new InboxRepositoryService();
 
-$userId = $_SESSION['id'];
+if(isset($_SESSION['id']) and preg_match($patron,$_SESSION['id'])){
+    $userId = $_SESSION['id'];
 
-$inboxIdUser = $inboxRepo -> getInboxIdByUserId($userId);
+    $inboxIdUser = $inboxRepo -> getInboxIdByUserId($userId);
 
-$conversations = $inboxRepo -> getConversationsByUserId($userId, $inboxIdUser);
+    $conversations = $inboxRepo -> getConversationsByUserId($userId, $inboxIdUser);
 
-$cont = 0;
-while($conversation = $conversations -> fetch_object())
-{
-    $cont++;
+    $cont = 0;
+    while($conversation = $conversations -> fetch_object()) {
+        $cont++;
 
-    if($conversation -> id_usuario == $userId )
-    {
-        echo "<li class='list-group-item conversation-item'>
+        if($conversation -> id_usuario == $userId ) {
+            echo "<li class='list-group-item conversation-item'>
                     <input type='hidden' class='propIdBandeja' value='".$conversation->prop_id_bandeja."'/>
                     <input type='hidden' class='propNombreBandeja' value='".$conversation->prop_nombre_bandeja."'/>
                     <input type='hidden' class='propApellidoBandeja' value='".$conversation->prop_apellido_bandeja."'/>
@@ -39,12 +39,12 @@ while($conversation = $conversations -> fetch_object())
                         </div>
                     </div>
                 </li>";
-    }else{
-        $conversationId = $conversation->id_conversacion;
-        $conversationsToUser = $inboxRepo -> getConversationToUser($userId, $conversationId);
-        $conversationToUser = $conversationsToUser -> fetch_object();
+        }else{
+            $conversationId = $conversation->id_conversacion;
+            $conversationsToUser = $inboxRepo -> getConversationToUser($userId, $conversationId);
+            $conversationToUser = $conversationsToUser -> fetch_object();
 
-        echo "<li class='list-group-item conversation-item'>
+            echo "<li class='list-group-item conversation-item'>
                     <input type='hidden' class='propIdBandeja' value='".$conversationToUser->prop_id_bandeja."'/>
                     <input type='hidden' class='propNombreBandeja' value='".$conversationToUser->prop_nombre_bandeja."'/>
                     <input type='hidden' class='propApellidoBandeja' value='".$conversationToUser->prop_apellido_bandeja."'/>
@@ -63,6 +63,9 @@ while($conversation = $conversations -> fetch_object())
                         </div>
                     </div>
                 </li>";
+        }
     }
+}else{
+    echo "ERROR: No se puede cargar las conversaciones";
 }
 ?>
