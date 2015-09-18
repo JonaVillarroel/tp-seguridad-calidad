@@ -12,7 +12,7 @@
                 </div>
                 <?php
 
-                if($_SESSION['id'] != $_GET['usuario']){
+                if($userLoggedId != false && $userLoggedId != $_GET['usuario']){
                     echo "<a class='btn btn-default btn-lg' href='#' id='privateMessageModalBtn'><span class='glyphicon glyphicon-envelope'></span> Mensaje Privado</a>";
                 };
                 ?>
