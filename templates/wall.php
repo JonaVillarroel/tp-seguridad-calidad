@@ -1,6 +1,6 @@
 <div id="wall" class="col-sm-12">
     <?php
-        include_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
+        require_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
         if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) || $_GET['usuario'] == $userLoggedId ){
     ?>
         <h2><?php echo "$nombreMuro $apellidoMuro (Wall)"?></h2>
@@ -10,7 +10,12 @@
                 <div class="avatar-wall">
                     <img class="img-circle" src="http://lorempixel.com/200/200" alt=""/>
                 </div>
-                <a class="btn btn-default btn-lg" href="#" id="privateMessageModalBtn"><span class="glyphicon glyphicon-envelope"></span> Mensaje Privado</a>
+                <?php
+
+                if($_SESSION['id'] != $_GET['usuario']){
+                    echo "<a class='btn btn-default btn-lg' href='#' id='privateMessageModalBtn'><span class='glyphicon glyphicon-envelope'></span> Mensaje Privado</a>";
+                };
+                ?>
             </div>
 
             <div class="col-sm-10 col-sm-push-1">

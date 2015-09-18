@@ -14,19 +14,21 @@ $data = json_decode($json, true);
 
 $newData['privacity'] = $data['opt'];
 
-$userName = $_SESSION['usuario'];
+    if(isset($_SESSION['usuario']) and preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$_SESSION['usuario'])) {
+        $userName = $_SESSION['usuario'];
+        $newData['wallId'] = $wallRepo->getWallIdByUserName($userName);
+        if($data['opt'] == 'opt-1' || $data['opt'] == 'opt-2') {
+            //Obtengo el userId de cada userName
+            $newUsers = Array();
+            foreach($data['users'] as $user){
+                $newUsers[] = $userRepo -> getUserIdByName($user);
+            }
+            $newData['users'] = $newUsers;
+        };
 
-$newData['wallId'] = $wallRepo -> getWallIdByUserName($userName);
-
-if($data['opt'] == 'opt-1' || $data['opt'] == 'opt-2') {
-    //Obtengo el userId de cada userName
-    $newUsers = Array();
-    foreach($data['users'] as $user){
-        $newUsers[] = $userRepo -> getUserIdByName($user);
+        $wallRepo -> updatePrivacity($newData);
+    }else{
+        echo "ERROR: No se pudo obtener el muro del usuario";
     }
-    $newData['users'] = $newUsers;
-};
-
-$wallRepo -> updatePrivacity($newData);
 
 ?>

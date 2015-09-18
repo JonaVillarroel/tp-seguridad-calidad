@@ -7,10 +7,10 @@ USE thewall;
 CREATE TABLE USUARIO (
 	id_usuario int not null auto_increment primary key,
 	rol set('Administrador','Comun'),
-	nombre varchar(30),
-	apellido varchar(30),
+	nombre varchar(50),
+	apellido varchar(50),
 	mail varchar(50),
-	nombre_usuario varchar(30),
+	nombre_usuario varchar(50),
 	contraseña varchar(50),
 	estado SET ('Registrado', 'Pendiente') not null,
 	fecha_baja date
@@ -45,11 +45,9 @@ CREATE TABLE COMPARTE_CON (
 );
 
 CREATE TABLE BANDEJA_DE_ENTRADA (
-	id_bandeja int not null auto_increment primary key,
+	id_bandeja int not null auto_increment,
 	id_usuario int not null,
-/*
-	privacidad set('publico','privado') not null,
-*/
+	primary key(id_bandeja),
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
 
@@ -59,6 +57,7 @@ CREATE TABLE MENSAJE_PRIVADO (
 	id_bandeja int not null,
 	fecha_alta datetime not null,
 	contenido varchar (280) not null,
+	id_conversacion int not null,
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
 	foreign key(id_bandeja) references BANDEJA_DE_ENTRADA(id_bandeja) ON DELETE CASCADE
 );
@@ -88,18 +87,20 @@ INSERT INTO BANDEJA_DE_ENTRADA
 (9);
 
 INSERT INTO MENSAJE_PRIVADO
-(id_usuario,id_bandeja,contenido,fecha_alta) VALUES
-(1,2,'Hola NicoRome, mi nombre es Cosme Fulanito.', NOW() ),
-(2,1,'Lárgate de aquí Homero !', NOW() ),
-(3,4,'Hola !', NOW() ),
-(4,3,'¿Qué haces? ', NOW() ),
-(5,4,'Hello !', NOW() ),
-(4,5,'Ciao !', NOW() ),
-(8,1,'Hola Cosme.', NOW() ),
-(8,2,'Hola Nico.', NOW() ),
-(8,3,'Hola Flor.', NOW() ),
-(8,4,'Hola Laura.', NOW() ),
-(9,5,'Hola Lucas. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW() );
+(id_usuario,id_bandeja,contenido,fecha_alta, id_conversacion) VALUES
+(1,2,'Hola NicoRome, mi nombre es Cosme Fulanito.', NOW(), 1 ),
+(2,1,'Lárgate de aquí Homero !', NOW(), 1 ),
+(3,4,'Hola !', NOW(), 2 ),
+(4,3,'¿Qué haces? ', NOW(), 2 ),
+(5,4,'Hello !', NOW(), 3 ),
+(4,5,'Ciao !', NOW(), 3 ),
+(8,1,'Hola Cosme.', NOW(), 4 ),
+(8,2,'Hola Nico.', NOW(), 5 ),
+(8,3,'Hola Flor.', NOW(), 6 ),
+(9,4,'Hola Laura.', NOW(), 7 ),
+(9,5,'Hola Lucas. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW(), 8 ),
+(5,9,'No soy Lucas, soy Laura.', NOW(), 8 );
+
 
 INSERT INTO MURO
 (id_usuario,privacidad) VALUES
@@ -129,7 +130,6 @@ INSERT INTO MENSAJE
 
 INSERT INTO COMPARTE_CON
 (id_muro,id_usuario) VALUES
-
 (5,1),
 (5,2),
 (5,3),

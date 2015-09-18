@@ -8,13 +8,13 @@ execute($_POST['action']);
 function execute($action){
     switch($action)
     {
-        case "getPrivateMessages": getPrivateMessages($_POST['content'], $_POST['toUser']);
+        case "getPrivateMessages": getPrivateMessages($_POST['toUser']);
             break;
     }
 
 }
 
-function getPrivateMessages($content, $toUser){
+function getPrivateMessages($toUser){
     $mysession = new Session();
     $mysession->initSession();
 

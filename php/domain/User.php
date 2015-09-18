@@ -59,6 +59,9 @@ class User{
                 $surnameOK = ucfirst(strtolower($surname));#Primer letra mayucula y el resto de lo que escribo en minuscula
 				$nameOK = ucfirst(strtolower($name));#Primer letra mayucula y el resto de lo que escribo en minuscula
 
+                $mail = sha1($myConnection -> real_escape_string($mail));
+                $pass = sha1($myConnection -> real_escape_string($pass));
+
 				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
 				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente');");
 
@@ -78,6 +81,10 @@ class User{
     public function Login($mail, $pass){
         $myConnection = new Connection();
         $mysession = new Session();
+
+        $mail = sha1($myConnection -> real_escape_string($mail));
+        $pass = sha1($myConnection -> real_escape_string($pass));
+
 
         $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass';");
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
