@@ -11,6 +11,7 @@
                     <img class="img-circle" src="http://lorempixel.com/200/200" alt=""/>
                 </div>
                 <?php
+
                 if($_SESSION['id'] != $_GET['usuario']){
                     echo "<a class='btn btn-default btn-lg' href='#' id='privateMessageModalBtn'><span class='glyphicon glyphicon-envelope'></span> Mensaje Privado</a>";
                 };

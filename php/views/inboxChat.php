@@ -1,6 +1,7 @@
 <?php
 require_once (dirname(__DIR__)."/services/InboxRepositoryService.php");
 require_once (dirname(__DIR__)."/domain/Session.php");
+$patron = "/^[[:digit:]]+$/";
 
 $mysession = new Session();
 $mysession->initSession();
@@ -8,37 +9,43 @@ $mysession->initSession();
 
 $inboxRepo = new InboxRepositoryService();
 
-$userRemitentIdFirst = $_SESSION['id'];
+if (isset($_SESSION['id']) and preg_match($patron,$_SESSION['id']) and isset($_GET['usuarioRemitent']) and preg_match($patron,$_GET['usuarioRemitent'])){
 
-$userRemitentIdSecond = $_GET['usuarioRemitent'];
+    $userRemitentIdFirst = $_SESSION['id'];
 
-$inboxIdFirst = $inboxRepo -> getInboxIdByUserId($userRemitentIdFirst);
+    $userRemitentIdSecond = $_GET['usuarioRemitent'];
 
-$inboxIdSecond = $inboxRepo -> getInboxIdByUserId($userRemitentIdSecond);
+    $inboxIdFirst = $inboxRepo -> getInboxIdByUserId($userRemitentIdFirst);
 
-$messages = $inboxRepo -> getMessagesOfChat($userRemitentIdFirst, $inboxIdFirst, $userRemitentIdSecond, $inboxIdSecond);
+    $inboxIdSecond = $inboxRepo -> getInboxIdByUserId($userRemitentIdSecond);
 
-while($message = $messages -> fetch_object())
-{
-    if($message -> id_usuario == $userRemitentIdFirst )
-    {
-        echo "<li class='list-group-item text-right'>
-        <div class='message-area-user'>
-            <p>".$message->nombre." ".$message->apellido."</p>
-        </div>
-        <div class='message-area-content'>
-            <p>".$message->contenido."</p>
-        </div>
-    </li>";
-    }else{
-        echo "<li class='list-group-item'>
-        <div class='message-area-user'>
-            <p>".$message->nombre." ".$message->apellido."</p>
-        </div>
-        <div class='message-area-content'>
-            <p>".$message->contenido."</p>
-        </div>
-    </li>";
-    }
+    $messages = $inboxRepo -> getMessagesOfChat($userRemitentIdFirst, $inboxIdFirst, $userRemitentIdSecond, $inboxIdSecond);
+
 }
+if($messages != null){
+    while($message = $messages -> fetch_object()) {
+        if($message -> id_usuario == $userRemitentIdFirst ) {
+            echo "<li class='list-group-item text-right'>
+        <div class='message-area-user'>
+            <p>".$message->nombre." ".$message->apellido."</p>
+        </div>
+        <div class='message-area-content'>
+            <p>".$message->contenido."</p>
+        </div>
+    </li>";
+        }else{
+            echo "<li class='list-group-item'>
+        <div class='message-area-user'>
+            <p>".$message->nombre." ".$message->apellido."</p>
+        </div>
+        <div class='message-area-content'>
+            <p>".$message->contenido."</p>
+        </div>
+    </li>";
+        }
+    }
+}else{
+    echo "ERROR: No se pudo obtener informacion de la Base de Datos";
+}
+
 ?>
