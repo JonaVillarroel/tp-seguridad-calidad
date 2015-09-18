@@ -14,6 +14,7 @@ function execute($action){
 
 }
 
+
 function sendPrivateMessage($content, $toUser){
     $mysession = new Session();
     $mysession->initSession();
@@ -23,9 +24,19 @@ function sendPrivateMessage($content, $toUser){
 
     $userIdSender = $_SESSION['id'];
 
-    $inboxId = $inboxRepo -> getInboxIdByUserId($toUser);
+    $recipientInboxId = $inboxRepo -> getInboxIdByUserId($toUser);
 
-    $results = $inboxRepo -> postMessage($inboxId, $userIdSender, $content);
+    $senderInboxId = $inboxRepo -> getInboxIdByUserId($userIdSender);
+
+    $conversationId = $inboxRepo -> getConversationIdByInboxId($recipientInboxId, $userIdSender, $senderInboxId, $toUser);
+
+    if($conversationId == null){
+        $lastId = $inboxRepo -> getLastConversationId();
+
+        $conversationId = $lastId+1;
+    };
+
+    $results = $inboxRepo -> postMessage($recipientInboxId, $userIdSender, $content, $conversationId);
 
     if($results === TRUE)
     {

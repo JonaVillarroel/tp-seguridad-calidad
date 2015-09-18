@@ -431,7 +431,6 @@ function sendPrivateMessageFromInbox(event){
 
 	var toUser = $("#toUserInbox").val().trim();
 
-
 	$.post(
 		"php/controllers/userCtrl.php",
 		{ content : content, toUser : toUser, action:"sendPrivateMessage" },
@@ -529,6 +528,8 @@ function openPrivateMessageModalFromInbox(){
 
 	$('#modalPrivateMessagesInbox').find('.modal-title').text(toUserName + " " + toUserSurname);
 	$('#modalPrivateMessagesInbox').find('#toUserInbox').val(toUserId);
+
+	console.log(toUserId);
 
 	$('#messageFromInbox-reload').load('./php/views/inboxChat.php?usuarioRemitent='+toUserId ,
 		function(){

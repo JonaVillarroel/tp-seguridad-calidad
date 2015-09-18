@@ -9,22 +9,33 @@ class InboxRepositoryService
         $this -> db = new Connection();
     }
 
-    function getConversationsByUserId($userId){
-        $query = "SELECT MP1.*, USUARIO.id_usuario as prop_id_bandeja, USUARIO.nombre as prop_nombre_bandeja,
-                    USUARIO.apellido as prop_apellido_bandeja
-                    FROM MENSAJE_PRIVADO as MP1 INNER JOIN
-                    (BANDEJA_DE_ENTRADA INNER JOIN USUARIO ON
-                    BANDEJA_DE_ENTRADA.id_usuario = USUARIO.id_usuario)
-                    ON BANDEJA_DE_ENTRADA.id_bandeja = MP1.id_bandeja
-                    WHERE (MP1.id_usuario = 9 or MP1.id_bandeja = 9) and (MP1.fecha_alta IN (
-                    SELECT max(MP2.fecha_alta) as maximo FROM MENSAJE_PRIVADO as MP2
-                    WHERE (MP2.id_usuario = 9) or (MP2.id_bandeja = 9)
-                    GROUP BY MP2.id_usuario, MP2.id_bandeja
-                    ) );
+    function getConversationsByUserId($userId, $inboxUserId){
+        $query = "SELECT *
+                    FROM (SELECT MP2.*, US.id_usuario as prop_id_bandeja, US.nombre as prop_nombre_bandeja,
+                                        US.apellido as prop_apellido_bandeja
+                     FROM MENSAJE_PRIVADO as MP2
+                    INNER JOIN
+                        (BANDEJA_DE_ENTRADA as BDJ INNER JOIN USUARIO as US ON
+                        BDJ.id_usuario = US.id_usuario)
+                    ON MP2.id_bandeja = BDJ.id_bandeja
 
-";
+                    WHERE (MP2.id_usuario = $userId) or (MP2.id_bandeja = $inboxUserId)
+                    ORDER BY fecha_alta DESC) x
+                    GROUP BY id_conversacion
+                    ORDER BY fecha_alta DESC";
         $results = $this -> db -> query($query)
         or die('Error obteniendo las conversaciones del inbox: ' . mysqli_error($this->db));
+
+        return $results;
+    }
+
+    function getConversationToUser($userId, $conversationId){
+        $query = "select MENSAJE_PRIVADO.*, USUARIO.id_usuario as prop_id_bandeja, USUARIO.nombre as prop_nombre_bandeja,
+                    USUARIO.apellido as prop_apellido_bandeja
+                    from MENSAJE_PRIVADO INNER JOIN USUARIO ON MENSAJE_PRIVADO.id_usuario = USUARIO.id_usuario
+                    where MENSAJE_PRIVADO.id_conversacion = $conversationId and MENSAJE_PRIVADO.id_usuario != $userId";
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo las conversaciones del chat: ' . mysqli_error($this->db));
 
         return $results;
     }
@@ -76,15 +87,45 @@ class InboxRepositoryService
 
     }
 
-    function postMessage($inboxId, $userIdSender, $content){
-        $query = "INSERT INTO MENSAJE_PRIVADO (id_usuario,id_bandeja,contenido,fecha_alta)
-                  VALUES ($userIdSender, $inboxId, '$content', NOW())";
+    function postMessage($inboxId, $userIdSender, $content, $conversationId){
+        $conversationId = (int)$conversationId;
+        $query = "INSERT INTO MENSAJE_PRIVADO (id_usuario,id_bandeja,contenido,fecha_alta, id_conversacion)
+                  VALUES ($userIdSender, $inboxId, '$content', NOW(), $conversationId)";
 
         $results = $this -> db -> query($query)
         or die('Error insertando el mensaje en la BD: ' . mysqli_error($this->db));
 
         return $results;
     }
+
+    function getLastConversationId(){
+        $query = "SELECT max(id_conversacion) as conver_max  FROM MENSAJE_PRIVADO";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo la conversacion: ' . mysqli_error($this->db));
+
+        $obj = $results -> fetch_object();
+
+        return $obj -> conver_max;
+    }
+
+    function getConversationIdByInboxId($recipientInboxId, $userIdSender, $senderInboxId, $toUser){
+        $query = "SELECT id_conversacion FROM MENSAJE_PRIVADO
+                  WHERE (id_bandeja = $recipientInboxId and id_usuario = $userIdSender) or (id_bandeja = $senderInboxId and id_usuario = $toUser)
+                  LIMIT 1";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo la conversacion: ' . mysqli_error($this->db));
+
+        if($results -> num_rows == 0){
+            return null;
+        }else{
+            $obj = $results -> fetch_object();
+
+            return $obj -> id_conversacion;
+        };
+    }
+
 
     public function __destruct(){
         $this -> db -> close();
