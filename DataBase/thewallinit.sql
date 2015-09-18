@@ -65,14 +65,14 @@ CREATE TABLE MENSAJE_PRIVADO (
 INSERT INTO USUARIO 
 (rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
 ('Comun','Usuario','Anonimo',null,null,null,'Registrado'),
-('Comun','Juan','Diaz','juan@gmail.com','Juan','juan1990','Registrado'),
-('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome','nrthewall','Registrado'),
-('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova','fvthewall','Registrado'),
-('Comun','Laura','Gutierrez','laura.g@gmail.com','LauraGutierrez','lgthewall','Registrado'),
-('Comun','Lucas','Rodriguez','lucas.r@gmail.com','LucRodriguez','lrthewall','Registrado'),
-('Comun','Jorge','Pérez','jorge.p@gmail.com','JorgeP','jpthewall','Registrado'),
-('Comun','Anabel','Gimt','anabel.g@gmail.com','AnaGimt','agthewall','Pendiente'),
-('Administrador','Franco','Malen','franco.m@gmail.com','FranMalen','fmthewall','Registrado');
+('Comun','Juan','Diaz',SHA1('juan@gmail.com'),'Juan',SHA1('juan1990'),'Registrado'),
+('Comun','Nicolás','Romero',SHA1('nicolas.r@gmail.com'),'NicoRome',SHA1('nrthewall'),'Registrado'),
+('Comun','Florencia','Villanova',SHA1('florencia.v@gmail.com'),'FlorVillanova',SHA1('fvthewall'),'Registrado'),
+('Comun','Laura','Gutierrez',SHA1('laura.g@gmail.com'),'LauraGutierrez',SHA1('lgthewall'),'Registrado'),
+('Comun','Lucas','Rodriguez',SHA1('lucas.r@gmail.com'),'LucRodriguez',SHA1('lrthewall'),'Registrado'),
+('Comun','Jorge','Pérez',SHA1('jorge.p@gmail.com'),'JorgeP',SHA1('jpthewall'),'Registrado'),
+('Comun','Anabel','Gimt',SHA1('anabel.g@gmail.com'),'AnaGimt',SHA1('agthewall'),'Pendiente'),
+('Administrador','Franco','Malen',SHA1('franco.m@gmail.com'),'FranMalen',SHA1('fmthewall'),'Registrado');
 
 INSERT INTO BANDEJA_DE_ENTRADA
 (id_usuario) VALUES
