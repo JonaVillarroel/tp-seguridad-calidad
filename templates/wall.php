@@ -1,6 +1,8 @@
 <div id="wall" class="col-sm-12">
     <?php
         require_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
+
+        if($userHasWall){
     ?>
         <h2><?php echo "$nombreMuro $apellidoMuro"?></h2>
         <div class="col-sm-12">
@@ -71,6 +73,13 @@
             </div>
 
         </div>
+    <?php }else{ ?>
+            <div class="alert alert-danger text-center col-sm-8 col-sm-push-2" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <span>El usuario no existe.</span>
+            </div>
+    <?php }; ?>
 
 
 </div>
