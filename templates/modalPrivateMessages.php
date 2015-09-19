@@ -17,9 +17,10 @@
 
                         </ul>
                     </div>
-                    <label for="message-text" class="control-label" >Mensaje:</label><small>(<span id='countdownPrivate' class='visible-*-inline-block'>200 caracteres disponibles</span>)</small>
-                    <div id='divmessagePrivate' class="form-group has-success">
-                        <textarea class="form-control" id="message-content" maxlength='200'></textarea>
+
+                    <label for="message-text" class="control-label" >Mensaje público </label><small>(<span id='countdownPrivate' class='visible-*-inline-block'>200 caracteres disponibles</span>)</small>:
+                    <div id='divmessagePrivate' class=" has-success">
+                        <textarea id="message-content" class="form-control" type="text" maxlength='200' placeholder='Escribí tu mensaje...'></textarea>
                     </div>
                 </form>
             </div>

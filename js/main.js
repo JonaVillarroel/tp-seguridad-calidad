@@ -551,10 +551,42 @@ function showInConsole(data){
 }
 
 
+// LIMITADOR CARACTERES // Mensajes del Muro
+
+var limite = 200; // número máximo de caracteres
+
+$("#messageWall-content").keyup(function(event) {// cada vez que se deja de presionar una tecla
+	var box = $(this).val();// obtiene el texto que está escrito en el textarea
+	var value = (box.length *100) / limite;// calcula el porcentaje entre el texto ingresado y el límite
+	var resta = limite - box.length;// obtiene cuántos caracteres quedan
+	// si aún no se llegó al límite
+	if(box.length <= limite) {
+	    $('#countdownWall').html(resta + ' caracteres disponibles');// modifica el texto que muestra la cantidad de caracteres que restan
+	    // si no se llegó al 50%, hace que la barra sea de color verde
+	    if (value < 50) {
+	        $('#divmessageWall').removeClass();
+	        $('#divmessageWall').addClass('has-success');
+	    }
+	    else if (value < 85) { // si no se llegó al 85% que sea amarilla
+	        $('#divmessageWall').removeClass();
+	        $('#divmessageWall').addClass('has-warning has-feedback');
+	    }
+	    else { // si se superó el 85% que sea roja
+	        $('#divmessageWall').removeClass();
+	        $('#divmessageWall').addClass('has-error has-feedback');
+	    };
+	}
+	else // si se llegó al límite no permite ingresar más caracteres
+	{
+		$(this).val($(this).val().substr(0, limite));// evita que se ingresen más caracteres
+	    event.preventDefault();// evita que se ingresen más caracteres
+	}               
+});	
+
+
 // Mensajes Privados
 
-// número máximo de caracteres
-var limite = 10;
+var limite = 200;// número máximo de caracteres
 
     // cada vez que se deja de presionar una tecla
 $("#message-content").keyup(function(event) {
@@ -571,11 +603,11 @@ $("#message-content").keyup(function(event) {
 	    }
 	    else if (value < 85) { // si no se llegó al 85% que sea amarillo
 	        $('#divmessagePrivate').removeClass();
-	        $('#divmessagePrivate').addClass('has-warning has-feedback');
+	        $('#divmessagePrivate').addClass('has-warning');
 	    }
 	    else { // si se superó el 85% que sea rojo
 	        $('#divmessagePrivate').removeClass();
-	        $('#divmessagePrivate').addClass('has-error has-feedback');
+	        $('#divmessagePrivate').addClass('has-error');
 	    };
 	}
 	else // si se llegó al límite no permite ingresar más caracteres

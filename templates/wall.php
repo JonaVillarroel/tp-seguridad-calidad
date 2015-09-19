@@ -21,9 +21,15 @@
             <div class="col-sm-10 col-sm-push-1">
                 <form class="form-horizontal" method="post" action="./php/controllers/postMessageCtrl.php">
                     <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">
-                        <textarea type="text" name="content" class="form-control" maxlength="280" rows="5"></textarea><br/>
+
+                        <h4>Mensaje público <small>(<span id="countdownWall" class="visible-*-inline-block">200 caracteres disponibles</span>)</small>:</h4>
+                            <div id="divmessageWall" class="has-success has-feedback">
+                                <textarea id="messageWall-content" type="text" class="form-control" maxlength="200" rows="5" placeholder='Escribí tu mensaje...'></textarea><br/>
+                            </div>
+
+                       
                         <input name="toWall" value="<?php echo $idMuro?>" type="hidden"/>
-                        <input name="toUser" value="<?php echo $_GET['usuario']?>" type="hidden"/>
+                        <input name="toUser " value="<?php echo $_GET['usuario']?>" type="hidden"/>
                         <button type="submit" id="btnMessage" name="btnMessage" class="btn btn-success btn-md pull-right">
                             <span class="glyphicon glyphicon-send"></span> Publicar
                         </button>
