@@ -67,13 +67,5 @@
 	</div>
 </div>
 
-<?php
 
-if(isset($_SESSION['id']))
-{
-	require_once (__DIR__."/modalInbox.php");
-	require_once (__DIR__."/modalPrivateMessagesInbox.php");
-};
-
-?>
 

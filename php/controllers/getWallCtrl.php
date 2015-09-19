@@ -6,9 +6,8 @@
     $patron = "/^[[:digit:]]+$/";
     if(preg_match($patron,$_GET['usuario'])) {
         $idUsuario = $_GET['usuario'];
-
     }else{
-        header ('location: ../../index.php?error=4');
+        header ('location:index.php?error=4');
         exit;
     }
 
