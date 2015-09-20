@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS thewall;
 
 CREATE DATABASE thewall;
+
 USE thewall;
 
 CREATE TABLE USUARIO (
@@ -45,6 +46,7 @@ CREATE TABLE COMPARTE_CON (
 CREATE TABLE BANDEJA_DE_ENTRADA (
 	id_bandeja int not null auto_increment,
 	id_usuario int not null,
+	limite int,
 	primary key(id_bandeja),
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
@@ -54,7 +56,7 @@ CREATE TABLE MENSAJE_PRIVADO (
 	id_usuario int not null,
 	id_bandeja int not null,
 	fecha_alta datetime not null,
-	contenido varchar (280) not null,
+	contenido varchar (200) not null,
 	id_conversacion int not null,
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
 	foreign key(id_bandeja) references BANDEJA_DE_ENTRADA(id_bandeja) ON DELETE CASCADE
@@ -73,20 +75,21 @@ INSERT INTO USUARIO
 ('Administrador','Franco','Malen','franco.m@gmail.com','FranMalen',SHA1('fmthewall'),'Registrado');
 
 INSERT INTO BANDEJA_DE_ENTRADA
-(id_usuario) VALUES
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9);
+(id_usuario,limite) VALUES
+(8,3),
+(2,2),
+(3,6),
+(4,3),
+(5,2),
+(6,4),
+(7,3),
+
+(9,5);
 
 INSERT INTO MENSAJE_PRIVADO
 (id_usuario,id_bandeja,contenido,fecha_alta, id_conversacion) VALUES
 (3,4,'Hola !', NOW(), 2 ),
-(4,3,'¿Qué haces? ', NOW(), 2 ),
+(7,3,'¿Qué haces? ', NOW(), 2 ),
 (5,4,'Hello !', NOW(), 3 ),
 (4,5,'Ciao !', NOW(), 3 ),
 (8,2,'Hola Nico.', NOW(), 5 ),

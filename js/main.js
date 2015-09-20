@@ -15,11 +15,6 @@ $(document).ready(function(){
 		$("#message-area-inbox").scrollTop($("#message-area-inbox")[0].scrollHeight);
 
 	});
-
-
-
-
-
 });
 
 function mostrar_ocultar(cual) {

@@ -1,6 +1,6 @@
 <?PHP
-	require_once (dirname(__DIR__)."/domain/User.php");
-	require_once (dirname(__DIR__)."/domain/Wall.php");
+    require_once (dirname(__DIR__)."/domain/User.php");
+    require_once (dirname(__DIR__)."/domain/Wall.php");
     require_once (dirname(__DIR__)."/services/WallRepositoryService.php");
 
     $patron = "/^[[:digit:]]+$/";
@@ -14,6 +14,10 @@
     $wallRepo = new WallRepositoryService();
 
     $wallResult = $wallRepo -> getWallByUserId($idUsuario);
+    //
+    $MessageLimitResult = $wallRepo -> getMessageLimit($idUsuario);//
+    $MessageNumResult = $wallRepo -> getMessageNum($idUsuario);//
+
 
     if($wallResult -> num_rows > 0){
         $userHasWall = true;
@@ -25,6 +29,12 @@
         $objWall = $wallResult -> fetch_object();
         $privacidad = $objWall -> privacidad;
         $idMuro = $objWall -> id_muro;
+        
+        $objLimit = $MessageLimitResult -> fetch_object();
+        $limitPrivateMsg = $objLimit -> limite;//limite de mensaje de la bandeja de entrada $limiteMensajePri
+        $IdBandeja = $objLimit -> id_bandeja;
+
+        $totalPrivateMsg = $MessageNumResult;//cantidad de mensajes en bandeja de entrada
 
         $wall = new Wall();
         $messages = $wall -> getMessages();
