@@ -75,7 +75,6 @@ INSERT INTO USUARIO
 
 INSERT INTO BANDEJA_DE_ENTRADA
 (id_usuario) VALUES
-(1),
 (2),
 (3),
 (4),
@@ -87,23 +86,19 @@ INSERT INTO BANDEJA_DE_ENTRADA
 
 INSERT INTO MENSAJE_PRIVADO
 (id_usuario,id_bandeja,contenido,fecha_alta, id_conversacion) VALUES
-(1,2,'Hola NicoRome, mi nombre es Cosme Fulanito.', NOW(), 1 ),
-(2,1,'Lárgate de aquí Homero !', NOW(), 1 ),
 (3,4,'Hola !', NOW(), 2 ),
 (4,3,'¿Qué haces? ', NOW(), 2 ),
 (5,4,'Hello !', NOW(), 3 ),
 (4,5,'Ciao !', NOW(), 3 ),
-(8,1,'Hola Cosme.', NOW(), 4 ),
-(8,2,'Hola Nico.', NOW(), 5 ),
-(8,3,'Hola Flor.', NOW(), 6 ),
-(9,4,'Hola Laura.', NOW(), 7 ),
-(9,5,'Hola Lucas. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW(), 8 ),
-(5,9,'No soy Lucas, soy Laura.', NOW(), 8 );
+(8,2,'Hola.', NOW(), 5 ),
+(8,3,'Hola.', NOW(), 6 ),
+(9,4,'Hola.', NOW(), 7 ),
+(9,5,'Hola. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW(), 8 ),
+(5,8,'Hola.', NOW(), 8 );
 
 
 INSERT INTO MURO
 (id_usuario,privacidad) VALUES
-(1,'publico'),
 (2,'publico'),
 (3,'publico'),
 (4,'publico'),
@@ -129,13 +124,12 @@ INSERT INTO MENSAJE
 
 INSERT INTO COMPARTE_CON
 (id_muro,id_usuario) VALUES
-(5,1),
 (5,2),
 (5,3),
 (6,4),
 (6,5),
 (6,7),
-(7,1),
 (7,3),
 (7,8),
-(8,1);
+(8,1),
+(7,8);

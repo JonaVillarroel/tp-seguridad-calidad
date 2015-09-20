@@ -51,6 +51,16 @@
 
     ?>
 
+    <?php
+
+    if(isset($_SESSION['id']))
+    {
+        require_once (__DIR__."/templates/modalInbox.php");
+        require_once (__DIR__."/templates/modalPrivateMessagesInbox.php");
+    };
+
+    ?>
+
 
     <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
     <script src="lib/jquery-ui/jquery-ui.min.js"></script>

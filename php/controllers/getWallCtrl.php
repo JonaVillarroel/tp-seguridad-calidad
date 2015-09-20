@@ -8,7 +8,7 @@
         $idUsuario = $_GET['usuario'];
 
     }else{
-        header ('location: ../../index.php?error=4');
+        header ('location:index.php?error=4');
         exit;
     }
 
