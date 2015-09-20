@@ -1,9 +1,10 @@
 <div id="wall" class="col-sm-12">
     <?php
         require_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
-        if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) || $_GET['usuario'] == $userLoggedId ){
+
+        if($userHasWall){
     ?>
-        <h2><?php echo "$nombreMuro $apellidoMuro (Wall)"?></h2>
+        <h2><?php echo "$nombreMuro $apellidoMuro"?></h2>
         <div class="col-sm-12">
 
             <div class="col-sm-1">
@@ -17,8 +18,10 @@
                 };
                 ?>
             </div>
-
             <div class="col-sm-10 col-sm-push-1">
+                <?php
+                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) || $_GET['usuario'] == $userLoggedId ){
+                    ?>
                 <form class="form-horizontal" method="post" action="./php/controllers/postMessageCtrl.php">
                     <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">
 
@@ -35,7 +38,6 @@
                         </button>
                     </div>
                 </form>
-
                 <div class="btn-message col-sm-10 wall">
                     <?php
                         if(isset($rows)) {
@@ -58,16 +60,26 @@
                         };
                     ?>
                 </div>
+                <?php }else{
+                $error = 'El muro que desea ingresar es privado.';
+                ?>
+                <div class="alert alert-danger text-center col-sm-8 col-sm-push-2" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <?php echo $error; ?>
+                </div>
+                <?php } ?>
+
             </div>
 
         </div>
-        <?php }else{
-        $error = 'El muro que desea ingresar es privado.';
-    ?>
-    <div class="alert alert-danger text-center col-sm-8 col-sm-push-2" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        <?php echo $error; ?>
-    </div>
-    <?php } ?>
+    <?php }else{ ?>
+            <div class="alert alert-danger text-center col-sm-8 col-sm-push-2" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <span>El usuario no existe.</span>
+            </div>
+    <?php }; ?>
+
+
 </div>

@@ -132,8 +132,9 @@
 				require "./php/domain/User.php";
 				$user = new User();
 				$result = $user -> getUsersStatusCurrent();
-		
+
 			while($row = $result -> fetch_object()) {
+				if($row->id_usuario == 1 or $row->rol == 'Administrador'){}else{
 			?>
 				<tbody>
 					<tr>
@@ -155,7 +156,8 @@
 						</td>
 					</tr>
 				</tbody>
-			<?php } ?>
+			<?php }
+			}?>
 			</table>
 		</div>
 	<?php } ?>

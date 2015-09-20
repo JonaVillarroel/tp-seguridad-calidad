@@ -8,6 +8,9 @@
     $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
     $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
 
+	if($nombre){
+		header ('location: index.php?error=5');
+	}
 
 ?>
 <!DOCTYPE html>
@@ -32,14 +35,14 @@
 					<h1>Reg&iacute;strese</h1>
 				</div>
 			</div>
-	
+
 			<div class="row">
 				<div class="col-xs-12">
 					<span class="red">*Campos Obligatorios</span>
 				</div>
 			</div><br/>
 				<form class="form-horizontal" method="post" onsubmit="return ValidarRegistroComun()" action="./php/controllers/signUpController.php">
-					<!--NOMBRE-->	  
+					<!--NOMBRE-->
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblNombre" for="txtNombre">Nombre: <span class="red">*</span></label>
 						<div class="col-sm-6 col-md-6">
@@ -48,7 +51,7 @@
 							<div id="longnombreC" class="alert alert-danger">El Nombre debe tener menos de 50 caracteres</div>
 							<div id="malnombreC" class="alert alert-danger">Por favor ingrese un Nombre v&aacute;lido</div>
 						</div>
-					</div>	
+					</div>
 					<!--APELLIDO-->
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblApellido" for="txtApellido">Apellido: <span class="red">*</span></label>
@@ -59,7 +62,7 @@
 							<div id="malapelC" class="alert alert-danger">Por favor ingrese un Apellido v&aacute;lido</div>
 						</div>
 					</div>
-					<!--NOMBRE DE USUARIO-->	  
+					<!--NOMBRE DE USUARIO-->
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblNomUser" for="txtNomUser">Nombre de Usuario: <span class="red">*</span></label>
 						<div class="col-sm-6 col-md-6">
@@ -103,9 +106,9 @@
 					</div><br/>
 					<!--BOTONES-->
 					<div class="form-group">
-					<label class="col-sm-4 control-label" for=""></label>	    
+					<label class="col-sm-4 control-label" for=""></label>
 						<div class="col-sm-6">
-							<button type="submit" id="btnSubmit" name="enviar" class="btn btn-success btn-md" value="Aceptar"><span class="glyphicon glyphicon glyphicon-ok-circle"></span> Aceptar</button>	
+							<button type="submit" id="btnSubmit" name="enviar" class="btn btn-success btn-md" value="Aceptar"><span class="glyphicon glyphicon glyphicon-ok-circle"></span> Aceptar</button>
 							<button type="reset" id="btnButton" name="cancelar" class="btn btn-danger btn-md" value="Cancelar"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
 						</div>
 					</div><br/>

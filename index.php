@@ -44,7 +44,7 @@
 
 
     if(isset($_SESSION['id'])){
-        if($_SESSION['id'] != $_GET['usuario']){
+        if($_SESSION['id'] != $usuarioConsultado){
             require_once (__DIR__."/templates/modalPrivateMessages.php");
         }
     };

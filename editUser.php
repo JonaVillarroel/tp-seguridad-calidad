@@ -16,6 +16,7 @@ $mysession = new Session();
 $mysession->initSession();
 $username = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 $usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
+$userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
 if($username == null or $usersurname == null){
 	header ('location: index.php?error=2');
 }
