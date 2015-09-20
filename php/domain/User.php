@@ -70,8 +70,13 @@ class User{
                 $wall -> createWall($lastID);
                 $inbox = new InboxRepositoryService();
                 $inbox -> createInbox($lastID);
-				
-                echo "Usuario registrado";
+
+                echo "<div class='col-sm-12'>";
+	                echo "<div class='jumbotron col-sm-6 col-sm-push-3'>";
+		                    echo "<h1 class='text-center'>Usuario registrado</h1>";
+                            echo "<a class='btn btn-primary btn-lg pull-right' href='../../index.php' role='button'>Inicio</a>";
+                    echo "</div>";
+                echo "</div>";
             }
         }
 		$myConnection -> close();
@@ -82,7 +87,6 @@ class User{
         $mysession = new Session();
 
         $pass = sha1($myConnection -> real_escape_string($pass));
-
 
         $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass';");
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
@@ -107,9 +111,14 @@ class User{
                 }
 
             } else if ($row->estado == 'Pendiente') {
-                echo "DISCULPE LAS MOLESTIAS <br/>";
-                echo "Usuario " . $row->nombre . " " . $row->apellido . " su solicitud de registro todavia no fue confirmada por el Administrador del sitio.";
-                }
+                echo "<div class='col-sm-12'>";
+                    echo "<div class='jumbotron col-sm-6 col-sm-push-3'>";
+                        echo "<h1 class='text-center'>Disculpe Las Moletias<br/></h1>";
+                        echo "<p>Usuario " . $row->nombre . " " . $row->apellido . " su solicitud de registro todavia no fue confirmada por el Administrador del sitio.</p>";
+                        echo "<a class='btn btn-primary btn-lg pull-right' href='../../index.php' role='button'>Inicio</a>";
+                    echo "</div>";
+                echo "</div>";
+            }
         }else{
             header ('location: ../../index.php?error=1');
         }
