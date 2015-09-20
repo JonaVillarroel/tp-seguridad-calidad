@@ -16,7 +16,7 @@ if ($privacity == 'privado')
     $users = $wallRepo -> getUsersById($wallId);
 
     echo "<div class='radio wallconfiguration '><br/>
-            <label><input type='radio' name='optradio' value='opt-2' >Todos los usuarios del sistema pueden acceder y publicar contenido</label>
+            <label><input type='radio' name='optradio' value='opt-2' >Todos los usuarios del sistema pueden acceder y solo usuarios enumerados publicar contenido</label>
         </div>";
 
     echo "<div class='radio wallconfiguration'><br/>
@@ -52,27 +52,15 @@ if ($privacity == 'privado')
 
             echo "<div class='radio wallconfiguration'>
             <label><input type='radio' name='optradio' value='opt-5'>Usuarios anonimos pueden leer y publicar contenido</label>
-            </div>";
+            </div></div>";
 }
+echo "<div class='col-sm-3 clear wallconfiguration'>
+        <select id='topeLimite' class='form-control'>";
+$tope = 20;
+for($i = $tope; $i >= 0; $i--){
+    echo "<option value='".$i."'>".$i."</option>";
+}
+echo "</select> <span class='line'>Limite de mensajes en el muro.</span>
+</div>";
 
 ?>
-
-
-<!--<div class="radio wallconfiguration">
-    <label><input type="radio" name="optradio" value="opt-2">Pueden acceder todos los usuarios  pero solo agregar mensajes
-        aquellos enumerados</label>
-    <input type="text" placeholder="Escribe un nombre" id="item-opt-2">
-    <a href="#" id="addItemList-2" class="btn btn-success">Agregar</a>
-    <ul class="list-group list-2">
-    </ul>
-</div>-->
-
-<!--
-<div class="radio wallconfiguration">
-    <label><input type="radio" name="optradio" value="opt-4">Usuarios anónimos pueden leer contenido.</label>
-</div>
-
-<div class="radio wallconfiguration">
-    <label><input type="radio" name="optradio" value="opt-5">Usuarios anónimos pueden crear y leer contenido.</label>
-</div>
--->

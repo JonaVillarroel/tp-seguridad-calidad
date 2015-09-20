@@ -4,7 +4,7 @@
 
         if($userHasWall){
     ?>
-        <h2><?php echo "$nombreMuro $apellidoMuro"?></h2>
+        <h2><?php echo "$nombreMuro $apellidoMuro $anonimoEscritura $anonimoLectura"?></h2>
         <div class="col-sm-12">
 
             <div class="col-sm-1">
@@ -20,9 +20,11 @@
             </div>
             <div class="col-sm-10 col-sm-push-1">
                 <?php
-                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) || $usuarioConsultado == $userLoggedId ){
+                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) 
+                    || $usuarioConsultado == $userLoggedId){
                     ?>
                 <form class="form-horizontal" method="post" action="./php/controllers/postMessageCtrl.php">
+                    <?php if($userLoggedId == false && !$anonimoEscritura){}else{ ?>
                     <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">
 
                         <h4>Mensaje público <small>(<span id="countdownWall" class="visible-*-inline-block">200 caracteres disponibles</span>)</small>:</h4>
@@ -35,6 +37,7 @@
                             <span class="glyphicon glyphicon-send"></span> Publicar
                         </button>
                     </div>
+                    <?php }?>
                 </form>
                 <div class="btn-message col-sm-10 wall">
                     <?php

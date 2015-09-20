@@ -31,7 +31,7 @@ class WallRepositoryService{
     }
 
     public function getWallByUserId($userId){
-        $query = "SELECT privacidad, id_muro FROM MURO
+        $query = "SELECT privacidad, id_muro,flag_anonimo_lectura, flag_anonimo_escritura FROM MURO
                   WHERE id_usuario = $userId";
 
         $results = $this -> db -> query($query)
@@ -111,7 +111,7 @@ class WallRepositoryService{
 
 
             }
-            $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_muro = $wallId";
+            $queryUpdate = "UPDATE MURO SET privacidad = 'privado', flag_anonimo_lectura = 0, flag_anonimo_escritura = 0 WHERE id_muro = $wallId";
 
         }else if($privacity == "opt-2"){
             $users = $data['users'];
@@ -126,9 +126,11 @@ class WallRepositoryService{
                 $results = $this -> db -> query($query)
                 or die('Error insertando los usuarios con COMPARTE_CON: ' . mysqli_error($this->db));
             }
-            $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_muro = $wallId";
-        }else{
-            $queryUpdate = "UPDATE MURO SET privacidad = 'publico' WHERE id_muro = $wallId";
+            $queryUpdate = "UPDATE MURO SET privacidad = 'privado', flag_anonimo_lectura = 0, flag_anonimo_escritura = 0 WHERE id_muro = $wallId";
+        }else if($privacity == "opt-3" || $privacity == "opt-5"){
+            $queryUpdate = "UPDATE MURO SET privacidad = 'publico', flag_anonimo_lectura = 1, flag_anonimo_escritura = 1 WHERE id_muro = $wallId";
+        }else if($privacity == "opt-4"){
+            $queryUpdate = "UPDATE MURO SET privacidad = 'publico', flag_anonimo_lectura = 1, flag_anonimo_escritura = 0 WHERE id_muro = $wallId";
         };
 
 

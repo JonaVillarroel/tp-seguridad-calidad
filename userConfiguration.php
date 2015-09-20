@@ -28,7 +28,7 @@ require './php/domain/Session.php';
         <h4>Quién puede ver y escribir en mi muro</h4><br/>
         <div class="col-sm-3">
             <select id="privacidad" class="form-control">
-                <option value="publico">Publico</option>
+                <option value="publico">Público</option>
                 <option value="privado">Privado</option>
             </select>
         </div>
@@ -38,7 +38,10 @@ require './php/domain/Session.php';
         include_once (__DIR__."/php/views/userConfigView.php");
         ?>
         </div>
-        <a href="#" id="modifyConfigurationBtn" class="btn btn-success">Aceptar cambios</a>
+        <div class="col-sm-2 col-sm-push-1">
+        <br/>
+            <a href="#" id="modifyConfigurationBtn" class="btn btn-success">Aceptar cambios</a>
+        </div>
 	</div>
 
 <div class="modal fade bs-example-modal-sm" id="modalMessages" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">

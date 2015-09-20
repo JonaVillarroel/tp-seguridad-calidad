@@ -29,6 +29,8 @@
         $objWall = $wallResult -> fetch_object();
         $privacidad = $objWall -> privacidad;
         $idMuro = $objWall -> id_muro;
+        $anonimoLectura = $objWall -> flag_anonimo_lectura;
+        $anonimoEscritura = $objWall -> flag_anonimo_escritura;
         
         $objLimit = $MessageLimitResult -> fetch_object();
         $limitPrivateMsg = $objLimit -> limite;//limite de mensaje de la bandeja de entrada $limiteMensajePri
