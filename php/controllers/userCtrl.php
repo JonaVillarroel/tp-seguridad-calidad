@@ -10,9 +10,30 @@ function execute($action){
     {
         case "sendPrivateMessage": sendPrivateMessage($_POST['content'], $_POST['toUser']);
             break;
+/*        case "removePrivateMessage": sendPrivateMessage($_POST['messageId']);
+            break;*/
     }
 
 }
+
+/*function removePrivateMessage($messageId){
+    $mysession = new Session();
+    $mysession->initSession();
+
+    $inboxRepo = new InboxRepositoryService();
+
+    $userIdSender = $_SESSION['id'];
+
+    $results = $inboxRepo -> removeMessageById($messageId);
+
+    if($results === TRUE)
+    {
+        $response['valid'] = true;
+    }else{
+        $response['errorMsg'] = "Lo sentimos, hubo un error al eliminar el mensaje.";
+        $response['valid'] = false;
+    }
+}*/
 
 
 function sendPrivateMessage($content, $toUser){

@@ -137,6 +137,14 @@ class InboxRepositoryService
         };
     }
 
+    public function removeMessageById($messageId){
+        $query = "UPDATE MENSAJE_PRIVADO SET fecha_baja WHERE id_mensaje = $messageId";
+
+        $results = $this -> db -> query($query)
+            or die('Error eliminando el mensaje: ' . mysqli_error($this-db));
+
+        return $results;
+    }
 
     public function __destruct(){
         $this -> db -> close();

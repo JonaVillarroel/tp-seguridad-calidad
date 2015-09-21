@@ -26,11 +26,6 @@ if(!defined('DB_RETURN')){
 if(!defined('DB_DEBUG')){
 	define('DB_DEBUG',false);
 }
-/*if(!defined('PATH'))
-{
-    $path = $_SERVER['DOCUMENT_ROOT'];
-    $path .= "/facultad/web2/tp/pruebas";
-    define('PATH',$path);
-}*/
+
 
 ?>
