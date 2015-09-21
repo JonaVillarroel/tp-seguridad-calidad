@@ -227,6 +227,21 @@
 
 	?>
 
+	<div class="modal fade bs-example-modal-sm" id="modalMessages" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="exampleModalLabel">OH NO!</h4>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="lib/jquery-ui/external/jquery/jquery.js"></script>
 	<script src="lib/jquery-ui/jquery-ui.min.js"></script>
 	<script src="lib/bootstrap/js/bootstrap.js"></script>

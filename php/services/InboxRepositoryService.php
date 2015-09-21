@@ -65,7 +65,7 @@ class InboxRepositoryService
     }
 
     function getInboxIdByUserId($userId){
-        $query = "SELECT USUARIO.id_usuario FROM BANDEJA_DE_ENTRADA INNER JOIN USUARIO
+        $query = "SELECT BANDEJA_DE_ENTRADA.id_usuario FROM BANDEJA_DE_ENTRADA INNER JOIN USUARIO
                   ON BANDEJA_DE_ENTRADA.id_usuario = USUARIO.id_usuario
                   WHERE USUARIO.id_usuario = $userId";
 
@@ -75,6 +75,17 @@ class InboxRepositoryService
         $obj = $results -> fetch_object();
 
         return $obj -> id_usuario;
+    }
+
+    function getInboxIdAndLeaveDateByUserId($userId){
+        $query = "SELECT BANDEJA_DE_ENTRADA.id_usuario, USUARIO.fecha_baja FROM BANDEJA_DE_ENTRADA INNER JOIN USUARIO
+                  ON BANDEJA_DE_ENTRADA.id_usuario = USUARIO.id_usuario
+                  WHERE USUARIO.id_usuario = $userId";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo la bandeja de entrada del usuario por id de usuario: ' . mysqli_error($this->db));
+
+        return $results;
     }
 
     public function createInbox($userId){
