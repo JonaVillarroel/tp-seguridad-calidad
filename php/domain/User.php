@@ -61,8 +61,8 @@ class User{
 
                 $pass = sha1($myConnection -> real_escape_string($pass));
 
-				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
-				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente');");
+				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado, fecha_baja) VALUES
+				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente', null);");
 
                 $lastID = $myConnection -> insert_id;
 
@@ -88,7 +88,7 @@ class User{
 
         $pass = sha1($myConnection -> real_escape_string($pass));
 
-        $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass';");
+        $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass' AND fecha_baja is null;");
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
             if ($row->estado == 'Registrado') {
                 $mysession->initSession();
