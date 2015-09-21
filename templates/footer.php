@@ -16,6 +16,7 @@
                 <p>García Matías.</p>
                 <p>León Manuel.</p>
                 <p>Magnoni Nicolas.</p>
+                <p>Ramirez Federico</p>
                 <p>Villarroel Jonathan.</p>
             </div>
         </div>
