@@ -16,12 +16,13 @@ CREATE TABLE USUARIO (
 	fecha_baja date
 );
 
-
 CREATE TABLE MURO (
 	id_muro int not null auto_increment primary key,
 	id_usuario int not null,
 	privacidad set('publico','privado') not null,
 	fecha_baja date,
+	flag_anonimo_lectura boolean not null DEFAULT 1,
+	flag_anonimo_escritura boolean not null DEFAULT 1,
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
 
@@ -47,6 +48,7 @@ CREATE TABLE COMPARTE_CON (
 CREATE TABLE BANDEJA_DE_ENTRADA (
 	id_bandeja int not null auto_increment,
 	id_usuario int not null,
+	limite int,
 	primary key(id_bandeja),
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
@@ -56,55 +58,51 @@ CREATE TABLE MENSAJE_PRIVADO (
 	id_usuario int not null,
 	id_bandeja int not null,
 	fecha_alta datetime not null,
-	contenido varchar (280) not null,
+	contenido varchar (200) not null,
 	id_conversacion int not null,
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE,
 	foreign key(id_bandeja) references BANDEJA_DE_ENTRADA(id_bandeja) ON DELETE CASCADE
 );
 
 INSERT INTO USUARIO 
-(rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
-('Comun','Usuario','Anonimo',null,null,null,'Registrado'),
-('Comun','Juan','Diaz',SHA1('juan@gmail.com'),'Juan',SHA1('juan1990'),'Registrado'),
-('Comun','Nicolás','Romero',SHA1('nicolas.r@gmail.com'),'NicoRome',SHA1('nrthewall'),'Registrado'),
-('Comun','Florencia','Villanova',SHA1('florencia.v@gmail.com'),'FlorVillanova',SHA1('fvthewall'),'Registrado'),
-('Comun','Laura','Gutierrez',SHA1('laura.g@gmail.com'),'LauraGutierrez',SHA1('lgthewall'),'Registrado'),
-('Comun','Lucas','Rodriguez',SHA1('lucas.r@gmail.com'),'LucRodriguez',SHA1('lrthewall'),'Registrado'),
-('Comun','Jorge','Pérez',SHA1('jorge.p@gmail.com'),'JorgeP',SHA1('jpthewall'),'Registrado'),
-('Comun','Anabel','Gimt',SHA1('anabel.g@gmail.com'),'AnaGimt',SHA1('agthewall'),'Pendiente'),
-('Administrador','Franco','Malen',SHA1('franco.m@gmail.com'),'FranMalen',SHA1('fmthewall'),'Registrado');
+(rol,nombre,apellido,mail,nombre_usuario,contraseña,estado, fecha_baja) VALUES
+('Comun','Usuario','Anonimo',null,null,null,'Registrado', null),
+('Comun','Juan','Diaz','juan@gmail.com','Juan',SHA1('juan1990'),'Registrado', null),
+('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome',SHA1('nrthewall'),'Registrado', null),
+('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova',SHA1('fvthewall'),'Registrado', null),
+('Comun','Laura','Gutierrez','laura.g@gmail.com','LauraGutierrez',SHA1('lgthewall'),'Registrado', null),
+('Comun','Lucas','Rodriguez','lucas.r@gmail.com','LucRodriguez',SHA1('lrthewall'),'Registrado', null),
+('Comun','Jorge','Pérez','jorge.p@gmail.com','JorgeP',SHA1('jpthewall'),'Registrado', null),
+('Comun','Anabel','Gimt','anabel.g@gmail.com','AnaGimt',SHA1('agthewall'),'Pendiente', null),
+('Administrador','Franco','Malen','franco.m@gmail.com','FranMalen',SHA1('fmthewall'),'Registrado', null);
 
 INSERT INTO BANDEJA_DE_ENTRADA
-(id_usuario) VALUES
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9);
+(id_usuario,limite) VALUES
+(8,3),
+(2,2),
+(3,6),
+(4,3),
+(5,2),
+(6,4),
+(7,3),
+
+(9,5);
 
 INSERT INTO MENSAJE_PRIVADO
 (id_usuario,id_bandeja,contenido,fecha_alta, id_conversacion) VALUES
-(1,2,'Hola NicoRome, mi nombre es Cosme Fulanito.', NOW(), 1 ),
-(2,1,'Lárgate de aquí Homero !', NOW(), 1 ),
 (3,4,'Hola !', NOW(), 2 ),
-(4,3,'¿Qué haces? ', NOW(), 2 ),
+(7,3,'¿Qué haces? ', NOW(), 2 ),
 (5,4,'Hello !', NOW(), 3 ),
 (4,5,'Ciao !', NOW(), 3 ),
-(8,1,'Hola Cosme.', NOW(), 4 ),
 (8,2,'Hola Nico.', NOW(), 5 ),
 (8,3,'Hola Flor.', NOW(), 6 ),
 (9,4,'Hola Laura.', NOW(), 7 ),
 (9,5,'Hola Lucas. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW(), 8 ),
-(5,9,'No soy Lucas, soy Laura.', NOW(), 8 );
+(5,8,'No soy Lucas, soy Laura.', NOW(), 8 );
 
 
 INSERT INTO MURO
 (id_usuario,privacidad) VALUES
-(1,'publico'),
 (2,'publico'),
 (3,'publico'),
 (4,'publico'),
@@ -130,13 +128,10 @@ INSERT INTO MENSAJE
 
 INSERT INTO COMPARTE_CON
 (id_muro,id_usuario) VALUES
-(5,1),
 (5,2),
 (5,3),
 (6,4),
 (6,5),
 (6,7),
-(7,1),
 (7,3),
-(7,8),
-(8,1);
+(7,8);

@@ -25,13 +25,23 @@ require './php/domain/Session.php';
 ?>
 	<div class="container">
         <h2 class="text-info">Configuración de usuario</h2>
-        <h4>Quién puede ver y escribir en mi muro</h4>
-
+        <h4>Quién puede ver y escribir en mi muro</h4><br/>
+        <div class="col-sm-3">
+            <select id="privacidad" class="form-control">
+                <option value="publico">Público</option>
+                <option value="privado">Privado</option>
+            </select>
+        </div>
+        <div class="clear"></div>
+        <div class="col-sm-12">
         <?php
         include_once (__DIR__."/php/views/userConfigView.php");
         ?>
-
-        <a href="#" id="modifyConfigurationBtn" class="btn btn-success">Aceptar cambios</a>
+        </div>
+        <div class="col-sm-2 col-sm-push-1">
+        <br/>
+            <a href="#" id="modifyConfigurationBtn" class="btn btn-success">Aceptar cambios</a>
+        </div>
 	</div>
 
 <div class="modal fade bs-example-modal-sm" id="modalMessages" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -51,6 +61,16 @@ require './php/domain/Session.php';
 
 <?php
             include_once (__DIR__."/templates/footer.php");
+?>
+
+<?php
+
+if(isset($_SESSION['id']))
+{
+    require_once (__DIR__."/templates/modalInbox.php");
+    require_once (__DIR__."/templates/modalPrivateMessagesInbox.php");
+};
+
 ?>
 <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
 <script src="lib/jquery-ui/jquery-ui.min.js"></script>

@@ -1,9 +1,10 @@
 <div id="wall" class="col-sm-12">
     <?php
         require_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
-        if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) || $_GET['usuario'] == $userLoggedId ){
+
+        if($userHasWall){
     ?>
-        <h2><?php echo "$nombreMuro $apellidoMuro (Wall)"?></h2>
+        <h2><?php echo "$nombreMuro $apellidoMuro $anonimoEscritura $anonimoLectura"?></h2>
         <div class="col-sm-12">
 
             <div class="col-sm-1">
@@ -12,24 +13,32 @@
                 </div>
                 <?php
 
-                if($_SESSION['id'] != $_GET['usuario']){
+                if($userLoggedId != false && $userLoggedId != $usuarioConsultado){
                     echo "<a class='btn btn-default btn-lg' href='#' id='privateMessageModalBtn'><span class='glyphicon glyphicon-envelope'></span> Mensaje Privado</a>";
                 };
                 ?>
             </div>
-
             <div class="col-sm-10 col-sm-push-1">
+                <?php
+                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) 
+                    || $usuarioConsultado == $userLoggedId){
+                    ?>
                 <form class="form-horizontal" method="post" action="./php/controllers/postMessageCtrl.php">
+                    <?php if($userLoggedId == false && !$anonimoEscritura){}else{ ?>
                     <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">
-                        <textarea type="text" name="content" class="form-control" maxlength="280" rows="5"></textarea><br/>
+
+                        <h4>Mensaje público <small>(<span id="countdownWall" class="visible-*-inline-block">200 caracteres disponibles</span>)</small>:</h4>
+                            <div id="divmessageWall" class="has-success has-feedback">
+                                <textarea name="content" id="messageWall-content" type="text" class="form-control" maxlength="200" rows="5" placeholder='Escribí tu mensaje...'></textarea><br/>
+                            </div>
                         <input name="toWall" value="<?php echo $idMuro?>" type="hidden"/>
-                        <input name="toUser" value="<?php echo $_GET['usuario']?>" type="hidden"/>
+                        <input name="toUser" value="<?php echo $usuarioConsultado?>" type="hidden"/>
                         <button type="submit" id="btnMessage" name="btnMessage" class="btn btn-success btn-md pull-right">
                             <span class="glyphicon glyphicon-send"></span> Publicar
                         </button>
                     </div>
+                    <?php }?>
                 </form>
-
                 <div class="btn-message col-sm-10 wall">
                     <?php
                         if(isset($rows)) {
@@ -52,16 +61,26 @@
                         };
                     ?>
                 </div>
+                <?php }else{
+                $error = 'El muro que desea ingresar es privado.';
+                ?>
+                <div class="alert alert-danger text-center col-sm-8 col-sm-push-2" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    <?php echo $error; ?>
+                </div>
+                <?php } ?>
+
             </div>
 
         </div>
-        <?php }else{
-        $error = 'El muro que desea ingresar es privado.';
-    ?>
-    <div class="alert alert-danger text-center col-sm-8 col-sm-push-2" role="alert">
-        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-        <span class="sr-only">Error:</span>
-        <?php echo $error; ?>
-    </div>
-    <?php } ?>
+    <?php }else{ ?>
+            <div class="alert alert-danger text-center col-sm-8 col-sm-push-2" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                <span>El usuario no existe.</span>
+            </div>
+    <?php }; ?>
+
+
 </div>

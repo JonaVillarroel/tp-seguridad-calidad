@@ -24,26 +24,37 @@ function sendPrivateMessage($content, $toUser){
 
     $userIdSender = $_SESSION['id'];
 
-    $recipientInboxId = $inboxRepo -> getInboxIdByUserId($toUser);
 
-    $senderInboxId = $inboxRepo -> getInboxIdByUserId($userIdSender);
+    $resultsInbox = $inboxRepo -> getInboxIdAndLeaveDateByUserId($toUser);
 
-    $conversationId = $inboxRepo -> getConversationIdByInboxId($recipientInboxId, $userIdSender, $senderInboxId, $toUser);
+    $resultInbox = $resultsInbox -> fetch_object();
 
-    if($conversationId == null){
-        $lastId = $inboxRepo -> getLastConversationId();
+    if($resultInbox -> fecha_baja == null){
+        $recipientInboxId = $resultInbox -> id_usuario;
 
-        $conversationId = $lastId+1;
-    };
+        $senderInboxId = $inboxRepo -> getInboxIdByUserId($userIdSender);
 
-    $results = $inboxRepo -> postMessage($recipientInboxId, $userIdSender, $content, $conversationId);
+        $conversationId = $inboxRepo -> getConversationIdByInboxId($recipientInboxId, $userIdSender, $senderInboxId, $toUser);
 
-    if($results === TRUE)
-    {
-        $response['valid'] = true;
+        if($conversationId == null){
+            $lastId = $inboxRepo -> getLastConversationId();
+
+            $conversationId = $lastId+1;
+        };
+
+        $results = $inboxRepo -> postMessage($recipientInboxId, $userIdSender, $content, $conversationId);
+
+        if($results === TRUE)
+        {
+            $response['valid'] = true;
+        }else{
+            $response['errorMsg'] = "Lo sentimos, hubo un error al enviar el mensaje.";
+            $response['valid'] = false;
+        }
+
     }else{
-        $response['errorMsg'] = "Lo sentimos, hubo un error al enviar el mensaje.";
         $response['valid'] = false;
+        $response['errorMsg'] = "Lo sentimos, este usuario ha sido dado de baja.";
     }
 
     echo json_encode($response);

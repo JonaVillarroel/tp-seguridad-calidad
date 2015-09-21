@@ -10,6 +10,7 @@ $(document).ready(function(){
     $('#addItemList-1').click(addItemList1);
     $('.removeItemList-1').click(removeItemList1);
     $('#addItemList-2').click(addItemList2);
+    // $('#privacidad').click(changePrivacity);
 
     $('#modalMessages').modal({
         show: false
@@ -120,3 +121,11 @@ function modifyWallConfiguration(event){
             location.reload();
         } );
 }
+
+// function changePrivacity() {
+//     $.post("php/views/userConfigView.php", {change: $(this).val()},
+//         function (data)
+//         {
+//             console.log(data);
+//         });
+// }

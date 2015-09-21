@@ -25,14 +25,15 @@ class WallRepositoryService{
 
         $results = $this -> db -> query($query)
         or die('Error obteniendo el muro del usuario: ' . mysqli_error($this->db));
-	
-		$obj = $results -> fetch_object();
+    
+        $obj = $results -> fetch_object();
         return $obj -> id_muro;
     }
 
     public function getWallByUserId($userId){
-        $query = "SELECT privacidad, id_muro FROM MURO
-                  WHERE id_usuario = $userId";
+        $query = "SELECT privacidad, id_muro,flag_anonimo_lectura, flag_anonimo_escritura FROM MURO
+                  INNER JOIN USUARIO ON MURO.id_usuario = USUARIO.id_usuario
+                  WHERE USUARIO.id_usuario = $userId AND USUARIO.fecha_baja is null";
 
         $results = $this -> db -> query($query)
         or die('Error obteniendo el muro del usuario: ' . mysqli_error($this->db));
@@ -111,7 +112,7 @@ class WallRepositoryService{
 
 
             }
-            $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_muro = $wallId";
+            $queryUpdate = "UPDATE MURO SET privacidad = 'privado', flag_anonimo_lectura = 0, flag_anonimo_escritura = 0 WHERE id_muro = $wallId";
 
         }else if($privacity == "opt-2"){
             $users = $data['users'];
@@ -126,9 +127,11 @@ class WallRepositoryService{
                 $results = $this -> db -> query($query)
                 or die('Error insertando los usuarios con COMPARTE_CON: ' . mysqli_error($this->db));
             }
-            $queryUpdate = "UPDATE MURO SET privacidad = 'privado' WHERE id_muro = $wallId";
-        }else{
-            $queryUpdate = "UPDATE MURO SET privacidad = 'publico' WHERE id_muro = $wallId";
+            $queryUpdate = "UPDATE MURO SET privacidad = 'privado', flag_anonimo_lectura = 0, flag_anonimo_escritura = 0 WHERE id_muro = $wallId";
+        }else if($privacity == "opt-3" || $privacity == "opt-5"){
+            $queryUpdate = "UPDATE MURO SET privacidad = 'publico', flag_anonimo_lectura = 1, flag_anonimo_escritura = 1 WHERE id_muro = $wallId";
+        }else if($privacity == "opt-4"){
+            $queryUpdate = "UPDATE MURO SET privacidad = 'publico', flag_anonimo_lectura = 1, flag_anonimo_escritura = 0 WHERE id_muro = $wallId";
         };
 
 
@@ -150,5 +153,33 @@ class WallRepositoryService{
 
     public function __destruct(){
         $this -> db -> close();
+    }
+
+    // Obtengo la cantidad limite de mensajes que pueden recibier los usuarios
+    public function getMessageLimit($userId){
+        $query = "SELECT limite, id_bandeja FROM BANDEJA_DE_ENTRADA
+           WHERE BANDEJA_DE_ENTRADA.id_usuario = $userId";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo la cantidad de mensajes permitidos en bandeja_de_entrada: ' . mysqli_error($this->db));
+
+        return $results;
+    }
+
+    // Obtengo la cantidad de mensajes actuales
+    public function getMessageNum($userId){
+            $query = "SELECT id_mensaje FROM MENSAJE_PRIVADO INNER JOIN BANDEJA_DE_ENTRADA
+            ON MENSAJE_PRIVADO.id_bandeja = BANDEJA_DE_ENTRADA.id_bandeja
+            AND BANDEJA_DE_ENTRADA.id_bandeja =$userId;";
+            
+            $results = $this -> db -> query($query)
+            or die('Error obteniendo la cantidad de mensajes recibidos en mensaje_privado: ' . mysqli_error($this->db));
+
+             $obj = Array();
+            while ($row = $results->fetch_object()) {
+                $obj[] = $row;
+            }
+
+            return COUNT($obj);
     }
 }

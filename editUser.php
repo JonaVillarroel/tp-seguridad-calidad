@@ -16,6 +16,7 @@ $mysession = new Session();
 $mysession->initSession();
 $username = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 $usersurname = isset($_SESSION['apellido']) ? $_SESSION['apellido'] : null;
+$userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
 if($username == null or $usersurname == null){
 	header ('location: index.php?error=2');
 }
@@ -126,6 +127,16 @@ if($rol != 'Administrador'){
 	<?php
         include_once (__DIR__."/templates/footer.php");
     ?>
+
+	<?php
+
+	if(isset($_SESSION['id']))
+	{
+		require_once (__DIR__."/templates/modalInbox.php");
+		require_once (__DIR__."/templates/modalPrivateMessagesInbox.php");
+	};
+
+	?>
 
         <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
         <script src="lib/jquery-ui/jquery-ui.min.js"></script>

@@ -59,11 +59,10 @@ class User{
                 $surnameOK = ucfirst(strtolower($surname));#Primer letra mayucula y el resto de lo que escribo en minuscula
 				$nameOK = ucfirst(strtolower($name));#Primer letra mayucula y el resto de lo que escribo en minuscula
 
-                $mail = sha1($myConnection -> real_escape_string($mail));
                 $pass = sha1($myConnection -> real_escape_string($pass));
 
-				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado) VALUES
-				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente');");
+				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado, fecha_baja) VALUES
+				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente', null);");
 
                 $lastID = $myConnection -> insert_id;
 
@@ -71,8 +70,13 @@ class User{
                 $wall -> createWall($lastID);
                 $inbox = new InboxRepositoryService();
                 $inbox -> createInbox($lastID);
-				
-                echo "Usuario registrado";
+
+                echo "<div class='col-sm-12'>";
+	                echo "<div class='jumbotron col-sm-6 col-sm-push-3'>";
+		                    echo "<h1 class='text-center'>Usuario registrado</h1>";
+                            echo "<a class='btn btn-primary btn-lg pull-right' href='../../index.php' role='button'>Inicio</a>";
+                    echo "</div>";
+                echo "</div>";
             }
         }
 		$myConnection -> close();
@@ -82,11 +86,9 @@ class User{
         $myConnection = new Connection();
         $mysession = new Session();
 
-        $mail = sha1($myConnection -> real_escape_string($mail));
         $pass = sha1($myConnection -> real_escape_string($pass));
 
-
-        $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass';");
+        $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass' AND fecha_baja is null;");
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
             if ($row->estado == 'Registrado') {
                 $mysession->initSession();
@@ -109,9 +111,14 @@ class User{
                 }
 
             } else if ($row->estado == 'Pendiente') {
-                echo "DISCULPE LAS MOLESTIAS <br/>";
-                echo "Usuario " . $row->nombre . " " . $row->apellido . " su solicitud de registro todavia no fue confirmada por el Administrador del sitio.";
-                }
+                echo "<div class='col-sm-12'>";
+                    echo "<div class='jumbotron col-sm-6 col-sm-push-3'>";
+                        echo "<h1 class='text-center'>Disculpe Las Moletias<br/></h1>";
+                        echo "<p>Usuario " . $row->nombre . " " . $row->apellido . " su solicitud de registro todavia no fue confirmada por el Administrador del sitio.</p>";
+                        echo "<a class='btn btn-primary btn-lg pull-right' href='../../index.php' role='button'>Inicio</a>";
+                    echo "</div>";
+                echo "</div>";
+            }
         }else{
             header ('location: ../../index.php?error=1');
         }

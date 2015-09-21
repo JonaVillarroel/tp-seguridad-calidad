@@ -56,24 +56,21 @@
 						echo "Necesita iniciar Sesion como Administrador para acceder al sitio <br/>";
 					echo "</div>";
 				}
-			if($error == 4){
-				echo "<div class='alert alert-danger'>";
-				echo "Te pasas de listo pillin <br/>";
-				echo "</div>";
-			}
+				if($error == 4){
+					echo "<div class='alert alert-danger'>";
+					echo "Te pasas de listo pillin <br/>";
+					echo "</div>";
+				}
+				if($error == 5){
+					echo "<div class='alert alert-danger'>";
+					echo "Usted ya se encuentra registrado <br/>";
+					echo "</div>";
+				}
 			?>
 
 		</div>
 	</div>
 </div>
 
-<?php
 
-if(isset($_SESSION['id']))
-{
-	require_once (__DIR__."/modalInbox.php");
-	require_once (__DIR__."/modalPrivateMessagesInbox.php");
-};
-
-?>
 
