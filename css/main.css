@@ -191,3 +191,7 @@ textarea {
 .clear{
 	clear: both;
 }
+
+footer > h5 > strong {
+	cursor:pointer;
+}
