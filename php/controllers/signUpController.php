@@ -8,8 +8,11 @@
 	$userName = $_POST ["userName"];
 	$pass = $_POST ["pass"];
 	$repass = $_POST ["repass"];
+	$emailf= $_POST["emailf"];
+	$namef= $_POST["namef"];
+	$captcha_code= $_POST["captcha_code"];
 	//FIN DE TOMA DE VALORES DE LOS CAMPOS DEL FORMULARIO
 
 	$user = new User();
-	$user -> SignUp($name,$surname,$mail,$userName,$pass,$repass);
+	$user -> SignUp($name,$surname,$mail,$userName,$pass,$repass,$emailf,$namef,$captcha_code);
 ?>
