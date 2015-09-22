@@ -4,6 +4,8 @@ require_once(dirname(__DIR__)."/domain/Session.php");
 require_once(dirname(__DIR__)."/domain/Message.php");
 require_once(dirname(__DIR__)."/services/WallRepositoryService.php");
 require_once(dirname(__DIR__)."/services/InboxRepositoryService.php");
+require_once(dirname(__DIR__)."../controllers/redirect.php");
+require_once(dirname(__DIR__)."../../securimage/securimage.php");
 
 
 
@@ -29,11 +31,11 @@ class User{
 
     public function __construct(){}
 
-    public function SignUp($name,$surname,$mail,$userName,$pass,$repass){
+    public function SignUp($name,$surname,$mail,$userName,$pass,$repass,$emailf,$namef,$captcha_code){
 		$myConnection = new Connection();
 		
         //Valido los datos
-        $errorMessage = self::validate($name,$surname,$mail,$userName,$pass,$repass);
+        $errorMessage = self::validate($name,$surname,$mail,$userName,$pass,$repass,$emailf,$namef,$captcha_code);
 
         $isError = false;
         $errorMessageView = "";
@@ -253,9 +255,9 @@ class User{
 		header ('location: ../../indexAdmin.php?list=current');
     }
 	
-	private function validate($name,$surname,$mail,$userName,$pass,$repass){
+	private function validate($name,$surname,$mail,$userName,$pass,$repass,$emailf,$namef,$captcha_code){
         $errorMessage = array();
-
+        $securimage = new Securimage();
 
         if(preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$name)){
             $errorMessage["name"] = 0;
@@ -292,6 +294,33 @@ class User{
         }else{
             $errorMessage["userName"] = "El nombre de usuario no es correcto";
         }
+            //AntiSpam
+        if(strlen($emailf)==0){
+            $errorMessage["emailf"] = 0;
+        }else{
+             $errorMessage["emailf"] = "Campo vacio";
+             redirect('http://www.google.com');
+            
+        }
+        if(strlen($namef)==0){
+            $errorMessage["namef"] = 0;
+        }else{
+             $errorMessage["namef"] = "Campo vacio";
+             redirect('http://www.google.com');
+            
+        }
+        if ($securimage->check($_POST['captcha_code']) == false) {
+            $errorMessage["captcha_code"] = "captcha erroneo";
+
+  echo "El captcha ingresado es incorrecto.<br /><br />";
+
+  echo "Por favor <a href='javascript:history.go(-1)'>regrese</a>  e inténtelo de nuevo .";
+
+}
+else {
+    $errorMessage["captcha_code"] = 0;
+}
+
 
         return $errorMessage;
     }
