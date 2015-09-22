@@ -1,5 +1,7 @@
 <?php
     require './php/domain/Session.php';
+    require_once("securimage/securimage.php");
+
     
     $mysession = new Session();
     $mysession->initSession();
@@ -104,6 +106,41 @@
 							<div id="malpsw2C" class="alert alert-danger">Las Contrase&#xf1;as no coinciden</div>
 						</div>
 					</div><br/>
+					
+
+					<div class="form-group robotic ">
+						<label class="col-sm-4 control-label " id="" for="">Email:</label>
+						<div class="col-sm-6">
+						<input class="form-control " type="text" id="emailf" name="emailf"/>
+						</div>
+						
+					</div>
+
+
+					<div class="form-group robotic2">
+						<label class="col-sm-4 control-label " id="" for="">Nombre:</label>
+						<div class="col-sm-6">
+						<input class="form-control" type="text" id="" name="namef"/>
+						</div>
+						
+					</div>
+					
+					<div class="form-group">
+
+						<label class="col-sm-4 control-label" id="lblVeriCaptcha" for="">Captcha <span class="red">*</span></label>
+
+							<div class="col-sm-6 col-md-6">
+								<input class="form-control" id="captchaId" type="text" name="captcha_code" size="10" maxlength="6" />
+									<div id="emptyCaptcha" class="alert alert-danger">Completá el captcha.</div>
+									
+								
+									<img id="captcha" src="securimage/securimage_show.php" alt="CAPTCHA Image" />
+									<br>
+									<a id="otherCaptcha" href="#">[ Otro captcha ]</a>
+							</div>
+					</div>
+
+
 					<!--BOTONES-->
 					<div class="form-group">
 					<label class="col-sm-4 control-label" for=""></label>
@@ -112,6 +149,7 @@
 							<button type="reset" id="btnButton" name="cancelar" class="btn btn-danger btn-md" value="Cancelar"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
 						</div>
 					</div><br/>
+
 				</form>
 		   </div>
         </div>
