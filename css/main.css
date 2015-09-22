@@ -100,6 +100,8 @@ footer{
 	display: none;
 }
 
+.robotic { display: none; }
+
 /* --------------------------------------MURO--------------------------------------- */
 .btn-message{
 	margin-bottom: 2%;
