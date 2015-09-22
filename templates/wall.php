@@ -4,7 +4,7 @@
 
         if($userHasWall){
     ?>
-        <h2><?php echo "$nombreMuro $apellidoMuro $anonimoEscritura $anonimoLectura"?></h2>
+        <h2><?php echo "$nombreMuro $apellidoMuro"?></h2>
         <div class="col-sm-12">
 
             <div class="col-sm-1">

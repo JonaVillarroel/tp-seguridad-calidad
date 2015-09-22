@@ -10,24 +10,32 @@ class Wall extends Connection{
 	public function __construct(){	
 	}
 	
-	public function getMessages(){
+	public function getMessages($tope){
 
 	    $db = new Connection();
 	    $idUsuario = $_GET['usuario'];
-
-	    $query = "SELECT MENSAJE.*, USUARIO.nombre, USUARIO.apellido, MURO.privacidad
+	    $limite = 2;
+//USUARIO.nombre, USUARIO.apellido, MURO.privacidad
+	    $query = "SELECT MENSAJE.contenido, MENSAJE.nombre 
 					FROM MENSAJE 
 					INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro 
 					INNER JOIN USUARIO ON USUARIO.id_usuario = MENSAJE.id_usuario 
-					WHERE MURO.id_usuario = '$idUsuario' 
-					ORDER BY fecha_alta DESC LIMIT 10";
+					WHERE MURO.id_usuario = ? 
+					ORDER BY fecha_alta DESC LIMIT ? ";
 
-	    $results = $db -> query($query)
-	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));
+		$stmt = $db -> prepare($query);
+		$stmt -> bind_param("si", $idUsuario, $limite);
+		$stmt -> execute();
+		$stmt->bind_result($col1, $col2);
+		while($stmt->fetch())
+        { print_r($col1, $col2);}
 
-    	$db -> close();
+	    // $results = $db -> query($query)
+	    // or die('Error consultando los mensajes: ' . mysqli_error($this->db));
 
-	    return $results;
+    	// $db -> close();
+
+	    // return $results;
 
 	}
 

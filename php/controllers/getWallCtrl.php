@@ -31,6 +31,7 @@
         $idMuro = $objWall -> id_muro;
         $anonimoLectura = $objWall -> flag_anonimo_lectura;
         $anonimoEscritura = $objWall -> flag_anonimo_escritura;
+        $limiteMuro = $objWall -> limite_muro;
         
         $objLimit = $MessageLimitResult -> fetch_object();
         $limitPrivateMsg = $objLimit -> limite;//limite de mensaje de la bandeja de entrada $limiteMensajePri
@@ -39,7 +40,7 @@
         $totalPrivateMsg = $MessageNumResult;//cantidad de mensajes en bandeja de entrada
 
         $wall = new Wall();
-        $messages = $wall -> getMessages();
+        $messages = $wall -> getMessages($limiteMuro);
 
         if($messages -> num_rows > 0)
         {
