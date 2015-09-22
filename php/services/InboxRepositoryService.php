@@ -137,6 +137,25 @@ class InboxRepositoryService
         };
     }
 
+        // Modifica el límite de mensajes
+    public function modifyLimitInbox($userId, $limite){
+        $myConnection = new Connection();
+        
+        //verifico que sea un número positivo
+        if(is_numeric($limite)) {
+            if($limite >= 0){
+                $result = $myConnection -> query("UPDATE BANDEJA_DE_ENTRADA SET BANDEJA_DE_ENTRADA.limite = '$limite' WHERE BANDEJA_DE_ENTRADA.id_usuario = '$userId';");
+            }
+        }
+        else {
+             $errorMessageView = "El número ingresado no es válido<br>";
+        }
+        
+        $myConnection -> close();
+        
+        header ('location: ../../indexAdmin.php?list=current');
+    }
+
 
     public function __destruct(){
         $this -> db -> close();
