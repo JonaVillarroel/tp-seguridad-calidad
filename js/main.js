@@ -1,5 +1,6 @@
 $(document).ready(function(){
-
+	$('.robotic2').hide();
+	$('#otherCaptcha').click(anotherCaptcha);
 	$('#sendMessageBtn').click(sendPrivateMessage);
 	$('#postMessageBtn').click(postMessage);
 	$('#privateMessageModalBtn').click(openPrivateMessageModal);
@@ -16,6 +17,13 @@ $(document).ready(function(){
 
 	});
 });
+
+//Envio otro captcha al usuario
+function anotherCaptcha(){
+
+	document.getElementById('captcha').src = 'securimage/securimage_show.php?' + Math.random();
+	 return false;
+}
 
 function mostrar_ocultar(cual) {
    var elElemento=document.getElementById(cual);
@@ -113,6 +121,10 @@ function ValidarRegistroComun(){
 			var lblcontrasena=document.getElementById("lblContrasena");
 		var vericontrasena=document.getElementById("pswVeriContrasena");
 			var lblvericontrasena=document.getElementById("lblVeriContrasena");
+			var antispam=document.getElementById("emailf");	
+		var antispam2=document.getElementById("namef");	
+		var lblCaptcha=document.getElementById("lblVeriCaptcha");
+		var captcha=document.getElementById("captchaId");
 			
 	//NOMBRE
 	if(nombre.value==""){
@@ -311,6 +323,18 @@ function ValidarRegistroComun(){
 		$("#malpsw2C").fadeOut();
 		vericontrasena.style.borderColor = "#a4b97f";
 		lblvericontrasena.style.color = "black";
+	}
+
+
+	if(captcha.value==""){
+		lblVeriCaptcha.style.color="red";
+		captcha.style.borderColor="red";
+		$("#emptyCaptcha").fadeIn();
+		return false;
+	}
+
+	else {
+		$("#emptyCaptcha").fadeOut();
 	}
 
 	return true;
