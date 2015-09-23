@@ -13,29 +13,38 @@ class Wall extends Connection{
 	public function getMessages($tope){
 
 	    $db = new Connection();
-	    $idUsuario = $_GET['usuario'];
-	    $limite = 2;
-//USUARIO.nombre, USUARIO.apellido, MURO.privacidad
-	    $query = "SELECT MENSAJE.contenido, MENSAJE.nombre 
-					FROM MENSAJE 
-					INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro 
-					INNER JOIN USUARIO ON USUARIO.id_usuario = MENSAJE.id_usuario 
-					WHERE MURO.id_usuario = ? 
+		$idUsuario = $_GET['usuario'];
+		$limite = 2;
+
+	    $query = "SELECT MENSAJE.contenido, USUARIO.nombre, USUARIO.apellido, MURO.privacidad
+					FROM MENSAJE
+					INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro
+					INNER JOIN USUARIO ON USUARIO.id_usuario = MENSAJE.id_usuario
+					WHERE MURO.id_usuario = ?
 					ORDER BY fecha_alta DESC LIMIT ? ";
+		//ORDER BY fecha_alta DESC LIMIT ?
 
 		$stmt = $db -> prepare($query);
-		$stmt -> bind_param("si", $idUsuario, $limite);
+		$stmt -> bind_param("ii", $idUsuario, $limite);
 		$stmt -> execute();
-		$stmt->bind_result($col1, $col2);
-		while($stmt->fetch())
-        { print_r($col1, $col2);}
+		$stmt->bind_result($contenido, $nombre, $apellido, $privacidad);
+		$rows = 0;
 
-	    // $results = $db -> query($query)
-	    // or die('Error consultando los mensajes: ' . mysqli_error($this->db));
+			while ( $stmt->fetch() ) {
+				$rows++;
+				$data[] = array(
+					'contenido'    => $contenido,
+					'nombre'     => $nombre,
+					'apellido'     => $apellido,
+					'privacidad'     => $privacidad
+				);
+			}
 
-    	// $db -> close();
-
-	    // return $results;
+		if($rows > 0){
+			return $data;
+		}else{
+			return null;
+		}
 
 	}
 

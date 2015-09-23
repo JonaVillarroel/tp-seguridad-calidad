@@ -42,15 +42,24 @@
         $wall = new Wall();
         $messages = $wall -> getMessages($limiteMuro);
 
-        if($messages -> num_rows > 0)
+        $message = new stdClass();
+
+        if($messages != null)
         {
-            while($obj = $messages -> fetch_object()){
+            foreach ($messages as $key => $value)
+            {
+                $message->$key = $value;
+            }
+
+            foreach($message as $obj){
+                print_r($obj);
                 $mensajes[] = $obj -> contenido;
                 $nombre = $obj -> nombre;
                 $apellido = $obj -> apellido;
                 $rows[] = $obj;
             }
         };
+
 
         if(isset($_SESSION["id"])){
             $allow = $wall -> isInWhiteList($idMuro, $_SESSION["id"]);
