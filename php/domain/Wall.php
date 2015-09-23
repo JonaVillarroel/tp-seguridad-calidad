@@ -10,24 +10,39 @@ class Wall extends Connection{
 	public function __construct(){	
 	}
 	
-	public function getMessages(){
+	public function getMessages($tope){
 
 	    $db = new Connection();
-	    $idUsuario = $_GET['usuario'];
+		$idUsuario = $_GET['usuario'];
+		$limite = 2;
 
-	    $query = "SELECT MENSAJE.*, USUARIO.nombre, USUARIO.apellido, MURO.privacidad
-					FROM MENSAJE 
-					INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro 
-					INNER JOIN USUARIO ON USUARIO.id_usuario = MENSAJE.id_usuario 
-					WHERE MURO.id_usuario = '$idUsuario' 
-					ORDER BY fecha_alta DESC LIMIT 10";
+	    $query = "SELECT MENSAJE.contenido, USUARIO.nombre, USUARIO.apellido, MURO.privacidad
+					FROM MENSAJE
+					INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro
+					INNER JOIN USUARIO ON USUARIO.id_usuario = MENSAJE.id_usuario
+					WHERE MURO.id_usuario = ?
+					ORDER BY fecha_alta DESC LIMIT ? ";
 
-	    $results = $db -> query($query)
-	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));
+		$stmt = $db -> prepare($query);
+		$stmt -> bind_param("ii", $idUsuario, $limite);
+		$stmt -> execute();
+		$stmt->bind_result($contenido, $nombre, $apellido, $privacidad);
+		$rows = 0;
+		$row = Array();
+		$result = $stmt->get_result();
+		$obj = new stdClass();
+		while ($obj = $result->fetch_object()) {
+			$rows++;
+			$row[] = $obj;
+		}
 
-    	$db -> close();
 
-	    return $results;
+		if($rows > 0){
+			return $row;
+		}else{
+			return null;
+		}
+
 
 	}
 

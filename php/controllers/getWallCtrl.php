@@ -31,7 +31,8 @@
         $idMuro = $objWall -> id_muro;
         $anonimoLectura = $objWall -> flag_anonimo_lectura;
         $anonimoEscritura = $objWall -> flag_anonimo_escritura;
-        
+        $limiteMuro = $objWall -> limite_muro;
+
         $objLimit = $MessageLimitResult -> fetch_object();
         $limitPrivateMsg = $objLimit -> limite;//limite de mensaje de la bandeja de entrada $limiteMensajePri
         $IdBandeja = $objLimit -> id_bandeja;
@@ -39,17 +40,22 @@
         $totalPrivateMsg = $MessageNumResult;//cantidad de mensajes en bandeja de entrada
 
         $wall = new Wall();
-        $messages = $wall -> getMessages();
+        $messages = $wall -> getMessages($limiteMuro);
 
-        if($messages -> num_rows > 0)
+        if($messages != null)
         {
-            while($obj = $messages -> fetch_object()){
+            foreach($messages as $obj){
+
                 $mensajes[] = $obj -> contenido;
                 $nombre = $obj -> nombre;
                 $apellido = $obj -> apellido;
                 $rows[] = $obj;
             }
-        };
+
+        }
+
+
+
 
         if(isset($_SESSION["id"])){
             $allow = $wall -> isInWhiteList($idMuro, $_SESSION["id"]);
