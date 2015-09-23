@@ -22,29 +22,27 @@ class Wall extends Connection{
 					INNER JOIN USUARIO ON USUARIO.id_usuario = MENSAJE.id_usuario
 					WHERE MURO.id_usuario = ?
 					ORDER BY fecha_alta DESC LIMIT ? ";
-		//ORDER BY fecha_alta DESC LIMIT ?
 
 		$stmt = $db -> prepare($query);
 		$stmt -> bind_param("ii", $idUsuario, $limite);
 		$stmt -> execute();
 		$stmt->bind_result($contenido, $nombre, $apellido, $privacidad);
 		$rows = 0;
+		$row = Array();
+		$result = $stmt->get_result();
+		$obj = new stdClass();
+		while ($obj = $result->fetch_object()) {
+			$rows++;
+			$row[] = $obj;
+		}
 
-			while ( $stmt->fetch() ) {
-				$rows++;
-				$data[] = array(
-					'contenido'    => $contenido,
-					'nombre'     => $nombre,
-					'apellido'     => $apellido,
-					'privacidad'     => $privacidad
-				);
-			}
 
 		if($rows > 0){
-			return $data;
+			return $row;
 		}else{
 			return null;
 		}
+
 
 	}
 

@@ -32,7 +32,7 @@
         $anonimoLectura = $objWall -> flag_anonimo_lectura;
         $anonimoEscritura = $objWall -> flag_anonimo_escritura;
         $limiteMuro = $objWall -> limite_muro;
-        
+
         $objLimit = $MessageLimitResult -> fetch_object();
         $limitPrivateMsg = $objLimit -> limite;//limite de mensaje de la bandeja de entrada $limiteMensajePri
         $IdBandeja = $objLimit -> id_bandeja;
@@ -42,23 +42,19 @@
         $wall = new Wall();
         $messages = $wall -> getMessages($limiteMuro);
 
-        $message = new stdClass();
-
         if($messages != null)
         {
-            foreach ($messages as $key => $value)
-            {
-                $message->$key = $value;
-            }
+            foreach($messages as $obj){
 
-            foreach($message as $obj){
-                print_r($obj);
                 $mensajes[] = $obj -> contenido;
                 $nombre = $obj -> nombre;
                 $apellido = $obj -> apellido;
                 $rows[] = $obj;
             }
-        };
+
+        }
+
+
 
 
         if(isset($_SESSION["id"])){
