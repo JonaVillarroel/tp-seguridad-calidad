@@ -73,4 +73,41 @@
 </div>
 
 
+<!-- Buscador -->
+<div class="container navbar-container col-sm-1">
+  <!-- Trigger the modal with a button -->
+  <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#searchModal"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-search"></span></button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="searchModal" role="dialog">
+    <div class="modal-dialog  modal-sm">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" >
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	       		<h4><span class="glyphicon glyphicon-search"></span>Buscar Usuarios</h4>
+	 	</div>
+        <div class="modal-body"  style="padding:30px 20px;">
+        	<div class="form-group">
+				<label for="numMsjPrivLimit"><span class="glyphicon glyphicon-search"></span> Buscar: </label>
+				<div class="input-group">
+					<input id="txtLivesearch" type="text" onkeyup="showHint(this.value)">
+					<p></p>
+					<label for="livesearch"></span> Resultado: </label>
+						<div id="livesearch">Sin usuarios</div>
+				</div>
+			</div>
+          	
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+<!--FIN Buscador -->
 
