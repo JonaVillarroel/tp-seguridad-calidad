@@ -208,3 +208,7 @@ textarea {
 footer > h5 > strong {
 	cursor:pointer;
 }
+
+#emptyContent{
+	display:none;
+}
