@@ -30,6 +30,7 @@
                         <h4>Mensaje público <small>(<span id="countdownWall" class="visible-*-inline-block">200 caracteres disponibles</span>)</small>:</h4>
                             <div id="divmessageWall" class="has-success has-feedback">
                                 <textarea name="content" id="messageWall-content" type="text" class="form-control" maxlength="200" rows="5" placeholder='Escribí tu mensaje...'></textarea><br/>
+                                <div class="alert alert-danger" id="emptyContent"><span class="glyphicon glyphicon-exclamation-sign"></span>El mensaje no puede estar vacío.</div>
                             </div>
                         <input name="toWall" value="<?php echo $idMuro?>" type="hidden"/>
                         <input name="toUser" value="<?php echo $usuarioConsultado?>" type="hidden"/>
