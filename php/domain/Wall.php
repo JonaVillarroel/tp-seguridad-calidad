@@ -16,7 +16,7 @@ class Wall extends Connection{
 		$idUsuario = $_GET['usuario'];
 		$limite = 2;
 
-	    $query = "SELECT MENSAJE.contenido, USUARIO.nombre, USUARIO.apellido, MURO.privacidad
+	    $query = "SELECT MENSAJE.contenido, USUARIO.nombre, USUARIO.apellido, MURO.privacidad,MENSAJE.fecha_alta
 					FROM MENSAJE
 					INNER JOIN MURO ON MENSAJE.id_muro = MURO.id_muro
 					INNER JOIN USUARIO ON USUARIO.id_usuario = MENSAJE.id_usuario
@@ -26,7 +26,7 @@ class Wall extends Connection{
 		$stmt = $db -> prepare($query);
 		$stmt -> bind_param("ii", $idUsuario, $limite);
 		$stmt -> execute();
-		$stmt->bind_result($contenido, $nombre, $apellido, $privacidad);
+		$stmt->bind_result($contenido, $nombre, $apellido, $privacidad,$fecha_alta);
 		$rows = 0;
 		$row = Array();
 		$result = $stmt->get_result();
