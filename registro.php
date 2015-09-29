@@ -132,11 +132,10 @@
 							<div class="col-sm-6 col-md-6">
 								<input class="form-control" id="captchaId" type="text" name="captcha_code" size="10" maxlength="6" />
 									<div id="emptyCaptcha" class="alert alert-danger">Completá el captcha.</div>
-									
-								
-									<img id="captcha" src="securimage/securimage_show.php" alt="CAPTCHA Image" />
 									<br>
-									<a id="otherCaptcha" href="#">[ Otro captcha ]</a>
+									<img id="captcha" src="securimage/securimage_show.php" alt="CAPTCHA Image" />
+
+									<img id="otherCaptcha" alt="refresh-captcha" src="securimage/images/refresh.png" alt="">
 							</div>
 					</div>
 
