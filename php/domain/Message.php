@@ -36,6 +36,7 @@ class Message extends Connection{
         $content = $this -> content;
         $dateStart = $this -> dateStart;
 
+        if(strlen($content)>0){
         $query = "INSERT INTO MENSAJE(id_usuario, id_muro, contenido, fecha_alta)
         VALUES ('$fromUser','$toWall','$content','$dateStart')";
 
@@ -43,6 +44,7 @@ class Message extends Connection{
         or die('Error guardando el mensaje: ' . 'del Usuario: ' . $fromUser . 'Para muro: ' . $toWall . 'Contenido: '. $content . 'Fecha: ' . $dateStart . ' /// ' . mysqli_error($db));
 	
 		$db -> close();
+        }
     }
 
 
