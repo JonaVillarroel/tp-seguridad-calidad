@@ -54,6 +54,11 @@
                                     </div>
                                     <div class="col-sm-9 mensaje">
                                         <?php echo $fila->contenido ?>
+                                        <br>
+                                        <span class="pull-right">Publicado el <?php
+                                        $fecha=substr($fila->fecha_alta,0,10);
+                                        $hora = substr($fila->fecha_alta,10,15);
+                                         echo $fecha  ?> a las <?php echo $hora ?> </span>
                                     </div>
                                 </div>
                             <?php }
