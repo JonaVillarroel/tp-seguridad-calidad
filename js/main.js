@@ -1,6 +1,7 @@
 $(document).ready(function(){
 	$('.robotic2').hide();
 	$('#otherCaptcha').click(anotherCaptcha);
+	$("#btnMessage").click(validateEmptyContent);
 	$('#sendMessageBtn').click(sendPrivateMessage);
 	$('#postMessageBtn').click(postMessage);
 	$('#privateMessageModalBtn').click(openPrivateMessageModal);
@@ -23,6 +24,24 @@ function anotherCaptcha(){
 
 	document.getElementById('captcha').src = 'securimage/securimage_show.php?' + Math.random();
 	 return false;
+}
+
+//Valido mensaje de muro que no esté vacío
+function validateEmptyContent(){
+	
+	var content=$("#messageWall-content").val();
+	
+	if(content.length==0){
+		$("#emptyContent").fadeIn();
+		return false;
+	}
+	else if(content.length>0){
+		
+		$("#emptyContent").fadeOut();
+
+	}
+	return true;
+
 }
 
 function mostrar_ocultar(cual) {
