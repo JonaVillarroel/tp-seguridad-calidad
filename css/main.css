@@ -96,6 +96,17 @@ footer{
 	}
 }
 
+#otherCaptcha:hover{
+
+	cursor:pointer;
+}
+
+#otherCaptcha{
+	width:40px;
+	heigth:40px;
+}
+
+
 #nonombreC,#longnombreC,#malnombreC,#nonombreUC,#longnombreUC,#malnombreUC,#noapelC,#longapelC,#malapelC,#noemailC,#longemailC,#malemailC,#nopswC,#longpswC,#malpswC,#minpswC,#nopsw2C,#malpsw2C,#modifyUser,#emptyCaptcha{
 	display: none;
 }
