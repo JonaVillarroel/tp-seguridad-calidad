@@ -129,7 +129,7 @@ class User{
     }
 
     //Recibe el nombre de usuario ACTUAL, y un json con los datos que el usuario modificó en el formulario
-    public function update($userName, $dataToModificate){
+    /*public function update($userName, $dataToModificate){
         $errorMessageView = "";
         $where = "'$userName' = nombre_usuario";
         $mail = $dataToModificate['mail'];
@@ -165,13 +165,7 @@ class User{
             }
         }
 
-    }
-
-
-    public function isAdmin($userId){
-        //Implementar funcion para verificar si el usuario que se le pasa por
-        //parámetro tiene como rol Admin.
-    }
+    }*/
 
 	public function getUser($userId){
         $myConnection = new Connection();
@@ -312,15 +306,13 @@ class User{
         if ($securimage->check($_POST['captcha_code']) == false) {
             $errorMessage["captcha_code"] = "captcha erroneo";
 
-  echo "El captcha ingresado es incorrecto.<br /><br />";
+            echo "El captcha ingresado es incorrecto.<br /><br />";
 
-  echo "Por favor <a href='javascript:history.go(-1)'>regrese</a>  e inténtelo de nuevo .";
+            echo "Por favor <a href='javascript:history.go(-1)'>regrese</a>  e inténtelo de nuevo .";
 
-}
-else {
-    $errorMessage["captcha_code"] = 0;
-}
-
+        } else {
+            $errorMessage["captcha_code"] = 0;
+        }
 
         return $errorMessage;
     }

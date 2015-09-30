@@ -35,7 +35,8 @@
 	<?php
         include_once (__DIR__."/templates/header.php");
     ?>
-
+	<div class="container bg">
+		<div class="row">
 <div class="col-sm-1 pull-right">
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
@@ -57,10 +58,7 @@
 	  </div>
 	</nav>
 </div>
-
-<div class="container bg">
-	<div class="row">		
-        <div class="col-sm-12">			 
+        <div class="col-sm-11">
             <div class="menuvertical list-group col-sm-12">
 				<?php
 					switch($list){			
@@ -89,7 +87,7 @@
             </div>
         </div>
 			
-		<div class="col-md-12">
+		<div class="col-md-11">
 			
 	<?php
 		/*--///////////////////////////////////////////////////---------SOLICITUDES--------//////////////////////////////////////////////////--*/
@@ -230,18 +228,7 @@
 
 	<?php
 
-	if(isset($_SESSION['id']))
-	{
-		require_once (__DIR__."/templates/modalInbox.php");
-		require_once (__DIR__."/templates/modalPrivateMessagesInbox.php");
-	};
-
-	?>
-
-	<?php
-
-	if(isset($_SESSION['id']))
-	{
+	if(isset($_SESSION['id'])) {
 		require_once (__DIR__."/templates/modalInbox.php");
 		require_once (__DIR__."/templates/modalPrivateMessagesInbox.php");
 	};

@@ -7,9 +7,9 @@ require './php/domain/Session.php';
     $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
     $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
     
-     if(!$userLoggedId){
-    header ('location: index.php?error=2');
-}
+    if(!$userLoggedId){
+        header ('location: index.php?error=2');
+    }
 
 ?>
 

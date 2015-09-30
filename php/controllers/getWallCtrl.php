@@ -42,8 +42,7 @@
         $wall = new Wall();
         $messages = $wall -> getMessages($limiteMuro);
 
-        if($messages != null)
-        {
+        if($messages != null) {
             foreach($messages as $obj){
 
                 $mensajes[] = $obj -> contenido;
@@ -53,9 +52,6 @@
             }
 
         }
-
-
-
 
         if(isset($_SESSION["id"])){
             $allow = $wall -> isInWhiteList($idMuro, $_SESSION["id"]);

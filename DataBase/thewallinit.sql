@@ -20,10 +20,9 @@ CREATE TABLE MURO (
 	id_muro int not null auto_increment primary key,
 	id_usuario int not null,
 	privacidad set('publico','privado') not null,
-	fecha_baja date,
 	flag_anonimo_lectura boolean not null DEFAULT 1,
 	flag_anonimo_escritura boolean not null DEFAULT 1,
-	limite_muro int not null DEFAULT 20,
+	limite_muro int not null DEFAULT 5,
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
 

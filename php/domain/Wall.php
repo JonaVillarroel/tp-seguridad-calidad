@@ -14,7 +14,7 @@ class Wall extends Connection{
 
 	    $db = new Connection();
 		$idUsuario = $_GET['usuario'];
-		$limite = 2;
+		$limite = $tope;
 
 	    $query = "SELECT MENSAJE.contenido, USUARIO.nombre, USUARIO.apellido, MURO.privacidad,MENSAJE.fecha_alta
 					FROM MENSAJE
