@@ -7,7 +7,7 @@ require './php/domain/Session.php';
     $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : false;
     $userLoggedId = isset($_SESSION['id']) ? $_SESSION['id'] : false;
     
-      if($username == null or $usersurname == null){
+     if(!$userLoggedId){
     header ('location: index.php?error=2');
 }
 
