@@ -30,13 +30,6 @@ require './php/domain/Session.php';
 	<div class="container">
         <h2 class="text-info">Configuración de usuario</h2>
         <h4>Quién puede ver y escribir en mi muro</h4><br/>
-        <div class="col-sm-3">
-            <select id="privacidad" class="form-control">
-                <option value="publico">Público</option>
-                <option value="privado">Privado</option>
-            </select>
-        </div>
-        <div class="clear"></div>
         <div class="col-sm-12">
         <?php
         include_once (__DIR__."/php/views/userConfigView.php");
