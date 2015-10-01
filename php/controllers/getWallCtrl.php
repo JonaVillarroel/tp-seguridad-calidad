@@ -1,4 +1,4 @@
-<?PHP
+<?php
     require_once (dirname(__DIR__)."/domain/User.php");
     require_once (dirname(__DIR__)."/domain/Wall.php");
     require_once (dirname(__DIR__)."/services/WallRepositoryService.php");
@@ -40,7 +40,7 @@
         $totalPrivateMsg = $MessageNumResult;//cantidad de mensajes en bandeja de entrada
 
         $wall = new Wall();
-        $messages = $wall -> getMessages($limiteMuro);
+        $messages = $wall -> getMessages($limiteMuro,$idUsuario);
 
         if($messages != null) {
             foreach($messages as $obj){

@@ -32,7 +32,7 @@ class WallRepositoryService{
 
     public function getWallByUserId($userId){
 
-        $query = "SELECT privacidad, id_muro,flag_anonimo_lectura, flag_anonimo_escritura, limite_muro FROM MURO
+        $query = "SELECT * FROM MURO
                   INNER JOIN USUARIO ON MURO.id_usuario = USUARIO.id_usuario
                   WHERE USUARIO.id_usuario = $userId AND USUARIO.fecha_baja is null";
 

@@ -35,24 +35,24 @@
 	<?php
         include_once (__DIR__."/templates/header.php");
     ?>
-	<div class="container bg">
-		<div class="row">
+<?php
+	if(isset($_GET["malahi"])){
+		echo "Error en el valor ingresado para limite de mensajes ingresado";
+	}
+?>
+<div class="container bg">
+<div class="row">
 <div class="col-sm-1 pull-right">
 	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
-		<li class="dropdown"><h1><span class='glyphicon glyphicon-wrench'></span></h1></li>
-		<hr>
 	    <div>
-
 	      <ul class="nav navbar-nav navbar-right">
-	        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class='glyphicon glyphicon-envelope'></span><span class="caret"></span></a>
-	          <ul class="dropdown-menu dropdown-menu-right">
+			  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><h1><span class='glyphicon glyphicon-align-justify'></span><span class="caret"></span></h1></a>
+	          	<ul class="dropdown-menu dropdown-menu-right">
 			      <li><a class="btn" data-toggle="modal" data-target="#modalMsjPriv">Bandeja de Entrada</a></li>
-			      <li><a class="btn" data-toggle="modal" data-target="#modalMsjPub">Publicac. al Muro</a></li>
-		    </ul>
-	        </li>
-	        <li><a href="#">---</a></li>
-	        <li><a href="#">---</a></li>
+			      <li><a class="btn" data-toggle="modal" data-target="#modalMsjPub">Muro</a></li>
+		    	</ul>
+			  </li>
 	      </ul>
 	    </div>
 	  </div>
@@ -235,7 +235,7 @@
 
 	?>
 
-	  <!-- Modal -->
+	  <!-- Modal limite mensajes privados-->
 	<div class="modal fade" id="modalMsjPriv" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<!-- Modal content-->
@@ -245,13 +245,12 @@
 					<h4><span class="glyphicon glyphicon-wrench"></span> Configuración de mensajes privado</h4>
 				</div>
 				<div class="modal-body" style="padding:40px 50px;">
-					<form method="post" role="form form-inline" action="./php/controllers/modifyAdminControllers.php?id=<?php echo $userLoggedId?>">
+					<form method="post" role="form form-inline" action="./php/controllers/modifyAdminControllers.php">
 						<div class="form-group">
 							<label for="numMsjPrivLimit"><span class="glyphicon glyphicon-envelope"></span> Límite: </label>
 							<div class="input-group">
-								<input type="number" min="0" class="form-control" name="MsjPrivLimit" id="numMsjPrivLimit" placeholder="20">
-								<input type="hidden" class="form-control" name="Id" id="hidId" value="<?php echo $userLoggedId?>">
-								<span class="input-group-addon"><button type="submit" id="btnSubmitPrivLimit" class="btn btn-success btn-md" role="button"></button></span>
+								<input type="number" min="0" class="form-control" name="MsjPrivLimit" placeholder="Ingrese Limite">
+								<button type="submit" class="btn btn-success btn-md" role="button"><span class="glyphicon glyphicon-ok"></span></button>
 							</div>
 						</div>
 					</form>
@@ -263,23 +262,22 @@
 		</div>
 	</div>
 
-	  <!-- Modal Configuracion Limite Muro -->
+	  <!-- Modal limite Muro -->
 	<div class="modal fade" id="modalMsjPub" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header" style="padding:35px 50px;">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4><span class="glyphicon glyphicon-wrench"></span> Configuración de mensajes públicos</h4>
+					<h4><span class="glyphicon glyphicon-wrench"></span> Configuración de mensajes publicos</h4>
 				</div>
 				<div class="modal-body" style="padding:40px 50px;">
-					<form method="post" role="form form-inline">
+					<form method="post" role="form form-inline" action="./php/controllers/modifyAdminControllers.php">
 						<div class="form-group">
-							<label for="numMsjPrivLimit"><span class="glyphicon glyphicon-envelope"></span> Privados</label>
+							<label for="numMsjPrivLimit"><span class="glyphicon glyphicon-envelope"></span> Límite: </label>
 							<div class="input-group">
-								<input type="number" class="form-control" name="MsjPrivLimit" id="numMsjPrivLimit" placeholder="20">
-								<input type="hidden" class="form-control" name="Id" id="hidId" value="<?php echo $userLoggedId?>">
-								<span class="input-group-addon"><button type="submit" id="btnSubmitPrivLimit" class="btn btn-success btn-md" role="button"></button></span>
+								<input type="number" min="0" class="form-control" name="MsjPublicLimit" placeholder="Ingrese Limite">
+								<button type="submit" class="btn btn-success btn-md" role="button"><span class="glyphicon glyphicon-ok"></span></button>
 							</div>
 						</div>
 					</form>
@@ -290,6 +288,7 @@
 			</div>
 		</div>
 	</div>
+
 
 	<div class="modal fade bs-example-modal-sm" id="modalMessages" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
 		<div class="modal-dialog modal-sm">

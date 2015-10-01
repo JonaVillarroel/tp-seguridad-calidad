@@ -20,9 +20,16 @@
             </div>
             <div class="col-sm-10 col-sm-push-1">
                 <?php
-                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) 
+                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow)
                     || $usuarioConsultado == $userLoggedId){
                     ?>
+                <?php if(isset($_GET["alert"])){    ?>
+                    <div class="alert alert-info text-center col-sm-8 col-sm-push-2" role="alert">
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Atenci&oacute;n:</span>
+                        <?php echo "<b>"."El muro llego a la cantidad m&aacute;xima de mensajes que puede soportar"."</b>"; ?>
+                    </div>
+                    <?php }?>
                 <form class="form-horizontal" method="post" action="./php/controllers/postMessageCtrl.php">
                     <?php if($userLoggedId == false && !$anonimoEscritura){}else{ ?>
                     <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">

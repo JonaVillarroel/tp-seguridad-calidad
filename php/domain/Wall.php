@@ -10,10 +10,9 @@ class Wall extends Connection{
 	public function __construct(){	
 	}
 	
-	public function getMessages($tope){
+	public function getMessages($tope,$idUsuario){
 
 	    $db = new Connection();
-		$idUsuario = $_GET['usuario'];
 		$limite = $tope;
 
 	    $query = "SELECT MENSAJE.contenido, USUARIO.nombre, USUARIO.apellido, MURO.privacidad,MENSAJE.fecha_alta
@@ -42,27 +41,6 @@ class Wall extends Connection{
 		}else{
 			return null;
 		}
-
-
-	}
-
-	//Posterior a dar de baja un usuario llamo a este método pasandole por parámetro el id del usuario.
-	public function remove($id_usuario){
-		//Busco el muro que corresponde con el id al usuario que se borró.
-		$result =  $qb.simple_select('MURO', 'id_muro', 'id_usuario', $id_usuario);
-
-		if($result->num_rows === 0)
-		{
-			//No existe un muro que corresponda a ese usuario
-		}else
-		{
-			//Existe un muro que corresponde a ese usuario entonces procedo a darle de baja.
-			$object = $result->fetch_object();
-			$id_muro = $object->id_muro;
-			$values['fecha_baja'] = new Date();
-			$qb.simple_update('MURO',$values ,'id_muro', $id_muro);
-		}
-
 	}
 
 	public function getWallByUser($userName){
@@ -92,6 +70,26 @@ class Wall extends Connection{
 
 	    return $results;
 	}
+
+	// Modifica el límite de mensajes publicos
+	public function modifyLimitAllWall($limit){
+		$myConnection = new Connection();
+
+		//verifico que sea un número positivo
+		if(is_numeric($limit)) {
+			if($limit >= 0){
+				$myConnection -> query("UPDATE MURO SET MURO.limite_muro = '$limit';");
+			}
+		}
+		else {
+			header ('location: ../../indexAdmin.php?malahi');
+		}
+
+		$myConnection -> close();
+
+		header ('location: ../../indexAdmin.php');
+	}
+
 }
 
 ?>

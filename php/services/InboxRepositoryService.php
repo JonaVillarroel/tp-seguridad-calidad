@@ -145,23 +145,24 @@ class InboxRepositoryService
 
         return $results;
     }
-        // Modifica el límite de mensajes
-    public function modifyLimitInbox($userId, $limite){
+
+    // Modifica el límite de mensajes privados
+    public function modifyLimitInbox($limite){
         $myConnection = new Connection();
         
         //verifico que sea un número positivo
         if(is_numeric($limite)) {
             if($limite >= 0){
-                $result = $myConnection -> query("UPDATE BANDEJA_DE_ENTRADA SET BANDEJA_DE_ENTRADA.limite = '$limite' WHERE BANDEJA_DE_ENTRADA.id_usuario = '$userId';");
+                $myConnection -> query("UPDATE BANDEJA_DE_ENTRADA SET BANDEJA_DE_ENTRADA.limite = '$limite';");
             }
         }
         else {
-             $errorMessageView = "El número ingresado no es válido<br>";
+            header ('location: ../../indexAdmin.php?malahi');
         }
         
         $myConnection -> close();
         
-        header ('location: ../../indexAdmin.php?list=current');
+        header ('location: ../../indexAdmin.php');
     }
 
     public function __destruct(){

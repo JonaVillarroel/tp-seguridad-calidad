@@ -74,7 +74,7 @@
 
 
 <!-- Buscador -->
-<div class="container navbar-container col-sm-1">
+<div class="container navbar-container col-xs-12">
   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#searchModal"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-search"></span></button>
 

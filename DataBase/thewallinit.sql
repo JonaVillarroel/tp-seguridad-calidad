@@ -22,7 +22,7 @@ CREATE TABLE MURO (
 	privacidad set('publico','privado') not null,
 	flag_anonimo_lectura boolean not null DEFAULT 1,
 	flag_anonimo_escritura boolean not null DEFAULT 1,
-	limite_muro int not null DEFAULT 5,
+	limite_muro int not null DEFAULT 10,
 	foreign key(id_usuario) references USUARIO(id_usuario) ON DELETE CASCADE
 );
 
