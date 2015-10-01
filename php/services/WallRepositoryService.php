@@ -89,7 +89,7 @@ class WallRepositoryService{
         $wallId = $data['wallId'];
         $privacity = $data['privacity'];
 
-        if($privacity == "opt-1") {
+        if($privacity == "private") {
             $users = $data['users'];
 
             foreach($users as $userId){
@@ -115,7 +115,7 @@ class WallRepositoryService{
             }
             $queryUpdate = "UPDATE MURO SET privacidad = 'privado', flag_anonimo_lectura = 0, flag_anonimo_escritura = 0 WHERE id_muro = $wallId";
 
-        }else if($privacity == "opt-2"){
+        }else if($privacity == "semiPrivate"){
             $users = $data['users'];
 
             foreach($users as $userId){

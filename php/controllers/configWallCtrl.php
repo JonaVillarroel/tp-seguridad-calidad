@@ -17,13 +17,23 @@ $newData['privacity'] = $data['opt'];
     if(isset($_SESSION['usuario']) and preg_match("/^[a-zA-ZñÑáéíóÁÉÍÓÚ]*$/",$_SESSION['usuario'])) {
         $userName = $_SESSION['usuario'];
         $newData['wallId'] = $wallRepo->getWallIdByUserName($userName);
-        if($data['opt'] == 'opt-1' || $data['opt'] == 'opt-2') {
+        
+        if($data['opt'] == 'private'){
             //Obtengo el userId de cada userName
             $newUsers = Array();
             foreach($data['users'] as $user){
                 $newUsers[] = $userRepo -> getUserIdByName($user);
             }
             $newData['users'] = $newUsers;
+
+        }else if($data['opt'] == 'semiPrivate') {
+            //Obtengo el userId de cada userName
+            $newUsers = Array();
+            foreach($data['users'] as $user){
+                $newUsers[] = $userRepo -> getUserIdByName($user);
+            }
+            $newData['users'] = $newUsers;
+
         };
 
         $wallRepo -> updatePrivacity($newData);

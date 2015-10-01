@@ -7,9 +7,10 @@
 $(document).ready(function(){
 
     $('#modifyConfigurationBtn').click(modifyWallConfiguration);
-    $('#addItemList-1').click(addItemList1);
+    $('#addItemList-private').click(addItemListPrivate);
     $('.removeItemList-1').click(removeItemList1);
-    $('#addItemList-2').click(addItemList2);
+    
+    $('#addItemList-semiPrivate').click(addItemListSemiPrivate);
     // $('#privacidad').click(changePrivacity);
 
     $('#modalMessages').modal({
@@ -18,9 +19,9 @@ $(document).ready(function(){
 
 });
 
-function addItemList1(event){
+function addItemListPrivate(event){
     event.preventDefault();
-    var user = $("#item-opt-1").val();
+    var user = $("#item-private").val();
 
     $.post( "php/controllers/verifyUserCtrl.php",
         { userName : user },
@@ -29,7 +30,7 @@ function addItemList1(event){
             var data = JSON.parse(data);
 
             if(data.valid == true){
-                $(".list-1").append("<li class='list-group-item'>"+ user +
+                $(".list-private").append("<li class='list-group-item'>"+ user +
                     "<button type='button' class='btn btn-danger btn-sm pull-right removeItemList-1' id=''>" +
                 "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>" +
                     "</li>");
@@ -81,11 +82,32 @@ function removeItemList1() {
     });
 }
 
-function addItemList2(event){
+function addItemListSemiPrivate(event){
     event.preventDefault();
-    var user = $("#item-opt-2").val();
+    var user = $("#item-semiPrivate").val();
 
-    $(".list-2").append("<li class='list-group-item'>"+ user +"</li>");
+    $.post( "php/controllers/verifyUserCtrl.php",
+        { userName : user },
+        function(data){
+            console.log(data);
+            var data = JSON.parse(data);
+
+            if(data.valid == true){
+                $(".list-semiPrivate").append("<li class='list-group-item'>"+ user +
+                    "<button type='button' class='btn btn-danger btn-sm pull-right removeItemList-1' id=''>" +
+                "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span></button>" +
+                    "</li>");
+
+                $('.removeItemList-1').click(removeItemList1);
+            }
+            else{
+                console.log(data.errorMsg);
+                $('#modalMessages').find('.modal-title').html("OH NO!");
+                $('#modalMessages').find('.modal-body').html(data.errorMsg)
+                $('#modalMessages').find('.modal-footer').html("");
+                $('#modalMessages').modal('toggle');
+            };
+        } );
 }
 
 function modifyWallConfiguration(event){
@@ -96,15 +118,15 @@ function modifyWallConfiguration(event){
 
     data.opt = $('input:radio[name="optradio"]:checked').val();
 
-    if(data.opt == "opt-1") {
-        $( ".list-1 li" ).each(function(){
+    if(data.opt == "private") {
+        $( ".list-private li" ).each(function(){
             user = $(this).text();
             users.push(user);
         });
 
         data.users = users;
-    }else if(data.opt == "opt-2") {
-        $( ".list-2 li" ).each(function(){
+    }else if(data.opt == "SemiPrivate") {
+        $( ".list-semiPrivate li" ).each(function(){
             user = $(this).text();
             users.push(user);
         });
