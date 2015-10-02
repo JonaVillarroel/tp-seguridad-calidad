@@ -9,47 +9,46 @@ $userRepo = new UserRepositoryService();
 $userId = $_SESSION['id'];
 
 $wallId = $userRepo -> getWallIdById($userId);
-$privacity = isset($_POST['change']) ? $_POST['change'] : $wallRepo -> getPrivacityById($wallId);
+//$privacity = isset($_POST['change']) ? $_POST['change'] : $wallRepo -> getPrivacityById($wallId);
 
-$checkedPrivate = false;
-$checkedSemiPrivate= false;
-$checkedNormal = false;
-$checkedSemiPublic = false;
-$checkedPublic = false;
+$privacity = $wallRepo -> getPrivacityById($wallId);
+
+$checkedPrivate = "";
+$checkedSemiPrivate= "";
+$checkedNormal = "";
+$checkedSemiPublic = "";
+$checkedPublic = "";
 $usersPrivate = null;
 $usersSemiPrivate = null;
 
 switch ($privacity){
-    case 'privado': $checkedPrivate = true;
+    case 'privado': $checkedPrivate = "checked";
                     $usersPrivate = $wallRepo -> getUsersById($wallId);
     break;
-    case 'semiprivado': $checkedSemiPrivate= true;
+    case 'semiprivado': $checkedSemiPrivate = "checked";
                         $usersSemiPrivate = $wallRepo -> getUsersById($wallId);
     break;
-    case 'normal': $checkedNormal = true;
+    case 'normal': $checkedNormal = "checked";
     break;
-    case 'semipublico': $checkedSemiPublic = true;
+    case 'semipublico': $checkedSemiPublic = "checked";
     break;
-    case 'publico': $checkedPublic = true;
+    case 'publico': $checkedPublic = "checked";
     break;
 }
-
- 
-
         echo "<div class='radio wallconfiguration '><br/>
-                <label><input type='radio' name='optradio' value='public' checked=".$checkedPublic.">Todos los usuarios pueden ver tu muro y pueden publicar en el.</label>
+                <label><input type='radio' name='optradio' value='public' ".$checkedPublic.">Todos los usuarios pueden ver tu muro y pueden publicar en el.</label>
             </div>";
 
         echo "<div class='radio wallconfiguration '><br/>
-                <label><input type='radio' name='optradio' value='semipublic' checked=".$checkedSemiPublic.">Todos los usuarios pueden ver tu muro y solo usuarios registrados pueden publicar en el.</label>
+                <label><input type='radio' name='optradio' value='semipublic' ".$checkedSemiPublic.">Todos los usuarios pueden ver tu muro y solo usuarios registrados pueden publicar en el.</label>
             </div>";
 
         echo "<div class='radio wallconfiguration '><br/>
-                <label><input type='radio' name='optradio' value='normal' checked=".$checkedNormal.">Sólo los usuarios registrados pueden ver tu muro y publicar en el.</label>
+                <label><input type='radio' name='optradio' value='normal' ".$checkedNormal.">Sólo los usuarios registrados pueden ver tu muro y publicar en el.</label>
             </div>";
 
         echo "<div class='radio wallconfiguration'><br/>
-                <label><input type='radio' name='optradio' value='semiprivate' checked=".$checkedSemiPrivate.">Sólo los usuarios registrados pueden ver tu muro pero sólo aquellos enumerados pueden publicar.</label><br/>
+                <label><input type='radio' name='optradio' value='semiprivate' ".$checkedSemiPrivate.">Sólo los usuarios registrados pueden ver tu muro pero sólo aquellos enumerados pueden publicar.</label><br/>
                 <div class='col-sm-6'>
                 <br/>
                 <input type='text' class='form-control' placeholder='Escribe un nombre' id='item-semiPrivate'>
@@ -72,7 +71,7 @@ switch ($privacity){
 
 
 echo "<div class='radio wallconfiguration'><br/>
-                <label><input type='radio' name='optradio' value='private' checked=".$checkedPrivate.">Sólo los usuarios enumerados pueden ver tu muro y publicar en el.</label><br/>
+                <label><input type='radio' name='optradio' value='private' ".$checkedPrivate.">Sólo los usuarios enumerados pueden ver tu muro y publicar en el.</label><br/>
                 <div class='col-sm-6'>
                 <br/>
                 <input type='text' class='form-control' placeholder='Escribe un nombre' id='item-private'>

@@ -26,7 +26,7 @@ $newData['privacity'] = $data['opt'];
             }
             $newData['users'] = $newUsers;
 
-        }else if($data['opt'] == 'semiPrivate') {
+        }else if($data['opt'] == 'semiprivate') {
             //Obtengo el userId de cada userName
             $newUsers = Array();
             foreach($data['users'] as $user){

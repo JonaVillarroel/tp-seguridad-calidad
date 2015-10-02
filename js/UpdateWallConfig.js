@@ -125,7 +125,7 @@ function modifyWallConfiguration(event){
         });
 
         data.users = users;
-    }else if(data.opt == "SemiPrivate") {
+    }else if(data.opt == "semiprivate") {
         $( ".list-semiPrivate li" ).each(function(){
             user = $(this).text();
             users.push(user);
@@ -136,6 +136,7 @@ function modifyWallConfiguration(event){
 
     var dataJSON = JSON.stringify(data);
 
+    console.log(data);
     $.post( "php/controllers/configWallCtrl.php",
         { data : dataJSON },
         function(data){

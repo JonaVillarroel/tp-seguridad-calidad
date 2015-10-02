@@ -19,7 +19,7 @@ CREATE TABLE USUARIO (
 CREATE TABLE MURO (
 	id_muro int not null auto_increment primary key,
 	id_usuario int not null,
-	privacidad set('publico','privado') not null,
+	privacidad set('publico','semipublico','privado','semiprivado', 'normal') not null,
 	flag_anonimo_lectura boolean not null DEFAULT 1,
 	flag_anonimo_escritura boolean not null DEFAULT 1,
 	limite_muro int not null DEFAULT 10,
