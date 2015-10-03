@@ -30,7 +30,6 @@
         $privacidad = $objWall -> privacidad;
         $idMuro = $objWall -> id_muro;
         $anonimoLectura = $objWall -> flag_anonimo_lectura;
-        $anonimoEscritura = $objWall -> flag_anonimo_escritura;
         $limiteMuro = $objWall -> limite_muro;
 
         $objLimit = $MessageLimitResult -> fetch_object();

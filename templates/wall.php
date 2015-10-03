@@ -20,8 +20,7 @@
             </div>
             <div class="col-sm-10 col-sm-push-1">
                 <?php
-                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow)
-                    || $usuarioConsultado == $userLoggedId){
+                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) || $usuarioConsultado == $userLoggedId || !$anonimoLectura){
                     ?>
                 <?php if(isset($_GET["alert"])){    ?>
                     <div class="alert alert-info text-center col-sm-8 col-sm-push-2" role="alert">
@@ -31,7 +30,7 @@
                     </div>
                     <?php }?>
                 <form class="form-horizontal" method="post" action="./php/controllers/postMessageCtrl.php">
-                    <?php if($userLoggedId == false && !$anonimoEscritura){}else{ ?>
+                    <?php if( ($userLoggedId == false && !$anonimoEscritura) || ($privacidad == "semiprivado" && !$userAllow) || ($privacidad == "privado" && !$userAllow)){}else{ ?>
                     <div class="col-sm-10 col-sm-push-1 btn-message" id="newMessage" name="newMessage">
 
                         <h4>Mensaje público <small>(<span id="countdownWall" class="visible-*-inline-block">200 caracteres disponibles</span>)</small>:</h4>
