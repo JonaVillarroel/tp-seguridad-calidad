@@ -19,9 +19,9 @@ if ($q !== "") {
         //if (stristr($q, substr($row->nombre_usuario, 0, $len))) {con esta línea busca desde el inicio de la cadena
         if (stristr($conte,$q)) {
             if ($hint === "") {
-                $hint = "<a href='http://localhost/tp-seguridad-calidad/index.php?usuario=".$row->id_usuario."'>" . $conte . "</a>";
+                $hint = "<a href='index.php?usuario=".$row->id_usuario."'>" . $conte . "</a>";
             } else {
-                $hint .= "<br /> <a href='http://localhost/tp-seguridad-calidad/index.php?usuario=".$row->id_usuario."'>" . $conte ."</a>";
+                $hint .= "<br /> <a href='index.php?usuario=".$row->id_usuario."'>" . $conte ."</a>";
             }
         }
     }
