@@ -20,7 +20,7 @@
             </div>
             <div class="col-sm-10 col-sm-push-1">
                 <?php
-                if(!($privacidad == 'privado') || ($privacidad == 'privado' && $userAllow) || $usuarioConsultado == $userLoggedId || !$anonimoLectura){
+                if( $privacidad == 'publico' || $privacidad == 'semipublico' || $anonimoLectura || ($privacidad == 'privado' && $userAllow) || ($privacidad == 'privado' && $userAllow) || $usuarioConsultado == $userLoggedId){
                     ?>
                 <?php if(isset($_GET["alert"])){    ?>
                     <div class="alert alert-info text-center col-sm-8 col-sm-push-2" role="alert">

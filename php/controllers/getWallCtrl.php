@@ -54,10 +54,16 @@
         }
 
         if(isset($_SESSION["id"])){
-            $allow = $wall -> isInWhiteList($idMuro, $_SESSION["id"]);
-            $userAllow = $allow -> fetch_array(MYSQLI_NUM);
-        }else
+            $results = $wall -> isInWhiteList($idMuro, $_SESSION["id"]);
+
+            if($results -> num_rows > 0){
+                $userAllow = true;
+            }else{
+                $userAllow = false;
+            }
+        }else{
             $userAllow = false;
+        }
 
         $userMuro = new User();
         $result = $userMuro -> getUser($_GET['usuario']);

@@ -66,7 +66,7 @@ class Wall extends Connection{
 	    $query = "SELECT * FROM COMPARTE_CON WHERE id_muro = '$idMuro' AND id_usuario = '$loggedUserId'";
 
 	    $results = $db -> query($query)
-	    or die('Error consultando los mensajes: ' . mysqli_error($this->db));
+	    or die('Error consultando la lista blanca: ' . mysqli_error($this->db));
 
 	    return $results;
 	}
