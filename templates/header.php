@@ -92,8 +92,8 @@
         	<div class="form-group">
 				<label for="numMsjPrivLimit"><span class="glyphicon glyphicon-search"></span> Buscar: </label>
 				<div class="input-group">
-					<input id="txtLivesearch" type="text" onkeyup="showHint(this.value)">
-					<p></p>
+					<input id="txtLivesearch" type="text" class="form-control" onkeyup="showHint(this.value)">
+					<br/>
 					<label for="livesearch"></span> Resultado: </label>
 						<div id="livesearch">Sin usuarios</div>
 				</div>

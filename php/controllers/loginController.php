@@ -3,6 +3,11 @@
 
     $mail = $_POST ["mail"];
     $pass = $_POST ["pass"];
+    if(!$mail || !$pass){
+        header ('location: ../../index.php?error=1s');
+        exit;
+    }
+
 
     if((preg_match("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/",$mail)) and (preg_match("/[\w]{6,}/",$pass))) {
         $user = new User();
