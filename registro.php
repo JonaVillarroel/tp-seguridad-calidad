@@ -43,7 +43,7 @@
 					<span class="red">*Campos Obligatorios</span>
 				</div>
 			</div><br/>
-				<form class="form-horizontal" method="post" onsubmit="return ValidarRegistroComun()" action="./php/controllers/signUpController.php">
+				<form class="form-horizontal" method="post" autocomplete="off" onsubmit="return ValidarRegistroComun()" action="./php/controllers/signUpController.php">
 					<!--NOMBRE-->
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblNombre" for="txtNombre">Nombre: <span class="red">*</span></label>
