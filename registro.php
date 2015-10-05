@@ -48,7 +48,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblNombre" for="txtNombre">Nombre: <span class="red">*</span></label>
 						<div class="col-sm-6 col-md-6">
-							<input class="form-control" type="text" id="txtNombre"  name="name" onkeypress="return sololetras(event)" onpaste="return false"/>
+							<input class="form-control" type="text" id="txtNombre"  name="name" onkeypress="return sololetras(event)" onpaste="return false" autocomplete="off"/>
 							<div id="nonombreC" class="alert alert-danger">Por favor ingrese su Nombre</div>
 							<div id="longnombreC" class="alert alert-danger">El Nombre debe tener menos de 50 caracteres</div>
 							<div id="malnombreC" class="alert alert-danger">Por favor ingrese un Nombre v&aacute;lido</div>
@@ -58,7 +58,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblApellido" for="txtApellido">Apellido: <span class="red">*</span></label>
 						<div class="col-sm-6 col-md-6">
-							<input class="form-control" type="text" id="txtApellido"  name="surname" onkeypress="return sololetras(event)" onpaste="return false"/>
+							<input class="form-control" type="text" id="txtApellido"  name="surname" onkeypress="return sololetras(event)" onpaste="return false" autocomplete="off"/>
 							<div id="noapelC" class="alert alert-danger">Por favor ingrese su Apellido</div>
 							<div id="longapelC" class="alert alert-danger">El Apellido debe tener menos de 50 caracteres</div>
 							<div id="malapelC" class="alert alert-danger">Por favor ingrese un Apellido v&aacute;lido</div>
@@ -68,7 +68,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblNomUser" for="txtNomUser">Nombre de Usuario: <span class="red">*</span></label>
 						<div class="col-sm-6 col-md-6">
-							<input class="form-control" type="text" id="txtNomUser"  name="userName" onkeypress="return sololetras(event)" onpaste="return false"/>
+							<input class="form-control" type="text" id="txtNomUser"  name="userName" onkeypress="return sololetras(event)" onpaste="return false" autocomplete="off"/>
 							<div id="nonombreUC" class="alert alert-danger">Por favor ingrese Nombre de Usuario</div>
 							<div id="longnombreUC" class="alert alert-danger">El Nombre de Usuario debe tener menos de 50 caracteres</div>
 							<div id="malnombreUC" class="alert alert-danger">Por favor ingrese un Nombre de Usuario v&aacute;lido</div>
@@ -79,7 +79,7 @@
 						<label class="col-sm-4 control-label marginright" id="lblEmail" for="txtEmail">Email: <span class="red">*</span></label>
 						<div id="DivEmail" class="input-group col-md-6">
 							<span class="input-group-addon">@</span>
-							<input class="form-control" type="text" id="txtEmail" name="mail"/>
+							<input class="form-control" type="text" id="txtEmail" name="mail" autocomplete="off"/>
 							<div id="noemailC" class="alert alert-danger">Por favor ingrese su EMail</div>
 							<div id="longemailC" class="alert alert-danger">El EMail debe tener menos de 50 caracteres</div>
 							<div id="malemailC" class="alert alert-danger">Por favor ingrese un EMail v&aacute;lido</div>
@@ -89,7 +89,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblContrasena" for="pswContrasena">Contrase&#xf1;a: <span class="red">*</span></label>
 						<div class="col-sm-6">
-							<input class="form-control" type="password" id="pswContrasena" name="pass"/>
+							<input class="form-control" type="password" id="pswContrasena" name="pass" autocomplete="off"/>
 							<span class="help-block">La contrase&ntilde;a debe tener como m&iacute;nimo 6 caracteres.</span>
 							<div id="nopswC" class="alert alert-danger">Por favor ingrese su Contrase&#xf1;a</div>
 							<div id="longpswC" class="alert alert-danger">La Contrase&#xf1;a debe tener menos de 50 caracteres</div>
@@ -101,7 +101,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label" id="lblVeriContrasena" for="pswVeriContrasena">Repetir Contrase&#xf1;a: <span class="red">*</span></label>
 						<div class="col-sm-6">
-							<input class="form-control" type="password" id="pswVeriContrasena" name="repass"/>
+							<input class="form-control" type="password" id="pswVeriContrasena" name="repass" autocomplete="off"/>
 							<div id="nopsw2C" class="alert alert-danger">Por favor repita su Contrase&#xf1;a</div>
 							<div id="malpsw2C" class="alert alert-danger">Las Contrase&#xf1;as no coinciden</div>
 						</div>
@@ -111,7 +111,7 @@
 					<div class="form-group robotic ">
 						<label class="col-sm-4 control-label " id="" for="">Email:</label>
 						<div class="col-sm-6">
-						<input class="form-control " type="text" id="emailf" name="emailf"/>
+						<input class="form-control " type="text" id="emailf" name="emailf" autocomplete="off"/>
 						</div>
 						
 					</div>
@@ -120,7 +120,7 @@
 					<div class="form-group robotic2">
 						<label class="col-sm-4 control-label " id="" for="">Nombre:</label>
 						<div class="col-sm-6">
-						<input class="form-control" type="text" id="" name="namef"/>
+						<input class="form-control" type="text" id="" name="namef" autocomplete="off"/>
 						</div>
 						
 					</div>
@@ -130,7 +130,7 @@
 						<label class="col-sm-4 control-label" id="lblVeriCaptcha" for="">Captcha <span class="red">*</span></label>
 
 							<div class="col-sm-6 col-md-6">
-								<input class="form-control" id="captchaId" type="text" name="captcha_code" size="10" maxlength="6" />
+								<input class="form-control" id="captchaId" type="text" name="captcha_code" size="10" maxlength="6" autocomplete="off" />
 									<div id="emptyCaptcha" class="alert alert-danger">Completá el captcha.</div>
 									<br>
 									<img id="captcha" src="securimage/securimage_show.php" alt="CAPTCHA Image" />
