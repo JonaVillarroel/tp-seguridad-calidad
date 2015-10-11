@@ -42,23 +42,14 @@
 ?>
 <div class="container bg">
 <div class="row">
-<div class="col-sm-1 pull-right">
-	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-	    <div>
-	      <ul class="nav navbar-nav navbar-right">
-			  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><h1><span class='glyphicon glyphicon-align-justify'></span><span class="caret"></span></h1></a>
-	          	<ul class="dropdown-menu dropdown-menu-right">
-			      <li><a class="btn" data-toggle="modal" data-target="#modalMsjPriv">Bandeja de Entrada</a></li>
-			      <li><a class="btn" data-toggle="modal" data-target="#modalMsjPub">Muro</a></li>
-		    	</ul>
-			  </li>
-	      </ul>
-	    </div>
-	  </div>
-	</nav>
+<div class="pull-right panel panel-warning">
+	<div class="panel-heading">Configuraciones</div>
+	<ul class="list-group">
+		<li><a class="list-group-item" data-toggle="modal" data-target="#modalMsjPriv">Bandeja de Entrada</a></li>
+		<li><a class="list-group-item" data-toggle="modal" data-target="#modalMsjPub">Muro</a></li>
+	</ul>	
 </div>
-        <div class="col-sm-11">
+        <div class="col-sm-10">
             <div class="menuvertical list-group col-sm-12">
 				<?php
 					switch($list){			
@@ -87,7 +78,7 @@
             </div>
         </div>
 			
-		<div class="col-md-11">
+		<div class="col-md-10">
 			
 	<?php
 		/*--///////////////////////////////////////////////////---------SOLICITUDES--------//////////////////////////////////////////////////--*/
@@ -222,9 +213,6 @@
 	
 	</div>
 </div>
-<?php
-    include_once (__DIR__."/templates/footer.php");
-?>
 
 	<?php
 
@@ -304,6 +292,10 @@
 			</div>
 		</div>
 	</div>
+
+	<?php
+    	include_once (__DIR__."/templates/footer.php");
+	?>
 
 	<script src="lib/jquery-ui/external/jquery/jquery.js"></script>
 	<script src="lib/jquery-ui/jquery-ui.min.js"></script>

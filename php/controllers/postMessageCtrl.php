@@ -17,7 +17,6 @@
     }else{
         //El id 1 pertenece al usuario anonimo
         $fromUser = 1;
-        exit;
     }
 
     if(isset($_POST["toUser"]) and preg_match($patron,$_POST["toUser"])) {
@@ -26,10 +25,9 @@
         header ('location:index.php?error=4');
         exit;
     }
-
+    echo "string";
     $wallRepo = new WallRepositoryService();
     $wallResult = $wallRepo -> getWallByUserId($toUser);
-
     if($row = $wallResult -> fetch_object()) {
         $wall = new Wall();
         $messages = $wall -> getMessages($row->limite_muro,$toUser);

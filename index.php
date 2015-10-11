@@ -40,10 +40,7 @@
             }
         ?>
 	</div>
-	
-	<?php
-        include_once (__DIR__."/templates/footer.php");
-    ?>
+
     <?php
 
 
@@ -79,6 +76,10 @@
             </div>
         </div>
     </div>
+
+    <?php
+        include_once (__DIR__."/templates/footer.php");
+    ?>
 
 
     <script src="lib/jquery-ui/external/jquery/jquery.js"></script>
