@@ -498,10 +498,9 @@ function sendPrivateMessage(event){
 	event.preventDefault();
 	//Traigo todo el contenido del mensaje
 	var content = $("#message-content").val();
-
 	var toUser = $("#userRecipient").val().trim();
-
-
+	var totalPrivateMsg = $("#inpTotalPrivateMsg").val();
+	var limitPrivateMsg = $("#inpLimitPrivateMsg").val(); 
 	$.post(
 		"php/controllers/userCtrl.php",
 		{ content : content, toUser : toUser, action:"sendPrivateMessage" },
@@ -510,12 +509,13 @@ function sendPrivateMessage(event){
 
 			if(data.valid == true){
 				//Actualizo el modal
-
+				
 				$("#message-content").val("");
 				$('#message-reload').load('./php/views/inboxChat.php?usuarioRemitent='+toUser,
 					function(){
 						$("#message-area-private").scrollTop($("#message-area-private")[0].scrollHeight);
 					});
+
 			}
 			else{
 				console.log(data.errorMsg);
@@ -525,6 +525,18 @@ function sendPrivateMessage(event){
 				$('#modalMessages').modal('toggle');
 			};
 		} );
+
+		if(totalPrivateMsg >= limitPrivateMsg){
+			$('#message-content').removeClass();
+			$('#message-content').attr('disabled', 'disabled');
+			$('#message-content').addClass('form-control');
+	        $('#divmessagePrivate').removeClass();//
+	        $('#message-content').attr('placeholder','No se puede ingresar texto...')
+			$('#sendMessageBtn').attr('disabled', 'disabled');
+			$('#countdownPrivate').removeClass();
+			$('#countdownPrivate').addClass('alert-danger');
+			$('#countdownPrivate').html(' ( La casilla se encuentra llena )');
+		}
 }
 
 function postMessage(){
@@ -560,9 +572,14 @@ function openPrivateMessageModal(event){
 }
 
 function openPrivateMessageModalFromInbox(){
+
 	var toUserId = $(this).find(".propIdBandeja").val();
 	var toUserName = $(this).find(".propNombreBandeja").val();
 	var toUserSurname = $(this).find(".propApellidoBandeja").val();
+
+	window.location.href = 'index.php?usuario=' + toUserId;
+
+/* ESTO LO CERRÉ POR UN RATO
 
 	$('#modalPrivateMessagesInbox').find('.modal-title').text(toUserName + " " + toUserSurname);
 	$('#modalPrivateMessagesInbox').find('#toUserInbox').val(toUserId);
@@ -575,7 +592,7 @@ function openPrivateMessageModalFromInbox(){
 		});
 
 	$('#modalPrivateMessagesInbox').modal('show');
-
+*/
 }
 
 function openInboxModal(event){
@@ -633,7 +650,7 @@ $("#message-content").keyup(function(event) {
 	var resta = limite - box.length;// obtiene cuántos caracteres quedan
 	// si aún no se llegó al límite
 	if(box.length <= limite) {
-	    $('#countdownPrivate').html(resta + ' caracteres disponibles');// modifica el texto que muestra la cantidad de caracteres que restan
+	    $('#countdownPrivate').html('('+resta + ' caracteres disponibles)');// modifica el texto que muestra la cantidad de caracteres que restan
 	    // si no se llegó al 50%, hace que el borde del text sea de color verde
 	    if (value < 50) {
 	        $('#divmessagePrivate').removeClass();

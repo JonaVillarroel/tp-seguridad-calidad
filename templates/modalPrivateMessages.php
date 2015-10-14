@@ -17,15 +17,15 @@
 
                             </ul>
                         </div>
-
+                        <input type="hidden" id="inpLimitPrivateMsg" name="inpLimitPrivateMsg" value="<?php echo $limitPrivateMsg; ?>">
                         <?php
                             if ($totalPrivateMsg < $limitPrivateMsg) {
-                                echo "  <label for='message-text' class='control-label' >Mensaje privado </label><small>(<span id='countdownPrivate' class='visible-*-inline-block'>200 caracteres disponibles</span>)</small>:
+                                echo "  <label for='message-text' class='control-label' >Mensaje privado </label><small><span id='countdownPrivate' class='visible-*-inline-block'>(200 caracteres disponibles)</span></small>:
                                         <div id='divmessagePrivate' class=' has-success'>
                                             <textarea id='message-content' class='form-control' name='content' type='text' maxlength='200' placeholder='Escribí tu mensaje...'></textarea>
                                         </div>";
                             } else {
-                                echo "  <label for='message-text' class='control-label' >Mensaje privado </label> <small class='alert-danger'>(<span> La casilla se encuentra llena </span>)</small>
+                                echo "  <label for='message-text' class='control-label' >Mensaje privado </label> <small class='alert-danger'><span>( La casilla se encuentra llena )</span></small>
                                         <textarea type='text' class='form-control' maxlength='0' disabled placeholder='No se puede ingresar texto...'></textarea><br/>";
                             }
                         ?> 

@@ -165,6 +165,35 @@ class InboxRepositoryService
         header ('location: ../../indexAdmin.php');
     }
 
+
+        // Obtengo la cantidad limite de mensajes que pueden recibier los usuarios
+    public function getMessageLimit($userId){
+        $query = "SELECT limite, id_bandeja FROM BANDEJA_DE_ENTRADA
+           WHERE BANDEJA_DE_ENTRADA.id_usuario = $userId";
+
+        $results = $this -> db -> query($query)
+        or die('Error obteniendo la cantidad de mensajes permitidos en bandeja_de_entrada: ' . mysqli_error($this->db));
+
+        return $results;
+    }
+
+    // Obtengo la cantidad de mensajes actuales
+    public function getMessageNum($userId){
+            $query = "SELECT id_mensaje FROM MENSAJE_PRIVADO INNER JOIN BANDEJA_DE_ENTRADA
+            ON MENSAJE_PRIVADO.id_bandeja = BANDEJA_DE_ENTRADA.id_bandeja
+            AND BANDEJA_DE_ENTRADA.id_bandeja =$userId;";
+            
+            $results = $this -> db -> query($query)
+            or die('Error obteniendo la cantidad de mensajes recibidos en mensaje_privado: ' . mysqli_error($this->db));
+
+             $obj = Array();
+            while ($row = $results->fetch_object()) {
+                $obj[] = $row;
+            }
+
+            return COUNT($obj);
+    }
+
     public function __destruct(){
         $this -> db -> close();
     }
