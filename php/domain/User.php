@@ -93,14 +93,6 @@ class User{
         $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass' AND fecha_baja is null;");
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
             if ($row->estado == 'Registrado') {
-                //Para prevenir robo de sesion
-                // Previene ataque xss para robar el identificador de sesion
-                ini_set('session.cookie_httponly', 1);
-                // **PREVENTING SESSION FIXATION**
-                // Id de sesion no puede ser pasada por url
-                ini_set('session.use_only_cookies', 1);
-                // Usa una conexion segura (HTTPS) si es posible
-                ini_set('session.cookie_secure', 1);
 
                 $mysession->initSession();
                 $mysession->setSession('id', $row->id_usuario);
