@@ -69,6 +69,11 @@
 					echo "Usted ya se encuentra registrado <br/>";
 					echo "</div>";
 				}
+				if($error == 6){
+					echo "<div class='alert alert-danger'>";
+					echo "La sesión expiró por inactividad, por favor vuelva a iniciar sesión.<br/>";
+					echo "</div>";
+				}
 			?>
 
 		</div>
