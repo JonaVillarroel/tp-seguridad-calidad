@@ -9,7 +9,7 @@
     }
 
 
-    if((preg_match("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/",$mail)) and (preg_match("/[\w]{6,}/",$pass))) {
+    if((preg_match("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/",$mail)) and (preg_match("/[\w]{6,15}/",$pass))) {
         $user = new User();
         $user->Login($mail, $pass);
     }else{
