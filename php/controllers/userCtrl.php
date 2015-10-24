@@ -45,10 +45,19 @@ function sendPrivateMessage($content, $toUser){
 
     $userIdSender = $_SESSION['id'];
 
-
     $resultsInbox = $inboxRepo -> getInboxIdAndLeaveDateByUserId($toUser);
 
     $resultInbox = $resultsInbox -> fetch_object();
+
+//1) este codigo ya lo use en getWallCtrl.php pero no sé cómo heredarlo
+    $MessageLimitResult = $inboxRepo -> getMessageLimit($toUser);//
+    $MessageNumResult = $inboxRepo -> getMessageNum($toUser);//
+    $objLimit = $MessageLimitResult -> fetch_object();
+    $limitPrivateMsg = $objLimit -> limite;//limite de mensaje de la bandeja de entrada $limiteMensajePri
+    $IdBandeja = $objLimit -> id_bandeja;
+
+    $totalPrivateMsg = $MessageNumResult;//cantidad de mensajes en bandeja de entrada
+//1)FIN
 
     if($resultInbox -> fecha_baja == null){
         $recipientInboxId = $resultInbox -> id_usuario;
@@ -63,7 +72,17 @@ function sendPrivateMessage($content, $toUser){
             $conversationId = $lastId+1;
         };
 
-        $results = $inboxRepo -> postMessage($recipientInboxId, $userIdSender, $content, $conversationId);
+        if(strlen($content)<=200){//controlo que el contenido del mensaje no supere los 200 caracteres
+            if ($totalPrivateMsg < $limitPrivateMsg) {//Verificando que no se envíen más mensajes de los permitidos
+                $results = $inboxRepo -> postMessage($recipientInboxId, $userIdSender, $content, $conversationId);
+            }else{
+                $response['errorMsg'] = "Lo sentimos, hubo la casilla de mensajes está llena.";
+                $response['valid'] = false;
+            }
+        }else{
+            $response['errorMsg'] = "Lo sentimos, el largo del mensaje supera los 200 caracteres permitidos.";
+            $response['valid'] = false;
+        } 
 
         if($results === TRUE)
         {

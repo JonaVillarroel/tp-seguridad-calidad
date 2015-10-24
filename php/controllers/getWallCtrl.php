@@ -2,6 +2,7 @@
     require_once (dirname(__DIR__)."/domain/User.php");
     require_once (dirname(__DIR__)."/domain/Wall.php");
     require_once (dirname(__DIR__)."/services/WallRepositoryService.php");
+    require_once (dirname(__DIR__)."/services/InboxRepositoryService.php");
 
     $patron = "/^[[:digit:]]+$/";
     if(preg_match($patron,$_GET['usuario'])) {
@@ -12,11 +13,12 @@
     }
 
     $wallRepo = new WallRepositoryService();
+    $inboxRepo =  new InboxRepositoryService();
 
     $wallResult = $wallRepo -> getWallByUserId($idUsuario);
     //
-    $MessageLimitResult = $wallRepo -> getMessageLimit($idUsuario);//
-    $MessageNumResult = $wallRepo -> getMessageNum($idUsuario);//
+    $MessageLimitResult = $inboxRepo -> getMessageLimit($idUsuario);//
+    $MessageNumResult = $inboxRepo -> getMessageNum($idUsuario);//
 
 
     if($wallResult -> num_rows > 0){

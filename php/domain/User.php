@@ -93,14 +93,6 @@ class User{
         $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass' AND fecha_baja is null;");
         if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
             if ($row->estado == 'Registrado') {
-                //Para prevenir robo de sesion
-                // Previene ataque xss para robar el identificador de sesion
-                ini_set('session.cookie_httponly', 1);
-                // **PREVENTING SESSION FIXATION**
-                // Id de sesion no puede ser pasada por url
-                ini_set('session.use_only_cookies', 1);
-                // Usa una conexion segura (HTTPS) si es posible
-                ini_set('session.cookie_secure', 1);
 
                 $mysession->initSession();
                 $mysession->setSession('id', $row->id_usuario);
@@ -274,17 +266,26 @@ class User{
             $errorMessage["name"] = "El nombre no es correcto";
         }
 
-        if(preg_match("/[\w]{6,}/",$pass)){
+        if(preg_match("/[\w]{6,15}/",$pass)){
             $errorMessage["pass"] = 0;
         }else{
             $errorMessage["pass"] = "La contraseña no es correcta";
         }
-
-        if($repass == $pass){
-            $errorMessage["repass"] = 0;
-        }else{
-            $errorMessage["repass"] = "Las contraseñas no coinciden";
-        }
+        if(preg_match("/[A-Z]/", $pass)){
+             $errorMessage["pass"] = 0;
+         }else{
+            $errorMessage["pass"] = "La contraseña debe tener al menos una mayúscula";
+         }
+         if(preg_match("/[a-z]/", $pass)){
+            $errorMessage["pass"] = 0;
+         }else{
+            $errorMessage["pass"] = "La contraseña debe tener al menos una minúscula";
+         }
+         if(preg_match("/[1-9]/", $pass)){
+             $errorMessage["pass"] = 0;
+         }else{
+            $errorMessage["pass"] = "La contraseña debe tener al menos un número";
+         }
 
         if(preg_match("/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/",$mail)){
             $errorMessage["mail"] = 0;
@@ -302,14 +303,14 @@ class User{
             $errorMessage["emailf"] = 0;
         }else{
              $errorMessage["emailf"] = "Campo vacio";
-             redirect('http://www.google.com');
+             redirect('../../index.php?error=4');
             
         }
         if(strlen($namef)==0){
             $errorMessage["namef"] = 0;
         }else{
              $errorMessage["namef"] = "Campo vacio";
-             redirect('http://www.google.com');
+             redirect('../../index.php?error=4');
             
         }
         if ($securimage->check($_POST['captcha_code']) == false) {

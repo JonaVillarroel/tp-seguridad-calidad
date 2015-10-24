@@ -144,6 +144,9 @@ function ValidarRegistroComun(){
 		var antispam2=document.getElementById("namef");	
 		var lblCaptcha=document.getElementById("lblVeriCaptcha");
 		var captcha=document.getElementById("captchaId");
+		var tieneMayuscula = /[A-Z]/.test(contrasena.value)
+		var tieneMinuscula = /[a-z]/.test(contrasena.value);
+		var tieneNumero= /[1-9]/.test(contrasena.value);
 			
 	//NOMBRE
 	if(nombre.value==""){
@@ -285,15 +288,21 @@ function ValidarRegistroComun(){
 		$("#longpswC").fadeOut();
 		$("#malpswC").fadeOut();
 		$("#minpswC").fadeOut();
+		$("#noMayuspswC").fadeOut();
+		$("#noMinuspswC").fadeOut();
+		
 		return false;
 	}else{
-		if(contrasena.value.length > 50 ) { //el campo tiene que tener mas de 50 digitos
+		if(contrasena.value.length > 15 ) { //el campo tiene que tener menos de 15 digitos
 			contrasena.style.borderColor = "red";
 			lblcontrasena.style.color = "red";
 			$("#nopswC").fadeOut();
 		    $("#longpswC").fadeIn();
 		    $("#malpswC").fadeOut();
 		    $("#minpswC").fadeOut();
+		    $("#noMayuspswC").fadeOut();
+		    $("#noMinuspswC").fadeOut();
+		    $("#noNumeropswC").fadeOut();
 			return false;
 		}
 	
@@ -304,6 +313,9 @@ function ValidarRegistroComun(){
 		    $("#longpswC").fadeOut();
 		    $("#malpswC").fadeIn();
 		    $("#minpswC").fadeOut();
+		    $("#noMayuspswC").fadeOut();
+		    $("#noMinuspswC").fadeOut();
+		    $("#noNumeropswC").fadeOut();
 			return false;
 		}
 		if(contrasena.value.length<6){//contraseña no puede tener menos de 6 digitos
@@ -312,13 +324,56 @@ function ValidarRegistroComun(){
 			$("#nopswC").fadeOut();
 		    $("#longpswC").fadeOut();
 		    $("#malpswC").fadeOut();
+		    $("#noMayuspswC").fadeOut();
+		    $("#noMinuspswC").fadeOut();
+		    $("#noNumeropswC").fadeOut();
 		    $("#minpswC").fadeIn();
 			return false;
 		}
+
+		 if(!tieneMayuscula){
+		$("#noMayuspswC").fadeIn();
+		$("#noMinuspswC").fadeOut();
 		$("#nopswC").fadeOut();
 		$("#longpswC").fadeOut();
 		$("#malpswC").fadeOut();
 		$("#minpswC").fadeOut();
+		$("#noNumeropswC").fadeOut();
+		lblcontrasena.style.color = "red";
+		return false;
+
+	}
+	if(!tieneMinuscula){
+		$("#nopswC").fadeOut();
+		$("#longpswC").fadeOut();
+		$("#malpswC").fadeOut();
+		$("#minpswC").fadeOut();
+		$("#noMayuspswC").fadeOut();
+		$("#noNumeropswC").fadeOut();
+		$("#noMinuspswC").fadeIn();
+		lblcontrasena.style.color = "red";
+		return false;
+
+	}
+	if(!tieneNumero){
+		$("#nopswC").fadeOut();
+		$("#longpswC").fadeOut();
+		$("#malpswC").fadeOut();
+		$("#minpswC").fadeOut();
+		$("#noMayuspswC").fadeOut();
+		$("#noMinuspswC").fadeOut();
+		$("#noNumeropswC").fadeIn();
+		lblcontrasena.style.color = "red";
+		return false;
+	}
+		
+		$("#nopswC").fadeOut();
+		$("#longpswC").fadeOut();
+		$("#malpswC").fadeOut();
+		$("#minpswC").fadeOut();
+		$("#noMayuspswC").fadeOut();
+		$("#noMinuspswC").fadeOut();
+		$("#noNumeropswC").fadeOut();
 		contrasena.style.borderColor = "#a4b97f";
 		lblcontrasena.style.color = "black";
 	}
@@ -498,10 +553,9 @@ function sendPrivateMessage(event){
 	event.preventDefault();
 	//Traigo todo el contenido del mensaje
 	var content = $("#message-content").val();
-
 	var toUser = $("#userRecipient").val().trim();
-
-
+	var totalPrivateMsg = $("#inpTotalPrivateMsg").val();
+	var limitPrivateMsg = $("#inpLimitPrivateMsg").val(); 
 	$.post(
 		"php/controllers/userCtrl.php",
 		{ content : content, toUser : toUser, action:"sendPrivateMessage" },
@@ -510,12 +564,13 @@ function sendPrivateMessage(event){
 
 			if(data.valid == true){
 				//Actualizo el modal
-
+				
 				$("#message-content").val("");
 				$('#message-reload').load('./php/views/inboxChat.php?usuarioRemitent='+toUser,
 					function(){
 						$("#message-area-private").scrollTop($("#message-area-private")[0].scrollHeight);
 					});
+
 			}
 			else{
 				console.log(data.errorMsg);
@@ -525,6 +580,18 @@ function sendPrivateMessage(event){
 				$('#modalMessages').modal('toggle');
 			};
 		} );
+
+		if(totalPrivateMsg >= limitPrivateMsg){
+			$('#message-content').removeClass();
+			$('#message-content').attr('disabled', 'disabled');
+			$('#message-content').addClass('form-control');
+	        $('#divmessagePrivate').removeClass();//
+	        $('#message-content').attr('placeholder','No se puede ingresar texto...')
+			$('#sendMessageBtn').attr('disabled', 'disabled');
+			$('#countdownPrivate').removeClass();
+			$('#countdownPrivate').addClass('alert-danger');
+			$('#countdownPrivate').html(' ( La casilla se encuentra llena )');
+		}
 }
 
 function postMessage(){
@@ -560,9 +627,14 @@ function openPrivateMessageModal(event){
 }
 
 function openPrivateMessageModalFromInbox(){
+
 	var toUserId = $(this).find(".propIdBandeja").val();
 	var toUserName = $(this).find(".propNombreBandeja").val();
 	var toUserSurname = $(this).find(".propApellidoBandeja").val();
+
+	window.location.href = 'index.php?usuario=' + toUserId;
+
+/* ESTO LO CERRÉ POR UN RATO
 
 	$('#modalPrivateMessagesInbox').find('.modal-title').text(toUserName + " " + toUserSurname);
 	$('#modalPrivateMessagesInbox').find('#toUserInbox').val(toUserId);
@@ -575,7 +647,7 @@ function openPrivateMessageModalFromInbox(){
 		});
 
 	$('#modalPrivateMessagesInbox').modal('show');
-
+*/
 }
 
 function openInboxModal(event){
@@ -633,7 +705,7 @@ $("#message-content").keyup(function(event) {
 	var resta = limite - box.length;// obtiene cuántos caracteres quedan
 	// si aún no se llegó al límite
 	if(box.length <= limite) {
-	    $('#countdownPrivate').html(resta + ' caracteres disponibles');// modifica el texto que muestra la cantidad de caracteres que restan
+	    $('#countdownPrivate').html('('+resta + ' caracteres disponibles)');// modifica el texto que muestra la cantidad de caracteres que restan
 	    // si no se llegó al 50%, hace que el borde del text sea de color verde
 	    if (value < 50) {
 	        $('#divmessagePrivate').removeClass();

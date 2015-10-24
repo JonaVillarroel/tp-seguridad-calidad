@@ -23,6 +23,7 @@ if (isset($_SESSION['id']) and preg_match($patron,$_SESSION['id']) and isset($_G
 
 }
 if($messages != null){
+    $i = 1;
     while($message = $messages -> fetch_object()) {
         if($message -> id_usuario == $userRemitentIdFirst ) {
             echo "<li class='list-group-item text-right'>
@@ -43,9 +44,10 @@ if($messages != null){
         </div>
     </li>";
         }
+    $i++;
     }
 }else{
     echo "ERROR: No se pudo obtener informacion de la Base de Datos";
 }
-
+echo "<input type='hidden' id='inpTotalPrivateMsg' name='inpTotalPrivateMsg' value=".$i.">";
 ?>

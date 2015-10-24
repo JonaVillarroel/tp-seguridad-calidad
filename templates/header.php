@@ -1,6 +1,8 @@
 <?php
 	//EVITO LOS WARNINGS DE VARIABLES NO DEFINIDAS
 	$error = isset($_GET['error']) ? $_GET['error'] : null;
+	// Token ANTI CSRF
+	$_SESSION["token"] = md5(uniqid(mt_rand(), true));
 ?>
 <div id="header">
     <div class="navbar navbar-default">
@@ -34,7 +36,8 @@
 				<a class="navbar-link" href="#" id="inboxModalBtn"><span class="glyphicon glyphicon-envelope"></span></a> |
 				<a class="navbar-link" href="userConfiguration.php"><span class="glyphicon glyphicon-cog"></span></a> |
                 <a class="navbar-link" href="index.php?usuario=<?php echo $_SESSION['id']; ?>"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['nombre'] . " " . $_SESSION['apellido']; ?></a> |
-                <a class="navbar-link" href="php/controllers/exitController.php"><span class="glyphicon glyphicon-log-out"></span> Salir</a>
+				 <a class="navbar-link" href="php/controllers/exitController.php?csrf=<?php echo $_SESSION["token"]?> "><span class="glyphicon glyphicon-log-out"></span> Salir</a>
+                <input type="hidden" name="csrf" value="<?php echo $_SESSION["token"]; ?>">
             </p>
             <?php
             }
