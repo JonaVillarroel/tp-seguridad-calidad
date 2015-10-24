@@ -144,6 +144,9 @@ function ValidarRegistroComun(){
 		var antispam2=document.getElementById("namef");	
 		var lblCaptcha=document.getElementById("lblVeriCaptcha");
 		var captcha=document.getElementById("captchaId");
+		var tieneMayuscula = /[A-Z]/.test(contrasena.value)
+		var tieneMinuscula = /[a-z]/.test(contrasena.value);
+		var tieneNumero= /[1-9]/.test(contrasena.value);
 			
 	//NOMBRE
 	if(nombre.value==""){
@@ -285,15 +288,21 @@ function ValidarRegistroComun(){
 		$("#longpswC").fadeOut();
 		$("#malpswC").fadeOut();
 		$("#minpswC").fadeOut();
+		$("#noMayuspswC").fadeOut();
+		$("#noMinuspswC").fadeOut();
+		
 		return false;
 	}else{
-		if(contrasena.value.length > 50 ) { //el campo tiene que tener mas de 50 digitos
+		if(contrasena.value.length > 15 ) { //el campo tiene que tener menos de 15 digitos
 			contrasena.style.borderColor = "red";
 			lblcontrasena.style.color = "red";
 			$("#nopswC").fadeOut();
 		    $("#longpswC").fadeIn();
 		    $("#malpswC").fadeOut();
 		    $("#minpswC").fadeOut();
+		    $("#noMayuspswC").fadeOut();
+		    $("#noMinuspswC").fadeOut();
+		    $("#noNumeropswC").fadeOut();
 			return false;
 		}
 	
@@ -304,6 +313,9 @@ function ValidarRegistroComun(){
 		    $("#longpswC").fadeOut();
 		    $("#malpswC").fadeIn();
 		    $("#minpswC").fadeOut();
+		    $("#noMayuspswC").fadeOut();
+		    $("#noMinuspswC").fadeOut();
+		    $("#noNumeropswC").fadeOut();
 			return false;
 		}
 		if(contrasena.value.length<6){//contraseña no puede tener menos de 6 digitos
@@ -312,13 +324,56 @@ function ValidarRegistroComun(){
 			$("#nopswC").fadeOut();
 		    $("#longpswC").fadeOut();
 		    $("#malpswC").fadeOut();
+		    $("#noMayuspswC").fadeOut();
+		    $("#noMinuspswC").fadeOut();
+		    $("#noNumeropswC").fadeOut();
 		    $("#minpswC").fadeIn();
 			return false;
 		}
+
+		 if(!tieneMayuscula){
+		$("#noMayuspswC").fadeIn();
+		$("#noMinuspswC").fadeOut();
 		$("#nopswC").fadeOut();
 		$("#longpswC").fadeOut();
 		$("#malpswC").fadeOut();
 		$("#minpswC").fadeOut();
+		$("#noNumeropswC").fadeOut();
+		lblcontrasena.style.color = "red";
+		return false;
+
+	}
+	if(!tieneMinuscula){
+		$("#nopswC").fadeOut();
+		$("#longpswC").fadeOut();
+		$("#malpswC").fadeOut();
+		$("#minpswC").fadeOut();
+		$("#noMayuspswC").fadeOut();
+		$("#noNumeropswC").fadeOut();
+		$("#noMinuspswC").fadeIn();
+		lblcontrasena.style.color = "red";
+		return false;
+
+	}
+	if(!tieneNumero){
+		$("#nopswC").fadeOut();
+		$("#longpswC").fadeOut();
+		$("#malpswC").fadeOut();
+		$("#minpswC").fadeOut();
+		$("#noMayuspswC").fadeOut();
+		$("#noMinuspswC").fadeOut();
+		$("#noNumeropswC").fadeIn();
+		lblcontrasena.style.color = "red";
+		return false;
+	}
+		
+		$("#nopswC").fadeOut();
+		$("#longpswC").fadeOut();
+		$("#malpswC").fadeOut();
+		$("#minpswC").fadeOut();
+		$("#noMayuspswC").fadeOut();
+		$("#noMinuspswC").fadeOut();
+		$("#noNumeropswC").fadeOut();
 		contrasena.style.borderColor = "#a4b97f";
 		lblcontrasena.style.color = "black";
 	}
