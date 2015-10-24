@@ -8,7 +8,8 @@
      
 	$mysession->destroySession();
 	}else{
-		header('location: ../../index.php?error=4');
+		$mysession->destroySession();
+		header('location: ../../index.php?error=6');
 		exit();
 		 }
 
