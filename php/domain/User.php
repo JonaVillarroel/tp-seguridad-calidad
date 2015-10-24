@@ -61,10 +61,14 @@ class User{
                 $surnameOK = ucfirst(strtolower($surname));#Primer letra mayucula y el resto de lo que escribo en minuscula
 				$nameOK = ucfirst(strtolower($name));#Primer letra mayucula y el resto de lo que escribo en minuscula
 
-                $pass = sha1($myConnection -> real_escape_string($pass));
+                //$pass = sha1($myConnection -> real_escape_string($pass));
 
-				$myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado, fecha_baja) VALUES
-				('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente', null);");
+				//Encripto password con Bcrypt, salt generado automáticamente.
+                $pass= password_hash($myConnection->real_escape_string($pass),PASSWORD_BCRYPT);
+                //$pass = sha1($myConnection -> real_escape_string($pass));
+
+                $myConnection -> query("INSERT INTO USUARIO (id_usuario,rol,nombre,apellido,mail,nombre_usuario,contraseña,estado, fecha_baja) VALUES
+                ('','Comun','$nameOK','$surnameOK','$mail','$userName','$pass','Pendiente', null);");
 
                 $lastID = $myConnection -> insert_id;
 
@@ -87,12 +91,22 @@ class User{
     public function Login($mail, $pass){
         $myConnection = new Connection();
         $mysession = new Session();
+      
+    $result2 = $myConnection-> query("SELECT contraseña FROM USUARIO WHERE mail = '$mail'; ");
 
-        $pass = sha1($myConnection -> real_escape_string($pass));
+      //  $pass = sha1($myConnection -> real_escape_string($pass));
+    $pass= $myConnection->real_escape_string($pass);
+    $row = mysqli_fetch_assoc($result2);
+    $hash=$row['contraseña'];
 
-        $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$pass' AND fecha_baja is null;");
-        if($row = $result -> fetch_object()) {//Devuelve la fila actual de un conjunto de resultados como un objeto
+//Comparo que la contraseña coincida con el hash de la contraseña almacenada.
+    if(password_verify($pass,$hash)){
+
+        $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$hash' AND fecha_baja is null;");
+
+        if($row = $result -> fetch_object()) { //Devuelve la fila actual de un conjunto de resultados como un objeto
             if ($row->estado == 'Registrado') {
+              
 
                 $mysession->initSession();
                 $mysession->setSession('id', $row->id_usuario);
@@ -109,7 +123,7 @@ class User{
                         header ('location: ../../indexAdmin.php');
                         break;
                     case 'Comun':
-						header ('location: ../../index.php?usuario='.$_SESSION['id']);
+                        header ('location: ../../index.php?usuario='.$_SESSION['id']);
                         break;
                 }
 
@@ -122,11 +136,15 @@ class User{
                     echo "</div>";
                 echo "</div>";
             }
-        }else{
+        }
+     }
+         
+        else{
             header ('location: ../../index.php?error=1');
         }
 
-		$myConnection->close();
+        $myConnection->close();
+       
     }
 
     //Recibe el nombre de usuario ACTUAL, y un json con los datos que el usuario modificó en el formulario
