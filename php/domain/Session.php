@@ -17,6 +17,26 @@ ini_set('session.hash_function', 1);
 		public function initSession(){
 			session_id();
 			@session_start();
+
+			//tiempo de vida de la sesión.
+
+			$time = $_SERVER['REQUEST_TIME'];
+			//tiempo de vida de la sesión(30 minutos).
+			$timeout_duration = 5;
+
+			//Busco la ultima actividad del usuario, si esta seteada y $timeout_duration expiró, cierro la sesión y
+			//lo redirijo a una página avisando lo sucedido.
+			if (isset($_SESSION['LAST_ACTIVITY']) && ($time - $_SESSION['LAST_ACTIVITY']) > $timeout_duration) {
+
+			 header('location: php/controllers/exitController.php');
+
+			}
+			    
+			//actualizo la variable por lo que el timeout estará basado en ella, y 
+			//no cuando cuando el usuario inicie sesión.
+			$_SESSION['LAST_ACTIVITY'] = $time;
+
+					}
 		}
 		
 		public function setSession($varname, $value){
