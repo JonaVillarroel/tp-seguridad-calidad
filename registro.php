@@ -92,9 +92,12 @@
 							<input class="form-control" type="password" id="pswContrasena" name="pass" autocomplete="off"/>
 							<span class="help-block">La contrase&ntilde;a debe tener como m&iacute;nimo 6 caracteres.</span>
 							<div id="nopswC" class="alert alert-danger">Por favor ingrese su Contrase&#xf1;a</div>
-							<div id="longpswC" class="alert alert-danger">La Contrase&#xf1;a debe tener menos de 50 caracteres</div>
+							<div id="longpswC" class="alert alert-danger">La Contrase&#xf1;a debe tener menos de 15 caracteres</div>
 							<div id="malpswC" class="alert alert-danger">Por favor ingrese un Contrase&#xf1;a v&aacute;lida</div>
 							<div id="minpswC" class="alert alert-danger">La Contrase&#xf1;a debe tener un m&iacute;nimo de 6 caracteres</div>
+							<div id="noMayuspswC" class="alert alert-danger">La contraseña debe tener al menos una mayúscula</div>
+							<div id="noMinuspswC" class="alert alert-danger">La contraseña debe tener al menos una minúscula</div>
+							<div id="noNumeropswC" class="alert alert-danger">La contraseña debe tener al menos un número</div>
 						</div>
 					</div>
 					<!--VERIFICACION DE CONTRASEÑA-->
