@@ -67,7 +67,7 @@ CREATE TABLE MENSAJE_PRIVADO (
 INSERT INTO USUARIO 
 
 (rol,nombre,apellido,mail,nombre_usuario,contraseña,estado, fecha_baja) VALUES
-/*Registrar los usuarios manualmente para que las contraseñas se encripten con Bcrypt, validación de contraseña cambiada
+/*Registrar los usuarios manualmente para que las contraseñas se encripten con Bcrypt, validación de contraseña cambiada*/
 
 ('Comun','Usuario','Anonimo',null,null,null,'Registrado', null),
 ('Comun','Juan','Diaz','juan@gmail.com','Juan',('juan1990'),'Registrado', null),
@@ -78,7 +78,7 @@ INSERT INTO USUARIO
 ('Comun','Jorge','Pérez','jorge.p@gmail.com','JorgeP',('jpthewall'),'Registrado', null),
 ('Comun','Anabel','Gimt','anabel.g@gmail.com','AnaGimt',('agthewall'),'Pendiente', null),
 ('Administrador','Franco','Malen','franco.m@gmail.com','FranMalen',('fmthewall'),'Registrado', null);
-*/
+
 INSERT INTO BANDEJA_DE_ENTRADA
 (id_usuario,limite) VALUES
 (8,3),
