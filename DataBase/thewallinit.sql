@@ -70,14 +70,14 @@ INSERT INTO USUARIO
 /*Registrar los usuarios manualmente para que las contraseñas se encripten con Bcrypt, validación de contraseña cambiada*/
 
 ('Comun','Usuario','Anonimo',null,null,null,'Registrado', null),
-('Comun','Juan','Diaz','juan@gmail.com','Juan',('juan1990'),'Registrado', null),
-('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome',('nrthewall'),'Registrado', null),
-('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova',('fvthewall'),'Registrado', null),
-('Comun','Laura','Gutierrez','laura.g@gmail.com','LauraGutierrez',('lgthewall'),'Registrado', null),
-('Comun','Lucas','Rodriguez','lucas.r@gmail.com','LucRodriguez',('lrthewall'),'Registrado', null),
-('Comun','Jorge','Pérez','jorge.p@gmail.com','JorgeP',('jpthewall'),'Registrado', null),
-('Comun','Anabel','Gimt','anabel.g@gmail.com','AnaGimt',('agthewall'),'Pendiente', null),
-('Administrador','Franco','Malen','franco.m@gmail.com','FranMalen',('fmthewall'),'Registrado', null);
+('Comun','Juan','Diaz','juan@gmail.com','Juan',SHA1('juan1990'),'Registrado', null),
+('Comun','Nicolás','Romero','nicolas.r@gmail.com','NicoRome',SHA1('nrthewall'),'Registrado', null),
+('Comun','Florencia','Villanova','florencia.v@gmail.com','FlorVillanova',SHA1('fvthewall'),'Registrado', null),
+('Comun','Laura','Gutierrez','laura.g@gmail.com','LauraGutierrez',SHA1('lgthewall'),'Registrado', null),
+('Comun','Lucas','Rodriguez','lucas.r@gmail.com','LucRodriguez',SHA1('lrthewall'),'Registrado', null),
+('Comun','Jorge','Pérez','jorge.p@gmail.com','JorgeP',SHA1('jpthewall'),'Registrado', null),
+('Comun','Anabel','Gimt','anabel.g@gmail.com','AnaGimt',SHA1('agthewall'),'Pendiente', null),
+('Administrador','Franco','Malen','franco.m@gmail.com','FranMalen',SHA1('fmthewall'),'Registrado', null);
 
 INSERT INTO BANDEJA_DE_ENTRADA
 (id_usuario,limite) VALUES
