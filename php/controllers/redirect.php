@@ -1,5 +1,4 @@
-<?php function redirect($url)
-{
+<?php function redirect($url){
     header('Location: '.$url);
     exit();
 }
