@@ -94,13 +94,14 @@ class User{
       
     $result2 = $myConnection-> query("SELECT contraseña FROM USUARIO WHERE mail = '$mail'; ");
 
-      //  $pass = sha1($myConnection -> real_escape_string($pass));
+    $passsha = sha1($myConnection -> real_escape_string($pass));
     $pass= $myConnection->real_escape_string($pass);
     $row = mysqli_fetch_assoc($result2);
     $hash=$row['contraseña'];
+	
 
-//Comparo que la contraseña coincida con el hash de la contraseña almacenada.
-    if(password_verify($pass,$hash)){
+//Comparo que la contraseña coincida con el hash de la contraseña almacenada, este encriptada en Bcrypt o SHA1.
+if(password_verify($pass,$hash) || $hash==$passsha ){
 
         $result = $myConnection -> query("SELECT * FROM USUARIO WHERE mail = '$mail' AND contraseña = '$hash' AND fecha_baja is null;");
 
