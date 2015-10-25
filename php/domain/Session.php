@@ -22,7 +22,7 @@ ini_set('session.hash_function', 1);
 
 			$time = $_SERVER['REQUEST_TIME'];
 			//tiempo de vida de la sesión(30 minutos).
-			$timeout_duration = 5;
+			$timeout_duration = 1800;
 
 			//Busco la ultima actividad del usuario, si esta seteada y $timeout_duration expiró, cierro la sesión y
 			//lo redirijo a una página avisando lo sucedido.
