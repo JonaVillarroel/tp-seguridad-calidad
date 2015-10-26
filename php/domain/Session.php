@@ -36,7 +36,6 @@ ini_set('session.hash_function', 1);
 			//no cuando cuando el usuario inicie sesión.
 			$_SESSION['LAST_ACTIVITY'] = $time;
 
-					}
 		}
 		
 		public function setSession($varname, $value){
