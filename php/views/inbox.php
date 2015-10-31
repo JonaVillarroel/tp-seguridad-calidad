@@ -1,6 +1,7 @@
 <?php
 require_once (dirname(__DIR__)."/services/InboxRepositoryService.php");
 require_once (dirname(__DIR__)."/domain/Session.php");
+require_once (dirname(__DIR__)."/security/CaesarCipher.php");
 
 $mysession = new Session();
 $mysession->initSession();
@@ -20,6 +21,7 @@ if(isset($_SESSION['id']) and preg_match($patron,$_SESSION['id'])){
         $cont++;
 
         if($conversation -> id_usuario == $userId ) {
+            $caesarCipher = new CaesarCipher($conversation->contenido);
             echo "<li class='list-group-item conversation-item'>
                     <input type='hidden' class='propIdBandeja' value='".$conversation->prop_id_bandeja."'/>
                     <input type='hidden' class='propNombreBandeja' value='".$conversation->prop_nombre_bandeja."'/>
@@ -32,7 +34,7 @@ if(isset($_SESSION['id']) and preg_match($patron,$_SESSION['id'])){
                             <p>".$conversation->prop_nombre_bandeja." ".$conversation->prop_apellido_bandeja."</p>
                         </div>
                         <div class='message-review'>
-                            <p><span><i class='glyphicon glyphicon-triangle-left'></i></span>". $conversation->contenido."</p>
+                            <p><span><i class='glyphicon glyphicon-triangle-left'></i></span>". $caesarCipher->decryptMessage()."</p>
                         </div>
                         <div class='message-date'>
                             <p>".$conversation->fecha_alta."</p>
@@ -56,7 +58,7 @@ if(isset($_SESSION['id']) and preg_match($patron,$_SESSION['id'])){
                             <p>".$conversationToUser->prop_nombre_bandeja." ".$conversationToUser->prop_apellido_bandeja."</p>
                         </div>
                         <div class='message-review'>
-                            <p>".$conversationToUser->contenido."</p>
+                            <p>".$caesarCihper->decryptMessage()."</p>
                         </div>
                         <div class='message-date'>
                             <p>".$conversationToUser->fecha_alta."</p>
