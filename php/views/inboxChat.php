@@ -1,5 +1,6 @@
 <?php
 require_once (dirname(__DIR__)."/services/InboxRepositoryService.php");
+require_once (dirname(__DIR__)."/security/CaesarCipher.php");
 require_once (dirname(__DIR__)."/domain/Session.php");
 $patron = "/^[[:digit:]]+$/";
 
@@ -26,12 +27,13 @@ if($messages != null){
     $i = 1;
     while($message = $messages -> fetch_object()) {
         if($message -> id_usuario == $userRemitentIdFirst ) {
+            $caesarCihper = new CaesarCipher($message->contenido);
             echo "<li class='list-group-item text-right'>
         <div class='message-area-user'>
             <p>".$message->nombre." ".$message->apellido."</p>
         </div>
         <div class='message-area-content'>
-            <p>".$message->contenido."</p>
+            <p>".$caesarCihper->decryptMessage()."</p>
         </div>
     </li>";
         }else{

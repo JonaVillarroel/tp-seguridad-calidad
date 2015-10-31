@@ -1,5 +1,6 @@
 <?php
 require_once (dirname(__DIR__)."/services/UserRepositoryService.php");
+require_once (dirname(__DIR__)."/security/CaesarCipher.php");
 require_once (dirname(__DIR__)."/services/InboxRepositoryService.php");
 require_once (dirname(__DIR__)."/domain/Session.php");
 
@@ -74,6 +75,8 @@ function sendPrivateMessage($content, $toUser){
 
         if(strlen($content)<=200){//controlo que el contenido del mensaje no supere los 200 caracteres
             if ($totalPrivateMsg < $limitPrivateMsg) {//Verificando que no se envíen más mensajes de los permitidos
+                $caesarCipher = new CaesarCipher($content);
+                $content = $caesarCipher->encryptMessage();
                 $results = $inboxRepo -> postMessage($recipientInboxId, $userIdSender, $content, $conversationId);
             }else{
                 $response['errorMsg'] = "Lo sentimos, hubo la casilla de mensajes está llena.";
