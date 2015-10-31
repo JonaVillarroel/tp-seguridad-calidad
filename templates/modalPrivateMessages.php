@@ -7,7 +7,6 @@
                     <h4 class="modal-title" >
                         <?php echo "$nombreMuro $apellidoMuro"; ?>
                     </h4>
-                    <?php echo "Bandeja: $IdBandeja | $totalPrivateMsg de $limitPrivateMsg"; ?>
                     <input type="hidden" id="userRecipient" value="<?php echo $_GET['usuario'];?>"/>
                 </div>
                 <div class="modal-body">
