@@ -1,8 +1,10 @@
 <div id="wall" class="col-sm-12">
     <?php
         require_once (dirname(__DIR__)."/php/controllers/getWallCtrl.php");
+            require_once (dirname(__DIR__)."/php/security/CbcCipher.php");
 
-        if($userHasWall){
+
+    if($userHasWall){
     ?>
         <h2><?php echo "$nombreMuro $apellidoMuro"?></h2>
         <div class="col-sm-12">
@@ -60,7 +62,11 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-9 mensaje">
-                                        <?php echo $fila->contenido ?>
+                                        <?php
+                                            $cbcCipher = new CbcCipher($fila->contenido);
+                                            $contenido = $cbcCipher->decrypt();
+                                            echo $contenido
+                                        ?>
                                         <br>
                                         <span class="pull-right">Publicado el <?php
                                         $fecha=substr($fila->fecha_alta,0,10);

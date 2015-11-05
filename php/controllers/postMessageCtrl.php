@@ -4,6 +4,8 @@
   	require_once (dirname(__DIR__)."/domain/Session.php");
     require_once (dirname(__DIR__)."/domain/Wall.php");
     require_once (dirname(__DIR__)."/services/WallRepositoryService.php");
+    require_once (dirname(__DIR__)."/security/CbcCipher.php");
+
 
 	$mysession = new Session();
 	$mysession->initSession();
@@ -32,6 +34,8 @@
         $wall = new Wall();
         $messages = $wall -> getMessages($row->limite_muro,$toUser);
             if (count($messages) < $row->limite_muro) {
+                $cbcCipher = new CbcCipher($content);
+                $content = $cbcCipher->encrypt();
                 $message = new Message($content, $toWall, $fromUser);
                 header ('location: ../../index.php?usuario='.$toUser);
             } else {
