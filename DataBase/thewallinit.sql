@@ -93,15 +93,15 @@ INSERT INTO BANDEJA_DE_ENTRADA
 
 INSERT INTO MENSAJE_PRIVADO
 (id_usuario,id_bandeja,contenido,fecha_alta, id_conversacion) VALUES
-(3,4,'Hola !', NOW(), 2 ),
-(7,3,'¿Qué haces? ', NOW(), 2 ),
-(5,4,'Hello !', NOW(), 3 ),
-(4,5,'Ciao !', NOW(), 3 ),
-(8,2,'Hola Nico.', NOW(), 5 ),
-(8,3,'Hola Flor.', NOW(), 6 ),
-(9,4,'Hola Laura.', NOW(), 7 ),
-(9,5,'Hola Lucas. Soy el admin de la app y mi contraseña NO ES fmthewal.', NOW(), 8 ),
-(5,8,'No soy Lucas, soy Laura.', NOW(), 8 );
+(3,4,'Krod#$', NOW(), 2 ),
+(7,3,'??Tx?#kdfhvB', NOW(), 2 ),
+(5,4,'Khoor#$', NOW(), 3 ),
+(4,5,'Fldr#$', NOW(), 3 ),
+(8,2,'Krod#Qlfr1', NOW(), 5 ),
+(8,3,'Krod#Ioru1', NOW(), 6 ),
+(9,4,'Krod#Odxud1', NOW(), 7 ),
+(9,5,'Krod#Oxfdv1#Vr|#ho#dgplq#gh#od#dss1', NOW(), 8 ),
+(5,8,'Qr#vr|#Oxfdv/#vr|#Odxud1', NOW(), 8 );
 
 
 INSERT INTO MURO
@@ -117,17 +117,17 @@ INSERT INTO MURO
 
 INSERT INTO MENSAJE 
 (id_usuario,id_muro,contenido,fecha_alta) VALUES
-(3,4,'Hola, que lindo fue cruzarte hoy! Saludos a la familia.', NOW() ),
-(6,2,'Hoy nos juntamos a la noche en mi casa. Estas invitado!! Te espero. :)', NOW() ),
-(5,3,'Feliz cumpleañoooos!! Que tengas un lindo dia', NOW() ),
-(4,3,'Feliz cumpleee! Te extraño mucho! Mas tarde te veo! Besitos ', NOW() ),
-(4,4,'Como extraño salir a pasear! Que vuelva el verano..', NOW() ),
-(4,4,'Hoy a la noche salimos a festejar el cumple de Flopy!', NOW() ),
-(8,5,'Bienvenido a The Wall. Cualquier consulta mandame un msj privado! Que lo disfrutes!', NOW() ),
-(6,6,'Que hermoso dia para ir a la plaza', NOW() ),
-(7,6,'Hace frio para ir a la plaza! Andate a la cama', NOW() ),
-(8,8,'Buen día!', NOW() ),
-(4,8,'Nos despertamos de buen humor? jajaja Yo estoy despierto desde temprano :(', NOW() );
+(3,4,'GxMjhESpH4iwd9+AOhOPJprxhgYzDKFbvV+1xnirLQVho3CRgE1DSZA8VcvQtRyX5v70oVZuUjQQPsnMUlb7ZQ==|I1UAlUhy9Mmu7lWSa+BmN5AjEjE11a+WZ6Pae3Nljr8=', NOW() ),
+(6,2,'N1LeULryXCWgVO6SwlzSF3MkaEt6PGhnyRSjtEF4NtUv6WoGCzdOdJsyGu12BjsTF9p+44ypHYmlsSc9B2bCeoSqzNSGMzgFY9Ij3uJa1C5uT/P7e5yOEyGp0kXVFHOw|FOS6uEQnZToE/dj4PwlGP/YBxxw8ZFIANxENpma9hW0=', NOW() ),
+(5,3,'JY1HzGcOnVujFxNiu9YPDoLoWt3rU7xmrW78NR8krCSF0RI7TkbYWo35DFBzNBiykdyfZF+fSpgMOxrmGAEwvw==|2fzgvj3Sc+5Ejq0KZa+8P1X5gYCqh0DGmW1M0UbLBiU=', NOW() ),
+(4,3,'zbIpzgbHZ2sZ/qE1olTvLXYbjNSa+fNTDscNbVsdhjNfo9JTReMk2mO+XbQJasKXVT8h7r5VBvOYCJeAMsX+niI8eLif01tXNGjA3OEpRghVrPWgdNypcmmWakZV0/I+|goDt13NUoq+7qxZ2/Axpre30sBeSq072k8MusrCimsQ=', NOW() ),
+(4,4,'ONXkouy37nm+xq+VRr0nI1N9dFduGAGVqvTyLF7RPJjmXdMBgMjiO+eqjikYv0qSu3VUiPV+y35hf4KsC/UgRA==|q/oSRrc4/qXkdVyXVkqy7uyJGFA73sYhtjsA57cDFq8=', NOW() ),
+(4,4,'d8oSP43E1NsvVdFFOSNtIOJGlZWUyldv4ZvkVsAv2IPfPVZMxRW+nwYpIm/StfmYKIhPk6GtAh3I/AzToZQCYw==|6GY/pGmC3R17xWkS6p1OwmyZO4uNM9gSpDISTTuPRaw=', NOW() ),
+(8,5,'vx2c8INUZIOSIdPL4Stbc1QGW4IuTA3H5NHAE3cTj4vGKc9EdVjMZoIQpgSuos9P03h0SjUindqhQFwGP9n+h/kOtloo7XX7tlR54dOteBQtEPbD0bQfuifxA4ZmHEeO|fKj4Id2o42WDQmJPJOtEXut2uepWPeUyq06/VmMEGxY=', NOW() ),
+(6,6,'+Q6G+uQlTqRUuc2zAeAjnGrv4lmb12HmV1kOvI8YirfdMbTOKIhLXLIo2SC2fsGxiWXVu3bqaGChfH1871BwaA==|6zmQ1Mn4a+Q/BQ6t6vYDFEeFf70Fi8TuVXg/laTPa6I=', NOW() ),
+(7,6,'Y6KJfLwMioAa0o+NqgkzbKMx0lOc6BVtmHeaK5MMbcnh7/x5ZYDl0J2UlcvHp1kBdhyNC1mJLwQA0yhvBRB4Cg==|CRyvRS9GRVN7ezg6zr4aqI9onxGFUBbbyrOBZ83nMRc=', NOW() ),
+(8,8,'W2GiJkrjvJPCjaWcsl4ga6C0F7xkQEQ2CDnMVjTAwJg=|zhBNQfzWiU5EwhzXDKVJ+dp3O2PM2/l72NkAVzF2FBc=', NOW() ),
+(4,8,'f/D9ksF05Scs0i4MTmbaIGK0UsfnBuZnKcaI5Ww+NzJqZ0uMANDs8kOFBgwGDPdDHBVlqZZin9zI68cHbL0ZxelB2QEPcP59ZBLhnRefqK5ve8Hh+qdfcJrN4KcygBvC|Dn+TMnohmWlXXmbyLX/KLHKJR2Yv5tKObmJEWZzeyZc=', NOW() );
 
 INSERT INTO COMPARTE_CON
 (id_muro,id_usuario) VALUES
